@@ -1,3 +1,19 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('../../images/background.jpg') no-repeat;
+    background-size: cover;
+    /* filter: brightness(50%); */
+}
+
 header {
-    background-color: brown;
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px #1e272e solid;
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.sign-in {
+    /* float: right; */
 }

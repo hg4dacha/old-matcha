@@ -1,10 +1,14 @@
-import React from 'react'
+import React from 'react';
+import Logo from '../Logo/Logo';
 
 const Header = () => {
     return (
-        <header>
-            <div className='bg-light'>
-                <a class="btn btn-primary" href="#" role="button">Se connecter</a>
+        <header className='mw-100 fixed-top'>
+            <div>
+                <Logo width='300'/>
+            </div>
+            <div>
+                <a class="btn btn-outline-light sign-in float-right" href="#" role="button">Se connecter</a>
             </div>
         </header>
     );

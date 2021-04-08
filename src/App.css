@@ -41,8 +41,8 @@ body {
 
 /*  HEADER  */
 header {
-    background: rgba(0, 0, 0, 0.5);
-    border-bottom: 1px #1e272e solid;
+    background: rgba(0, 0, 0, 0.6);
+    /* border-bottom: 1px #1e272e solid; */
     padding: 10px 10px;
     display: flex;
     align-items: center;

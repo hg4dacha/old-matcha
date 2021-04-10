@@ -4,14 +4,12 @@ import Logo from '../Logo/Logo';
 
 const Header = () => {
     return (
-        <header className='mw-100 fixed-top'>
-            <div>
+        <header className='mw-100'>
+            <div className='w120'>
                 <AiOutlineMenu color='white'  size='25px'/>
             </div>
-            <div>
-                <Logo width='200'/>
-            </div>
-            <div>
+            <Logo width='200'/>
+            <div className='w120'>
                 <a class="btn btn-outline-light sign-in" href="#" role="button">Se connecter</a>
             </div>
         </header>

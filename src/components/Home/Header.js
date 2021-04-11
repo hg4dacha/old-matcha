@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiOutlineMenu } from "react-icons/ai"
 import Logo from '../Logo/Logo';
 
 const Header = () => {
+
+    const widthState = window.screen.width <= 600 ? '18' : '25'
+
+    const [size, setSize] = useState(widthState)
+
+    document.querySelector('body').onresize = () => {
+        if (window.screen.width <= 600) {
+            setSize('18');
+        } else { setSize('25'); }
+    };
+
     return (
         <header className='mw-100'>
             <div className='w120'>
-                <AiOutlineMenu color='white'  size='25px'/>
+                <AiOutlineMenu color='white' size={size} />
             </div>
-            <Logo width='200'/>
+            <Logo />
             <div className='w120'>
-                <a class="btn btn-outline-light sign-in" href="#" role="button">Se connecter</a>
+                <a className="btn btn-outline-light sign-in" href="#" role="button">Se connecter</a>
             </div>
         </header>
     );

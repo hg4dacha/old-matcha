@@ -7,7 +7,7 @@ const Home = () => {
             <Header />
             <section>
                 <p className='slogan bold center'>L'amour à quelques clics...</p>
-                <a class="btn btn-success bold sign-up" href="#" role="button">S'inscrire</a>
+                <a className="btn btn-success bold sign-up" href="#" role="button">S'inscrire</a>
             </section>
         </Fragment>
     );

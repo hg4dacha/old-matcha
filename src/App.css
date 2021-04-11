@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Train+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 html, body{
     height: 100%;
@@ -59,7 +60,7 @@ section {
 p.slogan {
     font-family: 'Dancing Script', cursive;
     font-size: 40px;
-    color: #eb4d4b;
+    color: #d63031;
     text-shadow: 0.1em 0.1em 0.05em #333
 }
 
@@ -67,4 +68,58 @@ p.slogan {
     width: 250px;
     height: 45px;
     font-size: 20px;
+    box-shadow: 0px 0px 15px #2d3436;
+}
+
+@media all and (max-width: 950px)
+{
+    p.slogan {
+        font-size: 33px;
+    }
+
+    .sign-up {
+        width: 220px;
+    }
+}
+
+@media all and (max-width: 600px)
+{
+    section {
+        padding: 20px 30px;
+    }
+
+    p.slogan {
+        font-size: 22px;
+    }
+
+    .sign-up {
+        width: 150px;
+        height: 40px;
+        font-size: 17px;
+    }
+}
+
+/*****************************   FOOTER   *****************************/
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    font-family: 'Roboto Mono', monospace;
+    color: #d63031;
+    font-size: 16px;
+}
+
+@media all and (max-width: 950px)
+{
+    footer {
+        font-size: 14px;
+    }
+}
+
+@media all and (max-width: 600px)
+{
+    footer {
+        font-size: 9px;
+    }
 }

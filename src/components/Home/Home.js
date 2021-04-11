@@ -6,7 +6,7 @@ const Home = () => {
         <Fragment>
             <Header />
             <section>
-                <p className='slogan bold center'>L'amour en quelques clics...</p>
+                <p className='slogan bold center'>L'amour à quelques clics...</p>
                 <a class="btn btn-success bold sign-up" href="#" role="button">S'inscrire</a>
             </section>
         </Fragment>

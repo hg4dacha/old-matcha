@@ -5,7 +5,7 @@ const Footer = () => {
     const currentYear = new Date();
 
     return (
-        <footer className='bold'>
+        <footer>
             {`© ${currentYear.getFullYear()} Matcha - Project developed by hgadacha`}
         </footer>
     )

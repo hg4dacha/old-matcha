@@ -16,11 +16,11 @@ const Header = () => {
 
     return (
         <header className='mw-100'>
-            <div className='w120'>
+            <div className='sidesDivWidth'>
                 <AiOutlineMenu color='white' size={size} />
             </div>
             <Logo />
-            <div className='w120'>
+            <div className='sidesDivWidth'>
                 <a className="btn btn-outline-light sign-in" href="#" role="button">Se connecter</a>
             </div>
         </header>

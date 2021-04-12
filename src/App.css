@@ -9,11 +9,7 @@ html, body{
 }
 
 body {
-    background-image: url(./images/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
+    background-color: whitesmoke;
 }
 
 #root {
@@ -32,6 +28,14 @@ body {
 
 /*****************************   HOME   *****************************/
 
+.HomeContent {
+    height: 100%;
+    background-image: url(./images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
 
 /*  HEADER  */
 header {
@@ -47,8 +51,8 @@ header {
     pointer-events: none;
 }
 
-.w120 {
-    width: 120px;
+.sidesDivWidth {
+    width: 125px;
 }
 
 /*  SECTION  */
@@ -66,7 +70,7 @@ p.slogan {
     font-family: 'Dancing Script', cursive;
     font-size: 40px;
     color: #d63031;
-    text-shadow: 0.1em 0.1em 0.05em #333
+    text-shadow: 2px 2px 3px #333
 }
 
 .sign-up {
@@ -93,7 +97,7 @@ p.slogan {
         padding: 7px;
     }
 
-    .w120 {
+    .sidesDivWidth {
         width: 80px;
     }
 
@@ -123,6 +127,20 @@ p.slogan {
     }
 }
 
+/*** SIGNUP & SIGNIN PROPERTIES ***/
+.SignContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+/*****************************   SIGNUP   *****************************/
+
+
+
+/*****************************   SIGNIN   *****************************/
+
+
 /*****************************   FOOTER   *****************************/
 
 footer {
@@ -130,7 +148,7 @@ footer {
     bottom: 10px;
     left: 15px;
     font-family: 'Roboto Mono', monospace;
-    color: #d63031;
+    color: #636e72;
     font-size: 16px;
 }
 

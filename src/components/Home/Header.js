@@ -4,22 +4,32 @@ import Logo from '../Logo/Logo';
 
 const Header = () => {
 
-    const widthState = window.screen.width <= 600 ? '18' : '25'
+    const AiOutlineMenuSizeBase = window.screen.width <= 600 ? '18' : '25'
+    const [AiOutlineMenuSize, setAiOutlineMenuSize] = useState(AiOutlineMenuSizeBase)
 
-    const [size, setSize] = useState(widthState)
 
+    const logoWidthBase = window.screen.width <= 600 ? '150' : '200'
+    const [logoWidth, setlogoWidth] = useState(logoWidthBase)
+
+    
     document.querySelector('body').onresize = () => {
         if (window.screen.width <= 600) {
-            setSize('18');
-        } else { setSize('25'); }
+            setAiOutlineMenuSize('18');
+            setlogoWidth('150');
+        } else {
+            setAiOutlineMenuSize('25');
+            setlogoWidth('200');
+        }
     };
+
+ 
 
     return (
         <header className='mw-100'>
             <div className='sidesDivWidth'>
-                <AiOutlineMenu color='white' size={size} />
+                <AiOutlineMenu color='white' size={AiOutlineMenuSize} />
             </div>
-            <Logo />
+            <Logo width={logoWidth} />
             <div className='sidesDivWidth'>
                 <a className="btn btn-outline-light sign-in" href="#" role="button">Se connecter</a>
             </div>

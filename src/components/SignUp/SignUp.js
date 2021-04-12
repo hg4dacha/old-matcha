@@ -2,8 +2,8 @@ import React from 'react';
 
 const SignUp = () => {
     return (
-        <div className='SignContent'>
-            <div>
+        <div className='formsContent centerElementsInPage'>
+            <div className='centerElementsInPage'>
                 <form>
                     <div>
                         <label>Nom</label>

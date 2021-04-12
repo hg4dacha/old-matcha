@@ -3,8 +3,8 @@ import { MdEmail } from 'react-icons/md';
 
 const ForgotPassword = () => {
     return (
-        <div className='SignContent'>
-            <div>
+        <div className='formsContent centerElementsInPage'>
+            <div className='centerElementsInPage'>
                 <form>
                     <div>
                         <div>

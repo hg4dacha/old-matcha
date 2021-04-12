@@ -46,10 +46,10 @@ header {
     justify-content: space-between;
 }
 
-.logo {
+/* .logo {
     width: 200px;
     pointer-events: none;
-}
+} */
 
 .sidesDivWidth {
     width: 125px;
@@ -127,12 +127,36 @@ p.slogan {
     }
 }
 
-/*** SIGNUP & SIGNIN PROPERTIES ***/
-.SignContent {
+/*** FORMS PROPERTIES ***/
+.formsContent {
+    height: 100%;
+    background-image: url(./images/background2.png);
+}
+
+.centerElementsInPage {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 75%;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.inputStyle {
+    background: transparent;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 2px solid whitesmoke;
 }
 /*****************************   SIGNUP   *****************************/
 
@@ -140,6 +164,16 @@ p.slogan {
 
 /*****************************   SIGNIN   *****************************/
 
+.signInFormContent {
+    flex-direction: column;
+    background-color: rgba(39, 174, 96, 0.8);
+    width: 800px;
+    height: 460px;
+    border-radius: 5px;
+    justify-content: space-between;
+    padding: 10px 30px 40px 30px;
+    box-shadow: 0px 0px 25px black;
+}
 
 /*****************************   FOOTER   *****************************/
 

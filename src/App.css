@@ -132,7 +132,10 @@ p.slogan {
     }
 }
 
-/*** FORMS PROPERTIES ***/
+
+/*****************************   FORMS PROPERTIES   *****************************/
+
+
 .formsContent {
     height: 100%;
     background-image: url(./images/background2.png);
@@ -212,10 +215,6 @@ p.slogan {
     font-size: 16px;
 }
 
-.forgotPassword {
-    margin-top: 10px;
-    font-size: 15px;
-}
 
 /*****************************   SIGNUP   *****************************/
 
@@ -224,7 +223,6 @@ p.slogan {
 /*****************************   SIGNIN   *****************************/
 
 .signInFormContent {
-    /* position: relative; */
     flex-direction: column;
     background-color: rgba(39, 174, 96, 0.8);
     width: 800px;
@@ -243,8 +241,27 @@ p.slogan {
 .submitBtn {
     margin-top: 30px;
     width: 160px;
-    /* position: absolute;
-    bottom: 10px; */
+}
+
+.forgotPassword {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+@media all and (max-width: 600px)
+{
+    .signInFormContent {
+        width: 100%;
+        height: 100%;
+    }
+
+    .submitBtn {
+        width: 140px;
+    }
+
+    .forgotPassword {
+        font-size: 12px;
+    }
 }
 
 /*****************************   FOOTER   *****************************/

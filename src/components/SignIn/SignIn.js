@@ -10,23 +10,23 @@ const SignIn = () => {
         <div className='formsContent centerElementsInPage'>
             <div className='signInFormContent centerElementsInPage'>
                 <Logo width='250' />
-                <Form className='forms'>
+                <Form className='forms' autoComplete="off">
                     <Form.Group controlId="formGroupEmail">
-                        <div>
-                            <MdEmail size='18' />
+                        <Form.Control type="email" required />
+                        <div className='label-group'>
+                            <MdEmail size='16' className='iconSignIn' />
                             <Form.Label>Adresse e-mail</Form.Label>
                         </div>
-                        <Form.Control type="email" className='inputStyle' />
                     </Form.Group>
                     <Form.Group controlId="formGroupPassword">
-                        <div>
-                            <BsFillShieldLockFill size='17' />
+                        <Form.Control type="password" required />
+                        <div className='label-group'>
+                            <BsFillShieldLockFill size='15' className='iconSignIn' />
                             <Form.Label>Mot de passe</Form.Label>
                         </div>
-                        <Form.Control type="password" className='inputStyle' />
                     </Form.Group>
-                    <a href='#' >Mot de passe oubllié?</a>
-                    <Button variant="light">Connexion</Button>
+                    <a href='#' className='forgotPassword' >Mot de passe oubllié?</a>
+                    <Button variant="light" type='submit' className='submitBtn'>Connexion</Button>
                 </Form>
             </div>
         </div>

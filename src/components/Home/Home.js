@@ -1,13 +1,14 @@
 import React from 'react'
-import Header from './Header'
+import { Link } from 'react-router-dom'
+import HomeHeader from './HomeHeader'
 
 const Home = () => {
     return (
             <div className='HomeContent'>
-                <Header />
-                <section>
+                <HomeHeader />
+                <section className='HomeSection'>
                     <p className='slogan bold center'>L'amour à quelques clics...</p>
-                    <a className="btn btn-success sign-up" href="#" role="button">S'inscrire</a>
+                    <Link to="/SignUp" className="btn btn-success sign-up" role="button">S'inscrire</Link>
                 </section>
             </div>
     );

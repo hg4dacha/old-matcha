@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import { AiOutlineMenu } from "react-icons/ai"
 import Logo from '../Logo/Logo';
 
-const Header = () => {
+const HomeHeader = () => {
 
     const AiOutlineMenuSizeBase = window.screen.width <= 600 ? '18' : '25'
     const [AiOutlineMenuSize, setAiOutlineMenuSize] = useState(AiOutlineMenuSizeBase)
@@ -25,16 +26,16 @@ const Header = () => {
  
 
     return (
-        <header className='mw-100'>
+        <header className='mw-100 HomeHeader'>
             <div className='sidesDivWidth'>
                 <AiOutlineMenu color='white' size={AiOutlineMenuSize} />
             </div>
             <Logo width={logoWidth} />
             <div className='sidesDivWidth'>
-                <a className="btn btn-outline-light sign-in" href="#" role="button">Se connecter</a>
+                <Link to="/SignIn" className="btn btn-outline-light sign-in" role="button">Se connecter</Link>
             </div>
         </header>
     );
 }
 
-export default Header
+export default HomeHeader

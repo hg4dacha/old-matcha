@@ -6,7 +6,7 @@ import { BsFillShieldLockFill } from 'react-icons/bs';
 import { BsUnlockFill } from 'react-icons/bs';
 import Logo from '../Logo/Logo';
 
-const newPassword = () => {
+const NewPassword = () => {
     return (
         <div className='BackgroundFirst'>
             <div className='BackgroundSecond'>
@@ -16,7 +16,7 @@ const newPassword = () => {
                 <section className='centerElementsInPage FormsSection'>
                     <div className='centerElementsInPage signInFormContent'>
                         <div>
-                            <BsUnlockFill size='25'/>
+                            <BsUnlockFill size='20'/>
                             <span className='FormsTittle'>Nouveau mot de passe</span>
                         </div>
                         <span><Link to='/SignIn'>Retour à la connexion</Link></span>
@@ -45,4 +45,4 @@ const newPassword = () => {
     )
 }
 
-export default newPassword
+export default NewPassword

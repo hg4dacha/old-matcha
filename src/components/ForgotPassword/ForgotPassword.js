@@ -16,7 +16,7 @@ const ForgotPassword = () => {
                 <section className='centerElementsInPage FormsSection'>
                     <div className='centerElementsInPage signInFormContent'>
                         <div>
-                            <BsLockFill size='25'/>
+                            <BsLockFill size='20'/>
                             <span className='FormsTittle'>Mot de passe oublié</span>
                         </div>
                         <span><Link to='/SignIn'>Retour à la connexion</Link></span>

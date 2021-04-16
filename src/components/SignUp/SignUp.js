@@ -17,7 +17,7 @@ const SignUp = () => {
                 <section className='centerElementsInPage FormsSection'>
                     <div className='centerElementsInPage signInFormContent'>
                         <div>
-                            <FiEdit size='25'/>
+                            <FiEdit size='19' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Inscription</span>
                         </div>
                         <span>Vous avez déjà un compte? <Link to='/SignIn'>Connectez-vous</Link></span>
@@ -25,14 +25,14 @@ const SignUp = () => {
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Control type="email" required />
                                 <div className='label-group'>
-                                    <MdEmail size='16' className='iconSignIn' />
+                                    <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>
                                 </div>
                             </Form.Group>
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Control type="password" required />
                                 <div className='label-group'>
-                                    <BsFillShieldLockFill size='15' className='iconSignIn' />
+                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
                                     <Form.Label>Mot de passe</Form.Label>
                                 </div>
                             </Form.Group>

@@ -233,6 +233,17 @@ p.slogan {
     pointer-events: none;
 }
 
+.iconsFormsInputs {
+    margin-top: -2px;
+    margin-right: 3px;
+
+}
+
+.iconsFormsTittles {
+    margin-top: -6px;
+    margin-right: 2px;
+}
+
 
 /*****************************   SIGNUP   *****************************/
 
@@ -249,11 +260,6 @@ p.slogan {
     justify-content: space-between;
     padding: 10px 30px;
     /* box-shadow: 0px 0px 25px black; */
-}
-.iconSignIn {
-    margin-right: 2px;
-    margin-top: -4px;
-
 }
 
 .submitBtn {

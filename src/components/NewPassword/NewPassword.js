@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { BsFillShieldLockFill } from 'react-icons/bs';
-import { BsUnlockFill } from 'react-icons/bs';
+import { IoLockOpen } from 'react-icons/io5';
 import Logo from '../Logo/Logo';
 
 const NewPassword = () => {
@@ -16,7 +16,7 @@ const NewPassword = () => {
                 <section className='centerElementsInPage FormsSection'>
                     <div className='centerElementsInPage signInFormContent'>
                         <div>
-                            <BsUnlockFill size='20'/>
+                            <IoLockOpen size='20' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Nouveau mot de passe</span>
                         </div>
                         <span><Link to='/SignIn'>Retour à la connexion</Link></span>
@@ -24,14 +24,14 @@ const NewPassword = () => {
                         <Form.Group controlId="formGroupPassword">
                                 <Form.Control type="password" required />
                                 <div className='label-group'>
-                                    <BsFillShieldLockFill size='15' className='iconSignIn' />
+                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
                                     <Form.Label>Nouveau mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Control type="password" required />
                                 <div className='label-group'>
-                                    <BsFillShieldLockFill size='15' className='iconSignIn' />
+                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
                                     <Form.Label>Confirmez le nouveau mot de passe</Form.Label>
                                 </div>
                             </Form.Group>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { MdEmail } from 'react-icons/md';
-import { BsLockFill } from 'react-icons/bs';
+import { IoLockClosed } from 'react-icons/io5';
 import Logo from '../Logo/Logo';
 
 const ForgotPassword = () => {
@@ -16,7 +16,7 @@ const ForgotPassword = () => {
                 <section className='centerElementsInPage FormsSection'>
                     <div className='centerElementsInPage signInFormContent'>
                         <div>
-                            <BsLockFill size='20'/>
+                            <IoLockClosed size='20' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Mot de passe oublié</span>
                         </div>
                         <span><Link to='/SignIn'>Retour à la connexion</Link></span>
@@ -24,7 +24,7 @@ const ForgotPassword = () => {
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Control type="email" required />
                                 <div className='label-group'>
-                                    <MdEmail size='16' className='iconSignIn' />
+                                    <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>
                                 </div>
                             </Form.Group>

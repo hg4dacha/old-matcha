@@ -3,7 +3,7 @@ import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
-// import NewPassword from './components/NewPassword/NewPassword';
+import NewPassword from './components/NewPassword/NewPassword';
 import NotFound from './components/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
 import './App.css';
@@ -18,7 +18,7 @@ function App() {
         <Route path='/SignUp' component={SignUp} />
         <Route path='/SignIn' component={SignIn} />
         <Route path='/ForgotPassword' component={ForgotPassword} />
-        {/* <Route path='/NewPassword' component={NewPassword} /> */}
+        <Route path='/NewPassword' component={NewPassword} />
         <Route component={NotFound} />
       </Switch>
       

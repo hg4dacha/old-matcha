@@ -148,6 +148,13 @@ p.slogan {
 
 /*****************************   FORMS PROPERTIES   *****************************/
 
+.formContent {
+    flex-direction: column;
+    margin-top: -100px;
+    border-radius: 5px;
+    justify-content: space-between;
+    padding: 10px 30px;
+}
 
 .forms {
     display: flex;
@@ -247,19 +254,16 @@ p.slogan {
 
 /*****************************   SIGNUP   *****************************/
 
-
+.signUpSizeContent {
+    width: 800px;
+    height: 800px;
+}
 
 /*****************************   SIGNIN   *****************************/
 
-.signInFormContent {
-    flex-direction: column;
-    margin-top: -100px;
+.signInSizeContent {
     width: 800px;
     height: 470px;
-    border-radius: 5px;
-    justify-content: space-between;
-    padding: 10px 30px;
-    /* box-shadow: 0px 0px 25px black; */
 }
 
 .submitBtn {

@@ -15,7 +15,7 @@ const SignIn = () => {
                     <Logo width='250' />
                 </header>
                 <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage signInFormContent'>
+                    <div className='centerElementsInPage formContent signInSizeContent '>
                         <div>
                             <BiNetworkChart size='25' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Connexion</span>

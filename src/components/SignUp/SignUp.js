@@ -17,7 +17,7 @@ const SignUp = () => {
                     <Logo width='250' />
                 </header>
                 <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage signInFormContent'>
+                    <div className='centerElementsInPage formContent signUpSizeContent '>
                         <div>
                             <FiEdit size='19' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Inscription</span>

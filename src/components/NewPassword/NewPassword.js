@@ -1,25 +1,23 @@
 import React from 'react';
+import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { IoLockOpen } from 'react-icons/io5';
-import Logo from '../Logo/Logo';
 
 const NewPassword = () => {
     return (
         <div className='BackgroundFirst'>
             <div className='BackgroundSecond'>
-                <header className='centerElementsInPage FormsHeader'>
-                    <Logo width='250' />
-                </header>
+                <FormsHeader />
                 <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage signInFormContent'>
-                        <div>
-                            <IoLockOpen size='20' className='iconsFormsTittles' />
+                    <div className='centerElementsInPage formContent newPasswordSizeContent'>
+                        <div className='tittleDiv'>
+                            <IoLockOpen size='23' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Nouveau mot de passe</span>
                         </div>
-                        <span><Link to='/SignIn'>Retour à la connexion</Link></span>
+                        <span className='center paragrInfo'>Entrer un nouveau mot de passe.</span>
                         <Form className='forms' autoComplete="off">
                         <Form.Group controlId="formGroupPassword">
                                 <Form.Control type="password" required />
@@ -31,12 +29,12 @@ const NewPassword = () => {
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Control type="password" required />
                                 <div className='label-group'>
-                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
-                                    <Form.Label>Confirmez le nouveau mot de passe</Form.Label>
+                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' color='#2c3e50' />
+                                    <Form.Label style={{color: '#2c3e50'}}>Confirmez le nouveau mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Link to='/ForgotPassword' className='forgotPassword' >Mot de passe oubllié?</Link>
-                            <Button variant="light" type='submit' className='submitBtn'>Réinitialiser le mot de passe</Button>
+                            <Link to='/ForgotPassword' className='forgotPassword' >Annuler</Link>
+                            <Button variant="light" type='submit' className='submitBtnLarge'>Réinitialiser le mot de passe</Button>
                         </Form>
                     </div>
                 </section>

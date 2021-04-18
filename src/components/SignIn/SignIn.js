@@ -1,26 +1,24 @@
 import React from 'react';
+import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { MdEmail } from 'react-icons/md';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { BiNetworkChart } from 'react-icons/bi';
-import Logo from '../Logo/Logo';
 
 const SignIn = () => {
     return (
         <div className='BackgroundFirst'>
             <div className='BackgroundSecond'>
-                <header className='centerElementsInPage FormsHeader'>
-                    <Logo width='250' />
-                </header>
+                <FormsHeader />
                 <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage formContent signInSizeContent '>
-                        <div>
-                            <BiNetworkChart size='25' className='iconsFormsTittles' />
+                    <div className='centerElementsInPage formContent signInSizeContent'>
+                        <div className='tittleDiv'>
+                            <BiNetworkChart size='28' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Connexion</span>
                         </div>
-                        <span>Pas encore de compte? <Link to='/SignUp'>Inscrivez-vous</Link></span>
+                        <span className='center paragrInfo'>Pas encore de compte? <Link to='/SignUp'>Inscrivez-vous</Link></span>
                         <Form className='forms' autoComplete="off">
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Control type="email" required />
@@ -37,7 +35,7 @@ const SignIn = () => {
                                 </div>
                             </Form.Group>
                             <Link to='/ForgotPassword' className='forgotPassword' >Mot de passe oubllié?</Link>
-                            <Button variant="light" type='submit' className='submitBtn'>Connexion</Button>
+                            <Button variant="light" type='submit' className='submitBtnSmall'>Connexion</Button>
                         </Form>
                     </div>
                 </section>

@@ -137,7 +137,7 @@ p.slogan {
     p.slogan {
         font-size: 22px;
     }
-
+    
     .sign-up {
         width: 150px;
         height: 40px;
@@ -148,12 +148,39 @@ p.slogan {
 
 /*****************************   FORMS PROPERTIES   *****************************/
 
+.FormsHeader {
+    padding: 10px;
+    height: 10%;
+    width: 100%;
+}
+
+.FormsSection {
+    height: 90%;
+    width: 100%;
+}
+
 .formContent {
     flex-direction: column;
     margin-top: -100px;
     border-radius: 5px;
     justify-content: space-between;
     padding: 10px 30px;
+}
+
+.tittleDiv {
+    border: 1px dashed #2c3e50;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.FormsTittle {
+    font-size: 24px;
+    pointer-events: none;
+}
+
+.paragrInfo, .paragrInfoSignUp {
+    margin-top: 50px;
+    color: #2c3e50;
 }
 
 .forms {
@@ -224,22 +251,6 @@ p.slogan {
     font-size: 16px;
 }
 
-.FormsHeader {
-    padding: 10px;
-    height: 10%;
-    width: 100%;
-}
-
-.FormsSection {
-    height: 90%;
-    width: 100%;
-}
-
-.FormsTittle {
-    font-size: 21px;
-    pointer-events: none;
-}
-
 .iconsFormsInputs {
     margin-top: -2px;
     margin-right: 3px;
@@ -251,12 +262,64 @@ p.slogan {
     margin-right: 2px;
 }
 
+.submitBtnSmall, .submitBtnSignUp {
+    margin-top: 30px;
+    width: 160px;
+}
+
+.submitBtnLarge {
+    margin-top: 30px;
+    width: 300px;
+}
+
+@media all and (max-width: 600px)
+{
+    .FormsSection {
+        padding: 0;
+    }
+
+    .formContent {
+        margin-top: -55px;
+    }
+
+    .forms {
+        width: 80%;
+        height: 100%;
+    }
+
+    .paragrInfo {
+        margin-top: 25px;
+        font-size: 13px;
+    }
+}
+
 
 /*****************************   SIGNUP   *****************************/
 
 .signUpSizeContent {
     width: 800px;
     height: 800px;
+}
+
+@media all and (max-width: 600px)
+{
+    .signUpSizeContent {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 575px;
+    }
+
+    .paragrInfoSignUp {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 13px;
+    }
+
+    .submitBtnSignUp {
+        margin-top: -15px;
+        margin-bottom: 35px;
+    }
 }
 
 /*****************************   SIGNIN   *****************************/
@@ -266,11 +329,6 @@ p.slogan {
     height: 470px;
 }
 
-.submitBtn {
-    margin-top: 30px;
-    width: 160px;
-}
-
 .forgotPassword {
     margin-top: 10px;
     font-size: 15px;
@@ -278,19 +336,23 @@ p.slogan {
 
 @media all and (max-width: 600px)
 {
-    .signInFormContent {
+    .signInSizeContent {
+        padding: 0;
         width: 100%;
-        height: 100%;
-    }
-
-    .submitBtn {
-        width: 140px;
     }
 
     .forgotPassword {
         font-size: 12px;
     }
 }
+
+/*****************************   NEWPASSWORD   *****************************/
+
+.newPasswordSizeContent {
+    width: 800px;
+    height: 600px;
+}
+
 
 /*****************************   FOOTER   *****************************/
 

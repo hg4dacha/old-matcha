@@ -1,4 +1,5 @@
 import React from 'react';
+import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,22 +8,19 @@ import { RiUserFill } from 'react-icons/ri';
 import { MdEmail } from 'react-icons/md';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
-import Logo from '../Logo/Logo';
 
 const SignUp = () => {
     return (
         <div className='BackgroundFirst'>
             <div className='BackgroundSecond'>
-                <header className='centerElementsInPage FormsHeader'>
-                    <Logo width='250' />
-                </header>
+                <FormsHeader />
                 <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage formContent signUpSizeContent '>
-                        <div>
-                            <FiEdit size='19' className='iconsFormsTittles' />
+                    <div className='centerElementsInPage formContent signUpSizeContent'>
+                        <div className='tittleDiv'>
+                            <FiEdit size='21' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Inscription</span>
                         </div>
-                        <span>Vous avez déjà un compte? <Link to='/SignIn'>Connectez-vous</Link></span>
+                        <span className='center paragrInfoSignUp'>Vous avez déjà un compte? <Link to='/SignIn'>Connectez-vous</Link></span>
                         <Form className='forms' autoComplete="off">
                             <Form.Group controlId="formGroupText">
                                 <Form.Control type="text" required />
@@ -62,11 +60,11 @@ const SignUp = () => {
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Control type="password" required />
                                 <div className='label-group'>
-                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' color='#0a3d62' />
-                                    <Form.Label style={{color: '#0a3d62'}}>Confirmer le mot de passe</Form.Label>
+                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' color='#2c3e50' />
+                                    <Form.Label style={{color: '#2c3e50'}}>Confirmer le mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Button variant="light" type='submit' className='submitBtn'>S'inscrire</Button>
+                            <Button variant="light" type='submit' className='submitBtnSignUp'>S'inscrire</Button>
                         </Form>
                     </div>
                 </section>

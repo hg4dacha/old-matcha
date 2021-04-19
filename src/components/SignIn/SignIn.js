@@ -19,9 +19,9 @@ const SignIn = () => {
     
     const { email, password } = data
 
-
+    
     const btn = document.querySelector('.submitBtnSmall');
-    console.log(btn)
+    // console.log(btn)
 
     const handleChange = e => {
 

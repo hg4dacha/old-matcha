@@ -15,20 +15,19 @@ const ForgotPassword = () => {
     }
 
     const [data, setData] = useState(loginData);
-    
-    const { email } = data
+
+    const email = data.email
 
 
     const btn = document.querySelector('.submitBtnSmall');
-    console.log(btn)
 
     const handleChange = e => {
 
         setData({...data, [e.target.id]: e.target.value});
 
-        email !== '' ?
-        btn.removeAttribute('disabled') :
-        btn.setAttribute('disabled', 'true') ;
+        // email !== '' ?
+        // btn.removeAttribute('disabled') :
+        // btn.setAttribute('disabled', 'true') ;
     }
 
 

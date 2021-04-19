@@ -28,7 +28,6 @@ const SignUp = () => {
 
 
     const btn = document.querySelector('.submitBtnSignUp');
-    console.log(btn)
 
     const handleChange = e => {
 

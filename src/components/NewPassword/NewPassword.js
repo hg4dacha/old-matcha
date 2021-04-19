@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { IoLockOpen } from 'react-icons/io5';
 
+
 const NewPassword = () => {
     return (
         <div className='BackgroundFirst'>

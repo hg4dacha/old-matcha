@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
@@ -9,7 +9,38 @@ import { MdEmail } from 'react-icons/md';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
 
+
 const SignUp = () => {
+
+
+    const loginData = {
+        lastname: '',
+        firstname: '',
+        username: '',
+        email: '',
+        password: '',
+        passwordConfirmation: ''
+    }
+
+    const [data, setData] = useState(loginData);
+    
+    const { lastname, firstname, username, email, password, passwordConfirmation } = data
+
+
+    const btn = document.querySelector('.submitBtnSignUp');
+    console.log(btn)
+
+    const handleChange = e => {
+
+        setData({...data, [e.target.id]: e.target.value});
+
+        lastname !== '' && firstname !== '' && username !== '' &&
+        email !== '' && password !== '' && passwordConfirmation !== '' ?
+        btn.removeAttribute('disabled') :
+        btn.setAttribute('disabled', 'true') ;
+    }
+
+
     return (
         <div className='BackgroundFirst'>
             <div className='BackgroundSecond'>
@@ -22,49 +53,49 @@ const SignUp = () => {
                         </div>
                         <span className='center paragrInfoSignUp'>Vous avez déjà un compte? <Link to='/SignIn' style={{fontStyle: 'initial'}}>Connectez-vous</Link></span>
                         <Form className='forms' autoComplete="off">
-                            <Form.Group controlId="formGroupText">
-                                <Form.Control type="text" required />
+                            <Form.Group controlId="lastname">
+                                <Form.Control onChange={handleChange} value={lastname} type="text" required />
                                 <div className='label-group'>
                                     <FaIdCard size='15' className='iconsFormsInputs' />
                                     <Form.Label>Nom</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Form.Group controlId="formGroupText">
-                                <Form.Control type="text" required />
+                            <Form.Group controlId="firstname">
+                                <Form.Control onChange={handleChange} value={firstname} type="text" required />
                                 <div className='label-group'>
                                     <FaIdCard size='15' className='iconsFormsInputs' />
                                     <Form.Label>Prenom</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Form.Group controlId="formGroupText">
-                                <Form.Control type="text" required />
+                            <Form.Group controlId="username">
+                                <Form.Control onChange={handleChange} value={username} type="text" required />
                                 <div className='label-group'>
                                     <RiUserFill size='16' className='iconsFormsInputs' />
                                     <Form.Label>Nom d'utilisateur</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Form.Group controlId="formGroupEmail">
-                                <Form.Control type="email" required />
+                            <Form.Group controlId="email">
+                                <Form.Control onChange={handleChange} value={email} type="email" required />
                                 <div className='label-group'>
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Control type="password" required />
+                            <Form.Group controlId="password">
+                                <Form.Control onChange={handleChange} value={password} type="password" required />
                                 <div className='label-group'>
                                     <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
                                     <Form.Label>Mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Control type="password" required />
+                            <Form.Group controlId="passwordConfirmation">
+                                <Form.Control onChange={handleChange} value={passwordConfirmation} type="password" required />
                                 <div className='label-group'>
                                     <BsFillShieldLockFill size='15' className='iconsFormsInputs' color='#2c3e50' />
                                     <Form.Label style={{color: '#2c3e50'}}>Confirmer le mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Button variant="light" type='submit' className='submitBtnSignUp'>S'inscrire</Button>
+                            <Button variant="light" type='submit' className='submitBtnSignUp' disabled={true}>S'inscrire</Button>
                         </Form>
                     </div>
                 </section>

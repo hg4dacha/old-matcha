@@ -7,6 +7,7 @@ import { MdEmail } from 'react-icons/md';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { BiNetworkChart } from 'react-icons/bi';
 
+
 const SignIn = () => {
 
     const loginData = {
@@ -16,11 +17,11 @@ const SignIn = () => {
 
     const [data, setData] = useState(loginData);
     
-    // destructuring of data
     const { email, password } = data
 
 
     const btn = document.querySelector('.submitBtnSmall');
+    console.log(btn)
 
     const handleChange = e => {
 
@@ -31,7 +32,7 @@ const SignIn = () => {
         btn.setAttribute('disabled', 'true') ;
     }
 
-    
+
     return (
         <div className='BackgroundFirst'>
             <div className='BackgroundSecond'>

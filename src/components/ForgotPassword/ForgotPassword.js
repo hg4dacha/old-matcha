@@ -12,7 +12,7 @@ const ForgotPassword = () => {
             <div className='BackgroundSecond'>
                 <FormsHeader />
                 <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage formContent signInSizeContent'>
+                    <div className='centerElementsInPage formContent sectionContentSize'>
                         <div className='tittleDiv'>
                             <IoLockClosed size='23' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Mot de passe oublié</span>

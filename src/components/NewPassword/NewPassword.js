@@ -12,7 +12,7 @@ const NewPassword = () => {
             <div className='BackgroundSecond'>
                 <FormsHeader />
                 <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage formContent newPasswordSizeContent'>
+                    <div className='centerElementsInPage formContent sectionContentSize'>
                         <div className='tittleDiv'>
                             <IoLockOpen size='23' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Nouveau mot de passe</span>

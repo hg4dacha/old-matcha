@@ -20,7 +20,7 @@ const SignUp = () => {
                             <FiEdit size='21' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Inscription</span>
                         </div>
-                        <span className='center paragrInfoSignUp'>Vous avez déjà un compte? <Link to='/SignIn'>Connectez-vous</Link></span>
+                        <span className='center paragrInfoSignUp'>Vous avez déjà un compte? <Link to='/SignIn' style={{fontStyle: 'initial'}}>Connectez-vous</Link></span>
                         <Form className='forms' autoComplete="off">
                             <Form.Group controlId="formGroupText">
                                 <Form.Control type="text" required />

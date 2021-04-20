@@ -8,6 +8,7 @@ import { RiUserFill } from 'react-icons/ri';
 import { MdEmail } from 'react-icons/md';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
+import { RiErrorWarningLine } from 'react-icons/ri';
 
 
 const SignUp = () => {
@@ -81,6 +82,7 @@ const SignUp = () => {
                                     <RiUserFill size='16' className='iconsFormsInputs' />
                                     <Form.Label>Nom d'utilisateur</Form.Label>
                                 </div>
+                                <Form.Text>username</Form.Text>
                             </Form.Group>
                             <Form.Group controlId="email">
                                 <Form.Control onChange={handleChange} value={email} type="text" required />
@@ -88,6 +90,7 @@ const SignUp = () => {
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>
                                 </div>
+                                <Form.Text><RiErrorWarningLine />Adresse e-mail non valide</Form.Text>
                             </Form.Group>
                             <Form.Group controlId="password">
                                 <Form.Control onChange={handleChange} value={password} type="password" required />
@@ -95,6 +98,7 @@ const SignUp = () => {
                                     <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
                                     <Form.Label>Mot de passe</Form.Label>
                                 </div>
+                                <Form.Text>Password</Form.Text>
                             </Form.Group>
                             <Form.Group controlId="passwordConfirmation">
                                 <Form.Control onChange={handleChange} value={passwordConfirmation} type="password" required />

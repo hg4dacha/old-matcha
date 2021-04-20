@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
@@ -10,28 +10,38 @@ import { BiNetworkChart } from 'react-icons/bi';
 
 const SignIn = () => {
 
+    useEffect( () => {
+        document.title = 'Connexion - Matcha'
+    }, [])
+    
+
     const loginData = {
         email: '',
         password: ''
     }
-
+    
     const [data, setData] = useState(loginData);
     
     const { email, password } = data
-
     
-    const btn = document.querySelector('.submitBtnSmall');
-    // console.log(btn)
-
-    const handleChange = e => {
-
-        setData({...data, [e.target.id]: e.target.value});
-
+    useEffect( () => {
+        const btn = document.querySelector('.submitBtnSmall');
+        
         email !== '' && password !== '' ?
         btn.removeAttribute('disabled') :
         btn.setAttribute('disabled', 'true') ;
+    })
+    
+    
+    const handleChange = e => {
+        
+        setData({...data, [e.target.id]: e.target.value});
     }
-
+    
+    const handleSubmit = e => {
+        e.preventDefault()
+    }
+    
 
     return (
         <div className='BackgroundFirst'>
@@ -44,9 +54,9 @@ const SignIn = () => {
                             <span className='FormsTittle'>Connexion</span>
                         </div>
                         <span className='center paragrInfo'>Pas encore de compte? <Link to='/SignUp' style={{fontStyle: 'initial'}}>Inscrivez-vous</Link></span>
-                        <Form className='forms' autoComplete="off">
+                        <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
                             <Form.Group controlId="email">
-                                <Form.Control onChange={handleChange} value={email} type="email" required />
+                                <Form.Control onChange={handleChange} value={email} type="text" required />
                                 <div className='label-group'>
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>

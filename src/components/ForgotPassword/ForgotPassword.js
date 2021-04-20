@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
@@ -9,25 +9,35 @@ import { IoLockClosed } from 'react-icons/io5';
 
 const ForgotPassword = () => {
 
+    useEffect( () => {
+        document.title = 'Mot de passe oublié - Matcha'
+    }, [])
+
 
     const loginData = {
         email: ''
     }
-
+    
     const [data, setData] = useState(loginData);
+    
+    const { email } = data
 
-    const email = data.email
-
-
-    const btn = document.querySelector('.submitBtnSmall');
-
+    useEffect( () => {
+        const btn = document.querySelector('.submitBtnLarge');
+        
+        email !== '' ?
+        btn.removeAttribute('disabled') :
+        btn.setAttribute('disabled', 'true') ;
+    })
+    
+    
     const handleChange = e => {
-
-        setData({...data, [e.target.id]: e.target.value});
-
-        // email !== '' ?
-        // btn.removeAttribute('disabled') :
-        // btn.setAttribute('disabled', 'true') ;
+        
+        setData({email: e.target.value});
+    }
+    
+    const handleSubmit = e => {
+        e.preventDefault()
     }
 
 
@@ -42,9 +52,9 @@ const ForgotPassword = () => {
                             <span className='FormsTittle'>Mot de passe oublié</span>
                         </div>
                         <span className='center paragrInfo'>Entrer l'adresse email de votre compte,<br />un mail de réinitialisation vous sera envoyé.</span>
-                        <Form className='forms' autoComplete="off">
+                        <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
                             <Form.Group controlId="email">
-                                <Form.Control onChange={handleChange} value={email} type="email" required />
+                                <Form.Control onChange={handleChange} value={email} type="text" required />
                                 <div className='label-group'>
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>

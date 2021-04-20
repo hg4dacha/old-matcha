@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
@@ -11,6 +11,10 @@ import { FiEdit } from 'react-icons/fi';
 
 
 const SignUp = () => {
+
+    useEffect( () => {
+        document.title = 'Inscription - Matcha'
+    }, [])
 
 
     const loginData = {
@@ -26,19 +30,24 @@ const SignUp = () => {
     
     const { lastname, firstname, username, email, password, passwordConfirmation } = data
 
-
-    const btn = document.querySelector('.submitBtnSignUp');
-
-    const handleChange = e => {
-
-        setData({...data, [e.target.id]: e.target.value});
-
+    useEffect( () => {
+        const btn = document.querySelector('.submitBtnSignUp');
+        
         lastname !== '' && firstname !== '' && username !== '' &&
         email !== '' && password !== '' && passwordConfirmation !== '' ?
         btn.removeAttribute('disabled') :
         btn.setAttribute('disabled', 'true') ;
+    })
+
+
+    const handleChange = e => {
+
+        setData({...data, [e.target.id]: e.target.value});
     }
 
+    const handleSubmit = e => {
+        e.preventDefault()
+    }
 
     return (
         <div className='BackgroundFirst'>
@@ -51,7 +60,7 @@ const SignUp = () => {
                             <span className='FormsTittle'>Inscription</span>
                         </div>
                         <span className='center paragrInfoSignUp'>Vous avez déjà un compte? <Link to='/SignIn' style={{fontStyle: 'initial'}}>Connectez-vous</Link></span>
-                        <Form className='forms' autoComplete="off">
+                        <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
                             <Form.Group controlId="lastname">
                                 <Form.Control onChange={handleChange} value={lastname} type="text" required />
                                 <div className='label-group'>
@@ -74,7 +83,7 @@ const SignUp = () => {
                                 </div>
                             </Form.Group>
                             <Form.Group controlId="email">
-                                <Form.Control onChange={handleChange} value={email} type="email" required />
+                                <Form.Control onChange={handleChange} value={email} type="text" required />
                                 <div className='label-group'>
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>

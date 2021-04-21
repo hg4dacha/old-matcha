@@ -82,7 +82,7 @@ const SignUp = () => {
                                     <RiUserFill size='16' className='iconsFormsInputs' />
                                     <Form.Label>Nom d'utilisateur</Form.Label>
                                 </div>
-                                <Form.Text>username</Form.Text>
+                                <Form.Text>Le nom d’utilisateur ne peut contenir que des lettres (sans accents), des chiffres, des tirets et des points. (Pas d'espaces | 15 caractères max.)</Form.Text>
                             </Form.Group>
                             <Form.Group controlId="email">
                                 <Form.Control onChange={handleChange} value={email} type="text" required />
@@ -90,7 +90,7 @@ const SignUp = () => {
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>
                                 </div>
-                                <Form.Text><RiErrorWarningLine />Adresse e-mail non valide</Form.Text>
+                                <Form.Text style={{color: '#EA2027'}}><RiErrorWarningLine color='#EA2027' style={{marginTop: '-2px', marginRight: '2px'}} />Adresse e-mail non valide</Form.Text>
                             </Form.Group>
                             <Form.Group controlId="password">
                                 <Form.Control onChange={handleChange} value={password} type="password" required />

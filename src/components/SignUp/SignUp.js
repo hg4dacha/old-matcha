@@ -53,8 +53,13 @@ const SignUp = () => {
     const handleSubmit = e => {
         e.preventDefault()
 
-        if (!EMAIL_REGEX.test(data.email)) {
+        if (EMAIL_REGEX.test(data.email)) {
+            document.querySelector('#emailError').classList.contains('smallErrorDisplay') &&
+            document.querySelector('#emailError').classList.remove('smallErrorDisplay')
+        }
+        else {
             document.querySelector('#emailError').classList.add('smallErrorDisplay')
+
         }
     }
 

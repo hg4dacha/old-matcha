@@ -228,6 +228,7 @@ p.slogan {
 
 .smallOnError {
     color: #EA2027;
+    opacity: 0.7;
 }
 
 .smallErrorDisplay {

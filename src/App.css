@@ -42,14 +42,14 @@ a, a:hover{
     font-weight: bold;
 }
 
-*:disabled {
-    cursor: not-allowed;
-}
-
 .centerElementsInPage {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+*:disabled {
+    cursor: not-allowed;
 }
 
 
@@ -210,6 +210,31 @@ p.slogan {
     border-bottom: 2px solid whitesmoke;
 }
 
+.smallOnFocus, .smallOnError {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-style: italic;
+    -webkit-transition: 0.2s ease-in;
+    -moz-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in;
+}
+
+.smallOnFocus {
+    color: #218c74;
+}
+
+.smallOnError {
+    color: #EA2027;
+}
+
+.smallErrorDisplay {
+    visibility: visible;
+    top: 35px;
+}
+
 .form-control:focus {
     outline-style: none;
     /* ↓ because bootstrap ↓ */
@@ -228,6 +253,11 @@ p.slogan {
 .form-control:valid~.label-group .form-label {
     font-size: 15px;
     font-style: italic;
+}
+
+.form-control:focus~.smallOnFocus {
+    visibility: visible;
+    top: 35px;
 }
 
 .form-control:required {

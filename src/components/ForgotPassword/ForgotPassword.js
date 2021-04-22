@@ -54,7 +54,7 @@ const ForgotPassword = () => {
                         <span className='center paragrInfo'>Entrer l'adresse email de votre compte,<br />un mail de réinitialisation vous sera envoyé.</span>
                         <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
                             <Form.Group controlId="email">
-                                <Form.Control onChange={handleChange} value={email} type="text" required />
+                                <Form.Control onChange={handleChange} value={email} type="text" maxLength="250" required />
                                 <div className='label-group'>
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>

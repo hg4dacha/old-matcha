@@ -55,14 +55,14 @@ const NewPassword = () => {
                         <span className='center paragrInfo'>Entrer un nouveau mot de passe.</span>
                         <Form className='forms' autoComplete="off" onSubmit={handleSubmit}>
                         <Form.Group controlId="password">
-                                <Form.Control onChange={handleChange} value={password} type="password" required />
+                                <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />
                                 <div className='label-group'>
                                     <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
                                     <Form.Label>Nouveau mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
                             <Form.Group controlId="passwordConfirmation">
-                                <Form.Control onChange={handleChange} value={passwordConfirmation} type="password" required />
+                                <Form.Control onChange={handleChange} value={passwordConfirmation} type="password" maxLength="250" required />
                                 <div className='label-group'>
                                     <BsFillShieldLockFill size='15' className='iconsFormsInputs' color='#2c3e50' />
                                     <Form.Label style={{color: '#2c3e50'}}>Confirmez le nouveau mot de passe</Form.Label>

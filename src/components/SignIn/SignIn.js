@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { MdEmail } from 'react-icons/md';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { BiNetworkChart } from 'react-icons/bi';
+import { RiErrorWarningLine } from 'react-icons/ri';
 
 
 const SignIn = () => {
@@ -56,19 +57,20 @@ const SignIn = () => {
                         <span className='center paragrInfo'>Pas encore de compte? <Link to='/SignUp' style={{fontStyle: 'initial'}}>Inscrivez-vous</Link></span>
                         <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
                             <Form.Group controlId="email">
-                                <Form.Control onChange={handleChange} value={email} type="text" required />
+                                <Form.Control onChange={handleChange} value={email} type="text" maxLength="250" required />
                                 <div className='label-group'>
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>
                                 </div>
                             </Form.Group>
                             <Form.Group controlId="password">
-                                <Form.Control onChange={handleChange} value={password} type="password" required />
+                                <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />
                                 <div className='label-group'>
                                     <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
                                     <Form.Label>Mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
+                            <Form.Text style={{color: '#EA2027'}}><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Certaines de vos entrées ne sont pas valides</Form.Text>
                             <Link to='/ForgotPassword' className='forgotPassword' >Mot de passe oubllié?</Link>
                             <Button variant="light" type='submit' className='submitBtnSmall' disabled={true}>Connexion</Button>
                         </Form>

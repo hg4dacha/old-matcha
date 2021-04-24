@@ -48,17 +48,31 @@ const SignUp = () => {
         setData({...data, [e.target.id]: e.target.value});
     }
 
+    let NAMES_REGEX = /^[a-zA-Z\-]+$/;
+    let USERNAME_REGEX = /^[a-zA-Z0-9]+$/;
     let EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const handleSubmit = e => {
         e.preventDefault()
 
+
+
         if (EMAIL_REGEX.test(data.email)) {
-            document.querySelector('#emailError').classList.contains('smallErrorDisplay') &&
-            document.querySelector('#emailError').classList.remove('smallErrorDisplay')
+
+            document.querySelector('#emailError').classList.contains('mailErrorDisplay') &&
+            document.querySelector('#emailError').classList.remove('mailErrorDisplay')
+
+            if (NAMES_REGEX.test(data.lastname) && NAMES_REGEX.test(data.firstname)) {
+
+                document.querySelector('#generalError').classList.contains('generalErrorDisplay') &&
+                document.querySelector('#generalError').classList.remove('generalErrorDisplay')
+            }
+            else {
+                document.querySelector('#generalError').classList.add('generalErrorDisplay')
+            }
         }
         else {
-            document.querySelector('#emailError').classList.add('smallErrorDisplay')
+            document.querySelector('#emailError').classList.add('mailErrorDisplay')
 
         }
     }
@@ -103,7 +117,7 @@ const SignUp = () => {
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>
                                 </div>
-                                <Form.Text className='smallOnError' id='emailError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Adresse e-mail non valide</Form.Text>
+                                <Form.Text className='mailError' id='emailError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Adresse e-mail non valide</Form.Text>
                             </Form.Group>
                             <Form.Group controlId="password">
                                 <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />
@@ -120,8 +134,10 @@ const SignUp = () => {
                                     <Form.Label style={{color: '#2c3e50'}}>Confirmer le mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Form.Text className='smallOnError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Certaines de vos entrées ne sont pas valides</Form.Text>
-                            <Button variant="light" type='submit' className='submitBtnSignUp' disabled={true}>S'inscrire</Button>
+                            <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
+                                <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Certaines de vos entrées ne sont pas valides</Form.Text>
+                                <Button variant="light" type='submit' className='submitBtnSignUp' disabled={true}>S'inscrire</Button>
+                            </div>
                         </Form>
                     </div>
                 </section>

@@ -48,32 +48,48 @@ const SignUp = () => {
         setData({...data, [e.target.id]: e.target.value});
     }
 
-    let NAMES_REGEX = /^[a-zA-Z\-]+$/;
-    let USERNAME_REGEX = /^[a-zA-Z0-9]+$/;
-    let EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let NAMES_REGEX = /^[a-zA-Z-]{1,30}$/;
+    let USERNAME_REGEX = /^[a-zA-Z0-9-_]{1,15}$/;
+    let EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})){1,255}$/;
+    let PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,255}$/;
 
     const handleSubmit = e => {
         e.preventDefault()
 
+        if (lastname !== '' && firstname !== '' && username !== '' && email !== '' && password !== '' && passwordConfirmation !== '') {
 
+            if (EMAIL_REGEX.test(data.email)) {
+    
+                document.querySelector('#emailError').classList.contains('mailErrorDisplay') &&
+                document.querySelector('#emailError').classList.remove('mailErrorDisplay')
+    
+                if (NAMES_REGEX.test(data.lastname) && NAMES_REGEX.test(data.firstname)) {
+    
+                    if (USERNAME_REGEX.test(data.username)) {
 
-        if (EMAIL_REGEX.test(data.email)) {
+                        if (PASSWORD_REGEX.test(data.password) && data.password === data.passwordConfirmation) {
 
-            document.querySelector('#emailError').classList.contains('mailErrorDisplay') &&
-            document.querySelector('#emailError').classList.remove('mailErrorDisplay')
-
-            if (NAMES_REGEX.test(data.lastname) && NAMES_REGEX.test(data.firstname)) {
-
-                document.querySelector('#generalError').classList.contains('generalErrorDisplay') &&
-                document.querySelector('#generalError').classList.remove('generalErrorDisplay')
+                            document.querySelector('#generalError').classList.contains('generalErrorDisplay') &&
+                            document.querySelector('#generalError').classList.remove('generalErrorDisplay')
+                        }
+                        else {
+                            document.querySelector('#generalError').classList.add('generalErrorDisplay')
+                        }
+                    }
+                    else {
+                        document.querySelector('#generalError').classList.add('generalErrorDisplay')
+                    }
+                }
+                else {
+                    document.querySelector('#generalError').classList.add('generalErrorDisplay')
+                }
             }
             else {
-                document.querySelector('#generalError').classList.add('generalErrorDisplay')
+                document.querySelector('#emailError').classList.add('mailErrorDisplay')
             }
         }
         else {
-            document.querySelector('#emailError').classList.add('mailErrorDisplay')
-
+            document.querySelector('#generalError').classList.add('generalErrorDisplay')
         }
     }
 

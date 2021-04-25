@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { MdEmail } from 'react-icons/md';
 import { IoLockClosed } from 'react-icons/io5';
+import { RiErrorWarningLine } from 'react-icons/ri';
 
 
 const ForgotPassword = () => {
@@ -35,9 +36,22 @@ const ForgotPassword = () => {
         
         setData({email: e.target.value});
     }
+
+    let EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})){1,255}$/;
     
     const handleSubmit = e => {
         e.preventDefault()
+
+        let mailInput = document.querySelector('#emailError');
+
+        if (email !== '' && EMAIL_REGEX.test(email)) {
+
+            mailInput.classList.contains('mailErrorDisplay') &&
+            mailInput.classList.remove('mailErrorDisplay')
+        }
+        else {
+            mailInput.classList.add('mailErrorDisplay')
+        }
     }
 
 
@@ -59,6 +73,7 @@ const ForgotPassword = () => {
                                     <MdEmail size='16' className='iconsFormsInputs' />
                                     <Form.Label>Adresse e-mail</Form.Label>
                                 </div>
+                                <Form.Text className='mailError' id='emailError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Adresse e-mail non valide</Form.Text>
                             </Form.Group>
                             <Link to='/SignIn' className='forgotPassword' >Retour à la connexion</Link>
                             <Button variant="light" type='submit' className='submitBtnLarge' disabled={true}>Envoyer le mail de réinitialisation</Button>

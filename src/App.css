@@ -245,10 +245,17 @@ p.slogan {
     top: 35px;
 }
 
-.generalErrorDisplay {
+.generalErrorDisplay, .generalErrorDisplay2 {
     visibility: visible;
     opacity: 1;
+}
+
+.generalErrorDisplay {
     bottom: 60px;
+}
+
+.generalErrorDisplay2 {
+    bottom: 33px;
 }
 
 .form-control:focus {

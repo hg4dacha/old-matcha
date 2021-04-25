@@ -10,7 +10,6 @@ import { BsFillShieldLockFill } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi';
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { TiInfoOutline } from 'react-icons/ti';
-// import Alert from 'react-bootstrap/Alert'
 
 
 const SignUp = () => {
@@ -56,40 +55,32 @@ const SignUp = () => {
     const handleSubmit = e => {
         e.preventDefault()
 
+        let mailInput = document.querySelector('#emailError');
+        let genErrSmall = document.querySelector('#generalError');
+
         if (lastname !== '' && firstname !== '' && username !== '' && email !== '' && password !== '' && passwordConfirmation !== '') {
 
             if (EMAIL_REGEX.test(data.email)) {
     
-                document.querySelector('#emailError').classList.contains('mailErrorDisplay') &&
-                document.querySelector('#emailError').classList.remove('mailErrorDisplay')
+                mailInput.classList.contains('mailErrorDisplay') &&
+                mailInput.classList.remove('mailErrorDisplay')
     
-                if (NAMES_REGEX.test(data.lastname) && NAMES_REGEX.test(data.firstname)) {
+                if (NAMES_REGEX.test(lastname) && NAMES_REGEX.test(firstname) && USERNAME_REGEX.test(username) &&
+                    PASSWORD_REGEX.test(password) && password === passwordConfirmation) {
     
-                    if (USERNAME_REGEX.test(data.username)) {
-
-                        if (PASSWORD_REGEX.test(data.password) && data.password === data.passwordConfirmation) {
-
-                            document.querySelector('#generalError').classList.contains('generalErrorDisplay') &&
-                            document.querySelector('#generalError').classList.remove('generalErrorDisplay')
-                        }
-                        else {
-                            document.querySelector('#generalError').classList.add('generalErrorDisplay')
-                        }
-                    }
-                    else {
-                        document.querySelector('#generalError').classList.add('generalErrorDisplay')
-                    }
+                        genErrSmall.classList.contains('generalErrorDisplay') &&
+                        genErrSmall.classList.remove('generalErrorDisplay')
                 }
                 else {
-                    document.querySelector('#generalError').classList.add('generalErrorDisplay')
+                    genErrSmall.classList.add('generalErrorDisplay')
                 }
             }
             else {
-                document.querySelector('#emailError').classList.add('mailErrorDisplay')
+                mailInput.classList.add('mailErrorDisplay')
             }
         }
         else {
-            document.querySelector('#generalError').classList.add('generalErrorDisplay')
+            genErrSmall.classList.add('generalErrorDisplay')
         }
     }
 
@@ -103,7 +94,7 @@ const SignUp = () => {
                             <FiEdit size='21' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Inscription</span>
                         </div>
-                        <span className='center paragrInfoSignUp'>Vous avez déjà un compte? <Link to='/SignIn' style={{fontStyle: 'initial'}}>Connectez-vous</Link></span>
+                        <span className='center paragrInfoSignUp'>Vous avez déjà un compte?<Link to='/SignIn' style={{fontStyle: 'initial'}}> Connectez-vous</Link></span>
                         <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
                             <Form.Group controlId="lastname">
                                 <Form.Control onChange={handleChange} value={lastname} type="text" maxLength="30" required />
@@ -141,7 +132,7 @@ const SignUp = () => {
                                     <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
                                     <Form.Label>Mot de passe</Form.Label>
                                 </div>
-                                <Form.Text className='smallOnFocus'><TiInfoOutline style={{marginTop: '-2px', marginRight: '2px'}} />6 caract. min, 1 majusc., 1 chiffre ou 1 caract. spécial.</Form.Text>
+                                <Form.Text className='smallOnFocus'><TiInfoOutline style={{marginTop: '-2px', marginRight: '2px'}} />6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
                             </Form.Group>
                             <Form.Group controlId="passwordConfirmation">
                                 <Form.Control onChange={handleChange} value={passwordConfirmation} type="password" maxLength="250" required />

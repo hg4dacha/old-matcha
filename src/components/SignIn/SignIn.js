@@ -38,9 +38,23 @@ const SignIn = () => {
         
         setData({...data, [e.target.id]: e.target.value});
     }
+
+    let EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})){1,255}$/;
+    let PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,255}$/;
     
     const handleSubmit = e => {
         e.preventDefault()
+
+        let genErrSmall = document.querySelector('#generalError');
+
+        if (email !== '' && password !== '' && EMAIL_REGEX.test(email) && PASSWORD_REGEX.test(password)) {
+
+            genErrSmall.classList.contains('generalErrorDisplay2') &&
+            genErrSmall.classList.remove('generalErrorDisplay2')
+        }
+        else {
+            genErrSmall.classList.add('generalErrorDisplay2')
+        }
     }
     
 
@@ -54,7 +68,7 @@ const SignIn = () => {
                             <BiNetworkChart size='28' className='iconsFormsTittles' />
                             <span className='FormsTittle'>Connexion</span>
                         </div>
-                        <span className='center paragrInfo'>Pas encore de compte? <Link to='/SignUp' style={{fontStyle: 'initial'}}>Inscrivez-vous</Link></span>
+                        <span className='center paragrInfo'>Pas encore de compte?<Link to='/SignUp' style={{fontStyle: 'initial'}}> Inscrivez-vous</Link></span>
                         <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
                             <Form.Group controlId="email">
                                 <Form.Control onChange={handleChange} value={email} type="text" maxLength="250" required />
@@ -70,8 +84,10 @@ const SignIn = () => {
                                     <Form.Label>Mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Form.Text style={{color: '#EA2027'}}><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Certaines de vos entrées ne sont pas valides</Form.Text>
-                            <Link to='/ForgotPassword' className='forgotPassword' >Mot de passe oubllié?</Link>
+                            <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
+                                <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Vos entrées ne sont pas valides</Form.Text>
+                                <Link to='/ForgotPassword' className='forgotPassword' >Mot de passe oubllié?</Link>
+                            </div>
                             <Button variant="light" type='submit' className='submitBtnSmall' disabled={true}>Connexion</Button>
                         </Form>
                     </div>

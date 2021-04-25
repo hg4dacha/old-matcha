@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { IoLockOpen } from 'react-icons/io5';
+import { RiErrorWarningLine } from 'react-icons/ri';
+import { TiInfoOutline } from 'react-icons/ti'
 
 
 const NewPassword = () => {
@@ -36,9 +38,22 @@ const NewPassword = () => {
         
         setData({...data, [e.target.id]: e.target.value});
     }
+
+    let PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,255}$/;
     
     const handleSubmit = e => {
         e.preventDefault()
+
+        let genErrSmall = document.querySelector('#generalError');
+
+        if (password !== '' && passwordConfirmation !== '' && PASSWORD_REGEX.test(password) && password === passwordConfirmation) {
+
+            genErrSmall.classList.contains('generalErrorDisplay2') &&
+            genErrSmall.classList.remove('generalErrorDisplay2')
+        }
+        else {
+            genErrSmall.classList.add('generalErrorDisplay2')
+        }
     }
 
 
@@ -60,6 +75,7 @@ const NewPassword = () => {
                                     <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
                                     <Form.Label>Nouveau mot de passe</Form.Label>
                                 </div>
+                                <Form.Text className='smallOnFocus'><TiInfoOutline style={{marginTop: '-2px', marginRight: '2px'}} />6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
                             </Form.Group>
                             <Form.Group controlId="passwordConfirmation">
                                 <Form.Control onChange={handleChange} value={passwordConfirmation} type="password" maxLength="250" required />
@@ -68,7 +84,10 @@ const NewPassword = () => {
                                     <Form.Label style={{color: '#2c3e50'}}>Confirmez le nouveau mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
-                            <Link to='/ForgotPassword' className='forgotPassword' >Annuler</Link>
+                            <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
+                                <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Vos entrées ne sont pas valides</Form.Text>
+                                <Link to='/SignIn' className='forgotPassword' >Annuler</Link>
+                            </div>
                             <Button variant="light" type='submit' className='submitBtnLarge' disabled={true}>Réinitialiser le mot de passe</Button>
                         </Form>
                     </div>

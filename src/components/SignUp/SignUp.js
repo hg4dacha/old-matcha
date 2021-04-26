@@ -95,7 +95,10 @@ const SignUp = () => {
                             <span className='FormsTittle'>Inscription</span>
                         </div>
                         <span className='center paragrInfoSignUp'>Vous avez déjà un compte?<Link to='/SignIn' style={{fontStyle: 'initial'}}> Connectez-vous</Link></span>
+                        
                         <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
+
+                            {/* lastname */}
                             <Form.Group controlId="lastname">
                                 <Form.Control onChange={handleChange} value={lastname} type="text" maxLength="30" required />
                                 <div className='label-group'>
@@ -103,6 +106,8 @@ const SignUp = () => {
                                     <Form.Label>Nom</Form.Label>
                                 </div>
                             </Form.Group>
+
+                            {/* firstname */}
                             <Form.Group controlId="firstname">
                                 <Form.Control onChange={handleChange} value={firstname} type="text" maxLength="30" required />
                                 <div className='label-group'>
@@ -110,6 +115,8 @@ const SignUp = () => {
                                     <Form.Label>Prenom</Form.Label>
                                 </div>
                             </Form.Group>
+
+                            {/* username */}
                             <Form.Group controlId="username">
                                 <Form.Control onChange={handleChange} value={username} type="text" maxLength="15" required />
                                 <div className='label-group'>
@@ -118,6 +125,8 @@ const SignUp = () => {
                                 </div>
                                 <Form.Text className='smallOnFocus'>ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).</Form.Text>
                             </Form.Group>
+
+                            {/* email */}
                             <Form.Group controlId="email">
                                 <Form.Control onChange={handleChange} value={email} type="text" maxLength="250" required />
                                 <div className='label-group'>
@@ -126,6 +135,8 @@ const SignUp = () => {
                                 </div>
                                 <Form.Text className='mailError' id='emailError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Adresse e-mail non valide</Form.Text>
                             </Form.Group>
+
+                            {/* password */}
                             <Form.Group controlId="password">
                                 <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />
                                 <div className='label-group'>
@@ -134,6 +145,8 @@ const SignUp = () => {
                                 </div>
                                 <Form.Text className='smallOnFocus'><TiInfoOutline style={{marginTop: '-2px', marginRight: '2px'}} />6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
                             </Form.Group>
+
+                            {/* passwordConfirmation */}
                             <Form.Group controlId="passwordConfirmation">
                                 <Form.Control onChange={handleChange} value={passwordConfirmation} type="password" maxLength="250" required />
                                 <div className='label-group'>
@@ -141,10 +154,12 @@ const SignUp = () => {
                                     <Form.Label style={{color: '#2c3e50'}}>Confirmer le mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
+
                             <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
                                 <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Certaines de vos entrées ne sont pas valides</Form.Text>
                                 <Button variant="light" type='submit' className='submitBtnSignUp' disabled={true}>S'inscrire</Button>
                             </div>
+
                         </Form>
                     </div>
                 </section>

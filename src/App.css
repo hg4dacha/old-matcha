@@ -411,6 +411,61 @@ color: gray;
 }
 
 
+/*****************************   NAVBAR   *****************************/
+
+.nav-bar {
+    background: #2c3e50;
+}
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+}
+
+.nav-link {
+    display: block;
+    color: rgba(255,255,255,.5);;
+    padding: .5rem 1rem;
+}
+
+.iconsNavbar {
+    margin-top: -4px;
+    margin-right: 3px;
+}
+
+.star {
+    color: #fdee00;
+    margin-top: -3px;
+    margin-right: 2px;
+}
+
+.popularity {
+    color: whitesmoke;
+    margin-right: 10px;
+}
+
+.profilePicture {
+    width: 45px;
+    padding: 5px;
+    border: 1px solid whitesmoke;
+    border-radius: 30px;
+}
+
+.dropdown-menu {
+    left: initial;
+    right: 0;
+}
+
+.dropdown-item {
+    color: #EA2027;
+}
+
+
 /*****************************   FOOTER   *****************************/
 
 footer {

@@ -69,7 +69,10 @@ const SignIn = () => {
                             <span className='FormsTittle'>Connexion</span>
                         </div>
                         <span className='center paragrInfo'>Pas encore de compte?<Link to='/SignUp' style={{fontStyle: 'initial'}}> Inscrivez-vous</Link></span>
+                        
                         <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
+
+                            {/* email */}
                             <Form.Group controlId="email">
                                 <Form.Control onChange={handleChange} value={email} type="text" maxLength="250" required />
                                 <div className='label-group'>
@@ -77,6 +80,8 @@ const SignIn = () => {
                                     <Form.Label>Adresse e-mail</Form.Label>
                                 </div>
                             </Form.Group>
+
+                            {/* password */}
                             <Form.Group controlId="password">
                                 <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />
                                 <div className='label-group'>
@@ -84,11 +89,13 @@ const SignIn = () => {
                                     <Form.Label>Mot de passe</Form.Label>
                                 </div>
                             </Form.Group>
+
                             <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
                                 <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Vos entrées ne sont pas valides</Form.Text>
                                 <Link to='/ForgotPassword' className='forgotPassword' >Mot de passe oubllié?</Link>
                             </div>
                             <Button variant="light" type='submit' className='submitBtnSmall' disabled={true}>Connexion</Button>
+
                         </Form>
                     </div>
                 </section>

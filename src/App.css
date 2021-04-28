@@ -413,8 +413,8 @@ color: gray;
 
 /*****************************   NAVBAR   *****************************/
 
-.nav-bar {
-    background: #2c3e50;
+.navbar {
+    padding: 0 10px;
 }
 
 .navbar-brand {
@@ -428,14 +428,16 @@ color: gray;
 }
 
 .nav-link {
-    display: block;
-    color: rgba(255,255,255,.5);;
-    padding: .5rem 1rem;
+    padding: 20px 5px;
+}
+
+.nav-link.active {
+    border-bottom: 3px solid #b33939;
 }
 
 .iconsNavbar {
     margin-top: -4px;
-    margin-right: 3px;
+    margin-right: 2px;
 }
 
 .star {
@@ -452,7 +454,7 @@ color: gray;
 .profilePicture {
     width: 45px;
     padding: 5px;
-    border: 1px solid whitesmoke;
+    border: 1px solid grey;
     border-radius: 30px;
 }
 
@@ -461,8 +463,37 @@ color: gray;
     right: 0;
 }
 
-.dropdown-item {
+.dropdown-profile, .dropdown-log-out {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.dropdown-profile:hover, .dropdown-profile.active, .dropdown-log-out:hover {
+    background-color: #dfe4ea;
+}
+
+.dropdown-profile {
+    color: #212529;
+}
+
+.dropdown-profile:hover {
+    color: #40739e;
+}
+
+.dropdown-log-out {
     color: #EA2027;
+}
+
+.dropdown-log-out:hover {
+    color: #212529;
 }
 
 

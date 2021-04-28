@@ -13,8 +13,8 @@ const Main = () => {
             <div className='BackgroundSecond'>
                 <Navbar />
                 <div className='tittleDiv'>
-                    <TiHome size='23' className='iconsFormsTittles' />
-                    <span className='FormsTittle'>Acceuil</span>
+                    
+                    <h1 className='FormsTittle center'><TiHome size='23' className='iconsFormsTittles' />Acceuil</h1>
                 </div>
             </div>
         </div>

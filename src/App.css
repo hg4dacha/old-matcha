@@ -414,7 +414,7 @@ color: gray;
 /*****************************   NAVBAR   *****************************/
 
 .navbar {
-    padding: 0 10px;
+    padding: 0 10px !important;
 }
 
 .navbar-brand {
@@ -428,7 +428,7 @@ color: gray;
 }
 
 .nav-link {
-    padding: 20px 5px;
+    padding: 20px 5px !important;
 }
 
 .nav-link.active {
@@ -455,7 +455,7 @@ color: gray;
     width: 45px;
     padding: 5px;
     border: 1px solid grey;
-    border-radius: 30px;
+    border-radius: 50%;
 }
 
 .dropdown-menu {

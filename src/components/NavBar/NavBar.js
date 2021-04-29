@@ -10,7 +10,7 @@ import { VscHome } from 'react-icons/vsc';
 import { AiFillStar } from 'react-icons/ai';
 import user from '../../images/user.png';
 
-const Navbar1 = () => {
+const Navbar$ = () => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Link to="/Main" className='navbar-brand'><Logo width='150' /></Link>
@@ -26,7 +26,7 @@ const Navbar1 = () => {
                         <img src={user} alt='user' className='profilePicture'/>
                         <NavDropdown title="username-269428" id="collasible-nav-dropdown">
                             <NavLink to="/Profile" className='dropdown-profile'>
-                                <RiUser3Line className='iconsNavbar'/>Profil
+                                <RiUser3Line className='icons-dropdown'/>Profil
                             </NavLink>
                             <NavDropdown.Divider />
                             <LogOut/>
@@ -38,4 +38,4 @@ const Navbar1 = () => {
     )
 }
 
-export default Navbar1
+export default Navbar$

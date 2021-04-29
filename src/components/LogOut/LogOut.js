@@ -13,7 +13,7 @@ const LogOut = () => {
         <button
             onClick={handleLogout}
             className='dropdown-log-out'>
-                <AiOutlinePoweroff className='iconsNavbar'/>
+                <AiOutlinePoweroff className='icons-dropdown'/>
                 Déconnexion
         </button>
     )

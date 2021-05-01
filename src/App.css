@@ -524,11 +524,17 @@ color: gray;
     border: 1px solid grey;
 }
 
+.personal-information {
+    width: 50%;
+    padding: 5px 8px;
+}
+
 .info-rows {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     padding: 15px;
 }
 
@@ -536,7 +542,7 @@ color: gray;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: end;
+    align-content: flex-end;
 }
 
 .info-label {
@@ -550,7 +556,27 @@ color: gray;
 
 }
 
-.arrow {
+.info-links {
+    position: absolute;
+    height: 100%;
+    width: 15%;
+    right: 0;
+}
+
+.div-links {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.setting-and-arrow {
+    position: absolute;
+    right: 20%;
+}
+
+.arrow, .setting {
     color: rgb(145, 150, 155);
 }
 

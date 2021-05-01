@@ -70,7 +70,7 @@ const NewPassword = () => {
                         <span className='center paragrInfo'>Entrer un nouveau mot de passe.</span>
 
                         <Form className='forms' autoComplete="off" onSubmit={handleSubmit}>
-                            
+
                             {/* password */}
                             <Form.Group controlId="password">
                                 <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />

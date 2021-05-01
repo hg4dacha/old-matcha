@@ -3,6 +3,7 @@ import Navbar from '../NavBar/NavBar';
 import Alert from '../Alert/Alert';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { Form, Button } from 'react-bootstrap'
 import { RiUser3Fill } from 'react-icons/ri';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoSettingsOutline } from 'react-icons/io5';
@@ -38,6 +39,15 @@ const Profile = () => {
                     </div>
                 </Link>
             </div>
+            <Form style={{backgroundColor: 'cornsilk'}}>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>{info.label}</Form.Label>
+                    <Form.Control defaultValue={info.Info} type="email" placeholder="Entrez le nom" autoFocus/>
+                    <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
+                </Form.Group>
+                <Button variant="primary" type="submit">Enregistrer</Button>
+                <Button variant="danger" type="submit">Annuler</Button>
+            </Form>
             <hr/>
         </div>
         )
@@ -55,7 +65,7 @@ const Profile = () => {
                 </div>
                 <div className='big-info-container centerElementsInPage'>
                     <span className='personal-information'>Vos informations personelles</span>
-                    <div className='bg-light info-container'>
+                    <div className='info-container'>
                         {infoUser}
                      </div>
                 </div>

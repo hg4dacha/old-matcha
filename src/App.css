@@ -588,6 +588,28 @@ color: gray;
     text-align: center;
 }
 
+.forms-profile {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-bottom: 0 !important;
+    background-color: cornsilk !important;
+}
+
+.form-group-profile {
+    margin-bottom: 0!important;
+}
+
+.form-control-profile {
+    width: 60% !important;
+    border: 1px solid darkgray !important;
+}
+
+.buttons-form-profile {
+    margin: 2px;
+}
+
 
 /*****************************   FOOTER   *****************************/
 

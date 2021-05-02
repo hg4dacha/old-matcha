@@ -39,14 +39,14 @@ const Profile = () => {
                     </div>
                 </Link>
             </div>
-            <Form style={{backgroundColor: 'cornsilk'}}>
-                <Form.Group controlId="formBasicEmail">
+            <Form className='forms-profile'>
+                <Form.Group controlId="formBasicEmail" className='form-group-profile'>
                     <Form.Label>{info.label}</Form.Label>
-                    <Form.Control defaultValue={info.Info} type="email" placeholder="Entrez le nom" autoFocus/>
+                    <Form.Control defaultValue={info.Info} type="email" placeholder="Entrez le nom" className='form-control-profile' autoFocus/>
                     <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
                 </Form.Group>
-                <Button variant="primary" type="submit">Enregistrer</Button>
-                <Button variant="danger" type="submit">Annuler</Button>
+                <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
+                <Button variant="danger" type="submit" className='buttons-form-profile'>Annuler</Button>
             </Form>
             <hr/>
         </div>

@@ -15,11 +15,10 @@ const Profile = () => {
     }, [])
 
     const userInfo = [
-        {label: 'Nom', Info: 'Gadacha'},
-        {label: 'Prénom', Info: 'Ons'},
-        {label: 'Nom d\'utilisateur', Info: 'username93'},
-        {label: 'E-mail', Info: 'test@gmail.com'},
-        {label: 'Mot de passe', Info: '•••••••'},
+        {label: 'Nom', info: 'Gadacha', small: false},
+        {label: 'Prénom', info: 'Ons', small: false},
+        {label: 'Nom d\'utilisateur', info: 'username93', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).'},
+        {label: 'E-mail', info: 'test@gmail.com', small: false}
     ]
 
     const infoUser = userInfo.map( info => {
@@ -28,7 +27,7 @@ const Profile = () => {
                 <div className='info-rows'>
                 <div className='label-and-info'>
                     <span className='info-label'>{info.label}</span>
-                    <span className='info-info'>{info.Info}</span>
+                    <span className='info-info'>{info.info}</span>
                 </div>
                 <Link to="/#" className='info-links'>
                     <div className='div-links'>
@@ -42,16 +41,20 @@ const Profile = () => {
             <Form className='forms-profile'>
                 <Form.Group controlId="formBasicEmail" className='form-group-profile'>
                     <Form.Label>{info.label}</Form.Label>
-                    <Form.Control defaultValue={info.Info} type="email" placeholder="Entrez le nom" className='form-control-profile' autoFocus/>
-                    <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
+                    <Form.Control defaultValue={info.info} type="email" placeholder="Entrez le nom" className='form-control-profile' autoFocus/>
+                    <Form.Text className="text-muted">{info.small}</Form.Text>
                 </Form.Group>
-                <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-                <Button variant="danger" type="submit" className='buttons-form-profile'>Annuler</Button>
+                <div className='div-buttons-form-profile'>
+                    <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
+                    <Button variant="danger" type="submit" className='buttons-form-profile'>Annuler</Button>
+                </div>
             </Form>
             <hr/>
         </div>
         )
     })
+
+
 
     return (
         <div className='BackgroundFirst'>
@@ -67,10 +70,50 @@ const Profile = () => {
                     <span className='personal-information'>Vos informations personelles</span>
                     <div className='info-container'>
                         {infoUser}
-                     </div>
+                    </div>
+                    <div className='info-container mt-2 mb-5'>
+                        <div>
+                            <div className='info-rows'>
+                                <div className='label-and-info'>
+                                    <span className='info-label'>Mot de passe</span>
+                                    <span className='info-info'>•••••••</span>
+                                </div>
+                                <Link to="/#" className='info-links'>
+                                    <div className='div-links'>
+                                        <div className='setting-and-arrow'>
+                                            <IoSettingsOutline className='setting' />
+                                            <IoIosArrowForward className='arrow' />
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                        <Form className='forms-profile'>
+                            <Form.Group controlId="formBasicEmail" className='form-group-profile'>
+                                <div>
+                                    <Form.Label>Mot de passe actuel</Form.Label>
+                                    <Form.Control type="password" placeholder="Entrez le mot de passe actuel" className='form-control-profile' autoFocus/>
+                                </div>
+                                <div className='mt-2'>
+                                    <Form.Label>Nouveau mot de passe</Form.Label>
+                                    <Form.Control type="password" placeholder="Entrez le nouveau mot de passe" className='form-control-profile'/>
+                                    <Form.Text className="text-muted">6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
+                                </div>
+                                <div className='mt-2'>
+                                    <Form.Label>Confirmer le nouveau mot de passe</Form.Label>
+                                    <Form.Control type="password" placeholder="Entrez le nouveau mot de passe" className='form-control-profile'/>
+                                </div>
+                            </Form.Group>
+                            <div className='div-buttons-form-profile'>
+                                <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
+                                <Button variant="danger" type="submit" className='buttons-form-profile'>Annuler</Button>
+                            </div>
+                        </Form>
+                        <hr/>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     )
 }
 

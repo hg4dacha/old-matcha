@@ -15,10 +15,10 @@ const Profile = () => {
     }, [])
 
     const userInfo = [
-        {label: 'Nom', info: 'Gadacha', small: false},
-        {label: 'Prénom', info: 'Ons', small: false},
-        {label: 'Nom d\'utilisateur', info: 'username93', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).'},
-        {label: 'E-mail', info: 'test@gmail.com', small: false}
+        {label: 'Nom', info: 'Gadacha', small: false, id: 'lastname'},
+        {label: 'Prénom', info: 'Ons', small: false, id: 'firstname'},
+        {label: 'Nom d\'utilisateur', info: 'username93', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).', id: 'username'},
+        {label: 'E-mail', info: 'test@gmail.com', small: false, id: 'email'}
     ]
 
     const infoUser = userInfo.map( info => {
@@ -39,7 +39,7 @@ const Profile = () => {
                 </Link>
             </div>
             <Form className='forms-profile'>
-                <Form.Group controlId="formBasicEmail" className='form-group-profile'>
+                <Form.Group controlId={info.id} className='form-group-profile'>
                     <Form.Label>{info.label}</Form.Label>
                     <Form.Control defaultValue={info.info} type="email" placeholder="Entrez le nom" className='form-control-profile' autoFocus/>
                     <Form.Text className="text-muted">{info.small}</Form.Text>
@@ -76,7 +76,7 @@ const Profile = () => {
                             <div className='info-rows'>
                                 <div className='label-and-info'>
                                     <span className='info-label'>Mot de passe</span>
-                                    <span className='info-info'>•••••••</span>
+                                    <span className='info-info'>•••••••••••••</span>
                                 </div>
                                 <Link to="/#" className='info-links'>
                                     <div className='div-links'>
@@ -88,21 +88,21 @@ const Profile = () => {
                                 </Link>
                             </div>
                         <Form className='forms-profile'>
-                            <Form.Group controlId="formBasicEmail" className='form-group-profile'>
-                                <div>
-                                    <Form.Label>Mot de passe actuel</Form.Label>
-                                    <Form.Control type="password" placeholder="Entrez le mot de passe actuel" className='form-control-profile' autoFocus/>
-                                </div>
-                                <div className='mt-2'>
-                                    <Form.Label>Nouveau mot de passe</Form.Label>
-                                    <Form.Control type="password" placeholder="Entrez le nouveau mot de passe" className='form-control-profile'/>
-                                    <Form.Text className="text-muted">6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
-                                </div>
-                                <div className='mt-2'>
-                                    <Form.Label>Confirmer le nouveau mot de passe</Form.Label>
-                                    <Form.Control type="password" placeholder="Entrez le nouveau mot de passe" className='form-control-profile'/>
-                                </div>
-                            </Form.Group>
+                            <div className='w-100'>
+                                <Form.Group controlId="formBasicEmail" className='form-group-profile'>
+                                        <Form.Label>Mot de passe actuel</Form.Label>
+                                        <Form.Control type="password" placeholder="Entrez le mot de passe actuel" className='form-control-profile' autoFocus/>
+                                </Form.Group>
+                                <Form.Group controlId="formBasicEmail" className='form-group-profile mt-2'>
+                                        <Form.Label>Nouveau mot de passe</Form.Label>
+                                        <Form.Control type="password" placeholder="Entrez le nouveau mot de passe" className='form-control-profile'/>
+                                        <Form.Text className="text-muted">6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
+                                </Form.Group>
+                                <Form.Group controlId="formBasicEmail" className='form-group-profile mt-2'>
+                                        <Form.Label>Confirmer le nouveau mot de passe</Form.Label>
+                                        <Form.Control type="password" placeholder="Entrez le nouveau mot de passe" className='form-control-profile'/>
+                                </Form.Group>
+                            </div>
                             <div className='div-buttons-form-profile'>
                                 <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
                                 <Button variant="danger" type="submit" className='buttons-form-profile'>Annuler</Button>

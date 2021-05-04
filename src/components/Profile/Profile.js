@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../NavBar/NavBar';
 import Alert from '../Alert/Alert';
-import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { Form, Button } from 'react-bootstrap'
 import { RiUser3Fill } from 'react-icons/ri';
@@ -14,30 +13,51 @@ const Profile = () => {
         document.title = 'Profil - Matcha'
     }, [])
 
+
+    const infoChange = {
+        lastnameChange: false,
+        firstnameChange: false,
+        usernameChange: false,
+        emailChange: false,
+        passwordChange: false
+    }
+
+    const [infoState, setInfoState] = useState(infoChange)
+
+    const handleChange = (info) => {
+
+        // setData({...data, [e.target.id]: e.target.value});
+        console.log(info)
+        // setInfoState()
+    }
+
+    const [changer, setChanger] = useState(false)
+
     const userInfo = [
-        {label: 'Nom', info: 'Gadacha', small: false, id: 'lastname'},
-        {label: 'Prénom', info: 'Ons', small: false, id: 'firstname'},
-        {label: 'Nom d\'utilisateur', info: 'username93', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).', id: 'username'},
-        {label: 'E-mail', info: 'test@gmail.com', small: false, id: 'email'}
+        {label: 'Nom', info: 'Gadacha', small: false, id: 'lastname', stateInfo: infoState.lastnameChange},
+        {label: 'Prénom', info: 'Ons', small: false, id: 'firstname', stateInfo: infoState.firstnameChange},
+        {label: 'Nom d\'utilisateur', info: 'username93', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).', id: 'username', stateInfo: infoState.usernameChange},
+        {label: 'E-mail', info: 'test@gmail.com', small: false, id: 'email', stateInfo: infoState.emailChange}
     ]
 
     const infoUser = userInfo.map( info => {
         return (
             <div key={uuidv4()}>
+                {!info.stateInfo ?
                 <div className='info-rows'>
                 <div className='label-and-info'>
                     <span className='info-label'>{info.label}</span>
                     <span className='info-info'>{info.info}</span>
                 </div>
-                <Link to="/#" className='info-links'>
+                <div className='info-links' onClick={() => handleChange(info.stateInfo)}>
                     <div className='div-links'>
                         <div className='setting-and-arrow'>
                             <IoSettingsOutline className='setting' />
                             <IoIosArrowForward className='arrow' />
                         </div>
                     </div>
-                </Link>
-            </div>
+                </div>
+            </div> :
             <Form className='forms-profile'>
                 <Form.Group controlId={info.id} className='form-group-profile'>
                     <Form.Label>{info.label}</Form.Label>
@@ -46,13 +66,50 @@ const Profile = () => {
                 </Form.Group>
                 <div className='div-buttons-form-profile'>
                     <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-                    <Button variant="danger" type="submit" className='buttons-form-profile'>Annuler</Button>
+                    <Button variant="danger" type="button" className='buttons-form-profile' onClick={handleChange}>Annuler</Button>
                 </div>
-            </Form>
+            </Form>}
             <hr/>
         </div>
         )
     })
+
+    const infoPassword = !changer ?
+    <div className='info-rows'>
+        <div className='label-and-info'>
+            <span className='info-label'>Mot de passe</span>
+            <span className='info-info'>•••••••••••••</span>
+        </div>
+        <div className='info-links' onClick={() => setChanger(!changer)}>
+            <div className='div-links'>
+                <div className='setting-and-arrow'>
+                    <IoSettingsOutline className='setting' />
+                    <IoIosArrowForward className='arrow' />
+                </div>
+            </div>
+        </div>
+    </div> :
+    <Form className='forms-profile'>
+    <div className='w-100'>
+        <Form.Group controlId="currentPassword" className='form-group-profile'>
+                <Form.Label>Mot de passe actuel</Form.Label>
+                <Form.Control type="password" placeholder="" className='form-control-profile' autoFocus/>
+        </Form.Group>
+        <Form.Group controlId="newPassword" className='form-group-profile mt-2'>
+                <Form.Label>Nouveau mot de passe</Form.Label>
+                <Form.Control type="password" placeholder="" className='form-control-profile'/>
+                <Form.Text className="text-muted">6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
+        </Form.Group>
+        <Form.Group controlId="newPasswordConfirmation" className='form-group-profile mt-2'>
+                <Form.Label>Confirmer le nouveau mot de passe</Form.Label>
+                <Form.Control type="password" placeholder="" className='form-control-profile'/>
+        </Form.Group>
+    </div>
+    <div className='div-buttons-form-profile'>
+        <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
+        <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => setChanger(!changer)}>Annuler</Button>
+    </div>
+</Form>
 
 
 
@@ -67,53 +124,19 @@ const Profile = () => {
                     Profil</h1>
                 </div>
                 <div className='big-info-container centerElementsInPage'>
-                    <span className='personal-information'>Vos informations personelles</span>
+                    <h2 className='personal-information'>Vos informations personelles</h2>
                     <div className='info-container'>
                         {infoUser}
                     </div>
                     <div className='info-container mt-2 mb-5'>
                         <div>
-                            <div className='info-rows'>
-                                <div className='label-and-info'>
-                                    <span className='info-label'>Mot de passe</span>
-                                    <span className='info-info'>•••••••••••••</span>
-                                </div>
-                                <Link to="/#" className='info-links'>
-                                    <div className='div-links'>
-                                        <div className='setting-and-arrow'>
-                                            <IoSettingsOutline className='setting' />
-                                            <IoIosArrowForward className='arrow' />
-                                        </div>
-                                    </div>
-                                </Link>
-                            </div>
-                        <Form className='forms-profile'>
-                            <div className='w-100'>
-                                <Form.Group controlId="formBasicEmail" className='form-group-profile'>
-                                        <Form.Label>Mot de passe actuel</Form.Label>
-                                        <Form.Control type="password" placeholder="Entrez le mot de passe actuel" className='form-control-profile' autoFocus/>
-                                </Form.Group>
-                                <Form.Group controlId="formBasicEmail" className='form-group-profile mt-2'>
-                                        <Form.Label>Nouveau mot de passe</Form.Label>
-                                        <Form.Control type="password" placeholder="Entrez le nouveau mot de passe" className='form-control-profile'/>
-                                        <Form.Text className="text-muted">6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
-                                </Form.Group>
-                                <Form.Group controlId="formBasicEmail" className='form-group-profile mt-2'>
-                                        <Form.Label>Confirmer le nouveau mot de passe</Form.Label>
-                                        <Form.Control type="password" placeholder="Entrez le nouveau mot de passe" className='form-control-profile'/>
-                                </Form.Group>
-                            </div>
-                            <div className='div-buttons-form-profile'>
-                                <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-                                <Button variant="danger" type="submit" className='buttons-form-profile'>Annuler</Button>
-                            </div>
-                        </Form>
-                        <hr/>
+                            {infoPassword}
+                            <hr/>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     )
 }
 

@@ -506,7 +506,7 @@ color: gray;
 .page-titles {
     font-size: 24px;
     pointer-events: none;
-    margin: 10px;
+    margin: 20px;
 }
 
 
@@ -515,6 +515,13 @@ color: gray;
 .big-info-container {
     width: 100%;
     flex-direction: column;
+}
+
+.personal-information {
+    width: 50%;
+    padding: 5px 8px;
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .info-container {
@@ -557,12 +564,6 @@ color: gray;
     margin: 2px;
 }
 
-.personal-information {
-    width: 50%;
-    padding: 5px 8px;
-    font-weight: bold;
-}
-
 .info-rows {
     display: flex;
     flex-direction: row;
@@ -603,6 +604,7 @@ color: gray;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    cursor: pointer;
 }
 
 .setting-and-arrow {

@@ -15,29 +15,26 @@ const Profile = () => {
 
 
     const infoChange = {
-        lastnameChange: false,
-        firstnameChange: false,
-        usernameChange: false,
-        emailChange: false,
-        passwordChange: false
+        lastname: false,
+        firstname: false,
+        username: false,
+        email: false,
+        password: false
     }
 
     const [infoState, setInfoState] = useState(infoChange)
 
-    const handleChange = (info) => {
+    const handleChange = (info, stateInfo) => {
 
-        // setData({...data, [e.target.id]: e.target.value});
+        setInfoState({...infoState, [info]: !stateInfo})
         console.log(info)
-        // setInfoState()
     }
 
-    const [changer, setChanger] = useState(false)
-
     const userInfo = [
-        {label: 'Nom', info: 'Gadacha', small: false, id: 'lastname', stateInfo: infoState.lastnameChange},
-        {label: 'Prénom', info: 'Ons', small: false, id: 'firstname', stateInfo: infoState.firstnameChange},
-        {label: 'Nom d\'utilisateur', info: 'username93', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).', id: 'username', stateInfo: infoState.usernameChange},
-        {label: 'E-mail', info: 'test@gmail.com', small: false, id: 'email', stateInfo: infoState.emailChange}
+        {label: 'Nom', info: 'Gadacha', small: false, id: 'lastname', stateInfo: infoState.lastname},
+        {label: 'Prénom', info: 'Ons', small: false, id: 'firstname', stateInfo: infoState.firstname},
+        {label: 'Nom d\'utilisateur', info: 'username93', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).', id: 'username', stateInfo: infoState.username},
+        {label: 'E-mail', info: 'test@gmail.com', small: false, id: 'email', stateInfo: infoState.email}
     ]
 
     const infoUser = userInfo.map( info => {
@@ -49,7 +46,7 @@ const Profile = () => {
                     <span className='info-label'>{info.label}</span>
                     <span className='info-info'>{info.info}</span>
                 </div>
-                <div className='info-links' onClick={() => handleChange(info.stateInfo)}>
+                <div className='info-links' onClick={() => handleChange(info.id, info.stateInfo)}>
                     <div className='div-links'>
                         <div className='setting-and-arrow'>
                             <IoSettingsOutline className='setting' />
@@ -66,7 +63,7 @@ const Profile = () => {
                 </Form.Group>
                 <div className='div-buttons-form-profile'>
                     <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-                    <Button variant="danger" type="button" className='buttons-form-profile' onClick={handleChange}>Annuler</Button>
+                    <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleChange(info.id, info.stateInfo)}>Annuler</Button>
                 </div>
             </Form>}
             <hr/>
@@ -74,13 +71,13 @@ const Profile = () => {
         )
     })
 
-    const infoPassword = !changer ?
+    const infoPassword = !infoState.password ?
     <div className='info-rows'>
         <div className='label-and-info'>
             <span className='info-label'>Mot de passe</span>
             <span className='info-info'>•••••••••••••</span>
         </div>
-        <div className='info-links' onClick={() => setChanger(!changer)}>
+        <div className='info-links' onClick={() => handleChange('password', infoState.password)}>
             <div className='div-links'>
                 <div className='setting-and-arrow'>
                     <IoSettingsOutline className='setting' />
@@ -107,7 +104,7 @@ const Profile = () => {
     </div>
     <div className='div-buttons-form-profile'>
         <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-        <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => setChanger(!changer)}>Annuler</Button>
+        <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleChange('password', infoState.password)}>Annuler</Button>
     </div>
 </Form>
 

@@ -31,10 +31,10 @@ const Profile = () => {
     }
 
     const userInfo = [
-        {label: 'Nom', info: 'Gadacha', small: false, id: 'lastname', stateInfo: infoState.lastname},
-        {label: 'Prénom', info: 'Ons', small: false, id: 'firstname', stateInfo: infoState.firstname},
-        {label: 'Nom d\'utilisateur', info: 'username93', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).', id: 'username', stateInfo: infoState.username},
-        {label: 'E-mail', info: 'test@gmail.com', small: false, id: 'email', stateInfo: infoState.email}
+        {label: 'Nom', info: 'Gadacha', id: 'lastname', type:'text', small: false, stateInfo: infoState.lastname},
+        {label: 'Prénom', info: 'Ons', id: 'firstname', type:'text', small: false, stateInfo: infoState.firstname},
+        {label: 'Nom d\'utilisateur', info: 'username93', type:'text', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).', id: 'username', stateInfo: infoState.username},
+        {label: 'E-mail', info: 'test@gmail.com', type:'email', small: false, id: 'email', stateInfo: infoState.email}
     ]
 
     const infoUser = userInfo.map( info => {
@@ -58,7 +58,7 @@ const Profile = () => {
             <Form className='forms-profile'>
                 <Form.Group controlId={info.id} className='form-group-profile'>
                     <Form.Label>{info.label}</Form.Label>
-                    <Form.Control defaultValue={info.info} type="email" placeholder="Entrez le nom" className='form-control-profile' autoFocus/>
+                    <Form.Control defaultValue={info.info} type={info.type} placeholder="Entrez le nom" className='form-control-profile' autoFocus/>
                     <Form.Text className="text-muted">{info.small}</Form.Text>
                 </Form.Group>
                 <div className='div-buttons-form-profile'>

@@ -26,8 +26,11 @@ const Profile = () => {
 
     const handleChange = (info, stateInfo) => {
 
+        setInfoState(Object.assign(infoState, infoChange))
+        // setInfoState(infoState = infoChange)
         setInfoState({...infoState, [info]: !stateInfo})
-        console.log(info)
+        console.log(stateInfo)
+        console.log(infoState)
     }
 
     const userInfo = [

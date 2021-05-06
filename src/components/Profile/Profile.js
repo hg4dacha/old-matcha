@@ -14,6 +14,7 @@ const Profile = () => {
     }, [])
 
 
+    /* modification of user information */
     const infoChange = {
         lastname: false,
         firstname: false,
@@ -24,14 +25,39 @@ const Profile = () => {
 
     const [infoState, setInfoState] = useState(infoChange)
 
-    const handleChange = (info, stateInfo) => {
+    const handleModification = (info, stateInfo) => {
 
+        // this avoids the modification of several information at the same time
         setInfoState(Object.assign(infoState, infoChange))
-        // setInfoState(infoState = infoChange)
+
         setInfoState({...infoState, [info]: !stateInfo})
-        console.log(stateInfo)
-        console.log(infoState)
     }
+
+    /* new values */
+    const loginData = {
+        lastname: '',
+        firstname: '',
+        username: '',
+        email: '',
+        password: '',
+        passwordConfirmation: ''
+    }
+
+    const [data, setData] = useState(loginData);
+    
+    const { lastname, firstname, username, email, password, passwordConfirmation } = data
+
+    const handleChange = e => {
+
+        setData({...data, [e.target.id]: e.target.value});
+    }
+
+    let NAMES_REGEX = /^[a-zA-Z-]{1,30}$/;
+    let USERNAME_REGEX = /^[a-zA-Z0-9-_]{1,15}$/;
+    let EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})){1,255}$/;
+    let PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,255}$/;
+
+
 
     const userInfo = [
         {label: 'Nom', info: 'Gadacha', id: 'lastname', type:'text', small: false, stateInfo: infoState.lastname},
@@ -49,7 +75,7 @@ const Profile = () => {
                     <span className='info-label'>{info.label}</span>
                     <span className='info-info'>{info.info}</span>
                 </div>
-                <div className='info-links' onClick={() => handleChange(info.id, info.stateInfo)}>
+                <div className='info-links' onClick={() => handleModification(info.id, info.stateInfo)}>
                     <div className='div-links'>
                         <div className='setting-and-arrow'>
                             <IoSettingsOutline className='setting' />
@@ -66,7 +92,7 @@ const Profile = () => {
                 </Form.Group>
                 <div className='div-buttons-form-profile'>
                     <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-                    <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleChange(info.id, info.stateInfo)}>Annuler</Button>
+                    <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleModification(info.id, info.stateInfo)}>Annuler</Button>
                 </div>
             </Form>}
             <hr/>
@@ -80,7 +106,7 @@ const Profile = () => {
             <span className='info-label'>Mot de passe</span>
             <span className='info-info'>•••••••••••••</span>
         </div>
-        <div className='info-links' onClick={() => handleChange('password', infoState.password)}>
+        <div className='info-links' onClick={() => handleModification('password', infoState.password)}>
             <div className='div-links'>
                 <div className='setting-and-arrow'>
                     <IoSettingsOutline className='setting' />
@@ -107,7 +133,7 @@ const Profile = () => {
     </div>
     <div className='div-buttons-form-profile'>
         <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-        <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleChange('password', infoState.password)}>Annuler</Button>
+        <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleModification('password', infoState.password)}>Annuler</Button>
     </div>
 </Form>
 

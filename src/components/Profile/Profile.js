@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../NavBar/NavBar';
 import Alert from '../Alert/Alert';
+import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../variables/Regex';
+import { userFormInfo } from '../../variables/userFormInfo';
 import { v4 as uuidv4 } from 'uuid';
 import { Form, Button } from 'react-bootstrap'
 import { RiUser3Fill } from 'react-icons/ri';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoSettingsOutline } from 'react-icons/io5';
 
+console.log(userFormInfo)
+
 const Profile = () => {
 
     useEffect( () => {
         document.title = 'Profil - Matcha'
     }, [])
+
 
 
     /* modification of user information */
@@ -32,6 +37,8 @@ const Profile = () => {
 
         setInfoState({...infoState, [info]: !stateInfo})
     }
+
+
 
     /* new values */
     const loginData = {
@@ -54,21 +61,16 @@ const Profile = () => {
         console.log(lastname)
     }
 
-    let NAMES_REGEX = /^[a-zA-Z-]{1,30}$/;
-    let USERNAME_REGEX = /^[a-zA-Z0-9-_]{1,15}$/;
-    let EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})){1,255}$/;
-    let PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,255}$/;
 
 
-
-    const userInfo = [
+    const userFormInfo = [
         {label: 'Nom', info: lastname, id: 'lastname', type:'text', small: false, stateInfo: infoState.lastname},
         {label: 'Prénom', info: firstname, id: 'firstname', type:'text', small: false, stateInfo: infoState.firstname},
         {label: 'Nom d\'utilisateur', info: username, type:'text', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).', id: 'username', stateInfo: infoState.username},
         {label: 'E-mail', info: email, type:'email', small: false, id: 'email', stateInfo: infoState.email}
     ]
 
-    const infoUser = userInfo.map( info => {
+    const infoUser = userFormInfo.map( info => {
         return (
             <div key={uuidv4()}>
                 {!info.stateInfo ?

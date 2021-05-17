@@ -9,14 +9,15 @@ import { RiUser3Fill } from 'react-icons/ri';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoSettingsOutline } from 'react-icons/io5';
 
-console.log(userFormInfo)
+// console.log(userFormInfo)
 
 const Profile = () => {
 
     useEffect( () => {
         document.title = 'Profil - Matcha'
+        // document.querySelector('html').classList.add('BackgroundFirst')
+        // document.querySelector('body').classList.add('BackgroundSecond')
     }, [])
-
 
 
     /* modification of user information */
@@ -58,7 +59,7 @@ const Profile = () => {
     const handleChange = e => {
 
         setData({...data, [e.target.id]: e.target.value});
-        console.log(lastname)
+        // console.log(lastname)
     }
 
 
@@ -146,6 +147,7 @@ const Profile = () => {
     return (
         <div className='BackgroundFirst'>
             <div className='BackgroundSecond'>
+                <div className='totor'>
                 <Navbar />
                 <Alert />
                 <div className='page-titles'>
@@ -164,6 +166,7 @@ const Profile = () => {
                             <hr/>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>

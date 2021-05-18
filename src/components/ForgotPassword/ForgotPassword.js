@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
@@ -56,37 +56,35 @@ const ForgotPassword = () => {
 
 
     return (
-        <div className='BackgroundFirst'>
-            <div className='BackgroundSecond'>
-                <FormsHeader />
-                <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage formContent sectionContentSize'>
-                        <div className='tittleDiv'>
-                            <IoLockClosed size='23' className='iconsFormsTittles' />
-                            <span className='FormsTittle'>Mot de passe oublié</span>
-                        </div>
-                        <span className='center paragrInfo'>Entrer l'adresse email de votre compte,<br />un mail de réinitialisation vous sera envoyé.</span>
-                        
-                        <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
-
-                            {/* email */}
-                            <Form.Group controlId="email">
-                                <Form.Control onChange={handleChange} value={email} type="text" maxLength="250" required />
-                                <div className='label-group'>
-                                    <MdEmail size='16' className='iconsFormsInputs' />
-                                    <Form.Label>Adresse e-mail</Form.Label>
-                                </div>
-                                <Form.Text className='mailError' id='emailError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Adresse e-mail non valide</Form.Text>
-                            </Form.Group>
-
-                            <Link to='/SignIn' className='forgotPassword' >Retour à la connexion</Link>
-                            <Button variant="light" type='submit' className='submitBtnLarge' disabled={true}>Envoyer le mail de réinitialisation</Button>
-
-                        </Form>
+        <Fragment>
+            <FormsHeader />
+            <section className='centerElementsInPage FormsSection'>
+                <div className='centerElementsInPage formContent sectionContentSize'>
+                    <div className='tittleDiv'>
+                        <IoLockClosed size='23' className='iconsFormsTittles' />
+                        <span className='FormsTittle'>Mot de passe oublié</span>
                     </div>
-                </section>
-            </div>
-        </div>
+                    <span className='center paragrInfo'>Entrer l'adresse email de votre compte,<br />un mail de réinitialisation vous sera envoyé.</span>
+                    
+                    <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
+
+                        {/* email */}
+                        <Form.Group controlId="email">
+                            <Form.Control onChange={handleChange} value={email} type="text" maxLength="250" required />
+                            <div className='label-group'>
+                                <MdEmail size='16' className='iconsFormsInputs' />
+                                <Form.Label>Adresse e-mail</Form.Label>
+                            </div>
+                            <Form.Text className='mailError' id='emailError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Adresse e-mail non valide</Form.Text>
+                        </Form.Group>
+
+                        <Link to='/SignIn' className='forgotPassword' >Retour à la connexion</Link>
+                        <Button variant="light" type='submit' className='submitBtnLarge' disabled={true}>Envoyer le mail de réinitialisation</Button>
+
+                    </Form>
+                </div>
+            </section>
+        </Fragment>
     )
 }
 

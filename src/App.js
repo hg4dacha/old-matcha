@@ -9,8 +9,18 @@ import Main from './components/Main/Main';
 import NotFound from './components/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+  // console.log(window.outerHeight)
+  // console.log(window.innerHeight)
+
+  // const rootHeightPage = window.outerHeight > window.innerHeight  ?
+  //                        document.querySelector('#root').style.minHeight = '100%' :
+  //                        document.querySelector('#root').style.height = '100%';
+
+  // const [rootHeight, setRootHeight] = useState(rootHeightPage)
 
   return (
     <BrowserRouter>

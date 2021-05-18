@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -58,50 +58,48 @@ const NewPassword = () => {
 
 
     return (
-        <div className='BackgroundFirst'>
-            <div className='BackgroundSecond'>
-                <FormsHeader />
-                <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage formContent sectionContentSize'>
-                        <div className='tittleDiv'>
-                            <IoLockOpen size='23' className='iconsFormsTittles' />
-                            <span className='FormsTittle'>Nouveau mot de passe</span>
-                        </div>
-                        <span className='center paragrInfo'>Entrer un nouveau mot de passe.</span>
-
-                        <Form className='forms' autoComplete="off" onSubmit={handleSubmit}>
-
-                            {/* password */}
-                            <Form.Group controlId="password">
-                                <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />
-                                <div className='label-group'>
-                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
-                                    <Form.Label>Nouveau mot de passe</Form.Label>
-                                </div>
-                                <Form.Text className='smallOnFocus'><TiInfoOutline style={{marginTop: '-2px', marginRight: '2px'}} />6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
-                            </Form.Group>
-
-                            {/* passwordConfirmation */}
-                            <Form.Group controlId="passwordConfirmation">
-                                <Form.Control onChange={handleChange} value={passwordConfirmation} type="password" maxLength="250" required />
-                                <div className='label-group'>
-                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' color='#2c3e50' />
-                                    <Form.Label style={{color: '#2c3e50'}}>Confirmez le nouveau mot de passe</Form.Label>
-                                </div>
-                            </Form.Group>
-
-                            <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
-                                <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Vos entrées ne sont pas valides</Form.Text>
-                                <Link to='/SignIn' className='forgotPassword' >Annuler</Link>
-                            </div>
-
-                            <Button variant="light" type='submit' className='submitBtnLarge' disabled={true}>Réinitialiser le mot de passe</Button>
-
-                        </Form>
+        <Fragment>
+            <FormsHeader />
+            <section className='centerElementsInPage FormsSection'>
+                <div className='centerElementsInPage formContent sectionContentSize'>
+                    <div className='tittleDiv'>
+                        <IoLockOpen size='23' className='iconsFormsTittles' />
+                        <span className='FormsTittle'>Nouveau mot de passe</span>
                     </div>
-                </section>
-            </div>
-        </div>
+                    <span className='center paragrInfo'>Entrer un nouveau mot de passe.</span>
+
+                    <Form className='forms' autoComplete="off" onSubmit={handleSubmit}>
+
+                        {/* password */}
+                        <Form.Group controlId="password">
+                            <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />
+                            <div className='label-group'>
+                                <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
+                                <Form.Label>Nouveau mot de passe</Form.Label>
+                            </div>
+                            <Form.Text className='smallOnFocus'><TiInfoOutline style={{marginTop: '-2px', marginRight: '2px'}} />6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
+                        </Form.Group>
+
+                        {/* passwordConfirmation */}
+                        <Form.Group controlId="passwordConfirmation">
+                            <Form.Control onChange={handleChange} value={passwordConfirmation} type="password" maxLength="250" required />
+                            <div className='label-group'>
+                                <BsFillShieldLockFill size='15' className='iconsFormsInputs' color='#2c3e50' />
+                                <Form.Label style={{color: '#2c3e50'}}>Confirmez le nouveau mot de passe</Form.Label>
+                            </div>
+                        </Form.Group>
+
+                        <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
+                            <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Vos entrées ne sont pas valides</Form.Text>
+                            <Link to='/SignIn' className='forgotPassword' >Annuler</Link>
+                        </div>
+
+                        <Button variant="light" type='submit' className='submitBtnLarge' disabled={true}>Réinitialiser le mot de passe</Button>
+
+                    </Form>
+                </div>
+            </section>
+        </Fragment>
     )
 }
 

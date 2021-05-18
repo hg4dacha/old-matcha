@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
@@ -59,48 +59,46 @@ const SignIn = () => {
     
 
     return (
-        <div className='BackgroundFirst'>
-            <div className='BackgroundSecond'>
-                <FormsHeader />
-                <section className='centerElementsInPage FormsSection'>
-                    <div className='centerElementsInPage formContent sectionContentSize'>
-                        <div className='tittleDiv'>
-                            <BiNetworkChart size='28' className='iconsFormsTittles' />
-                            <span className='FormsTittle'>Connexion</span>
-                        </div>
-                        <span className='center paragrInfo'>Pas encore de compte?<Link to='/SignUp' style={{fontStyle: 'initial'}}> Inscrivez-vous</Link></span>
-                        
-                        <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
-
-                            {/* email */}
-                            <Form.Group controlId="email">
-                                <Form.Control onChange={handleChange} value={email} type="text" maxLength="250" required />
-                                <div className='label-group'>
-                                    <MdEmail size='16' className='iconsFormsInputs' />
-                                    <Form.Label>Adresse e-mail</Form.Label>
-                                </div>
-                            </Form.Group>
-
-                            {/* password */}
-                            <Form.Group controlId="password">
-                                <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />
-                                <div className='label-group'>
-                                    <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
-                                    <Form.Label>Mot de passe</Form.Label>
-                                </div>
-                            </Form.Group>
-
-                            <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
-                                <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Vos entrées ne sont pas valides</Form.Text>
-                                <Link to='/ForgotPassword' className='forgotPassword' >Mot de passe oubllié?</Link>
-                            </div>
-                            <Button variant="light" type='submit' className='submitBtnSmall' disabled={true}>Connexion</Button>
-
-                        </Form>
+        <Fragment>
+            <FormsHeader />
+            <section className='centerElementsInPage FormsSection'>
+                <div className='centerElementsInPage formContent sectionContentSize'>
+                    <div className='tittleDiv'>
+                        <BiNetworkChart size='28' className='iconsFormsTittles' />
+                        <span className='FormsTittle'>Connexion</span>
                     </div>
-                </section>
-            </div>
-        </div>
+                    <span className='center paragrInfo'>Pas encore de compte?<Link to='/SignUp' style={{fontStyle: 'initial'}}> Inscrivez-vous</Link></span>
+                    
+                    <Form className='forms' autoComplete="off" onSubmit={handleSubmit} >
+
+                        {/* email */}
+                        <Form.Group controlId="email">
+                            <Form.Control onChange={handleChange} value={email} type="text" maxLength="250" required />
+                            <div className='label-group'>
+                                <MdEmail size='16' className='iconsFormsInputs' />
+                                <Form.Label>Adresse e-mail</Form.Label>
+                            </div>
+                        </Form.Group>
+
+                        {/* password */}
+                        <Form.Group controlId="password">
+                            <Form.Control onChange={handleChange} value={password} type="password" maxLength="250" required />
+                            <div className='label-group'>
+                                <BsFillShieldLockFill size='15' className='iconsFormsInputs' />
+                                <Form.Label>Mot de passe</Form.Label>
+                            </div>
+                        </Form.Group>
+
+                        <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
+                            <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Vos entrées ne sont pas valides</Form.Text>
+                            <Link to='/ForgotPassword' className='forgotPassword' >Mot de passe oubllié?</Link>
+                        </div>
+                        <Button variant="light" type='submit' className='submitBtnSmall' disabled={true}>Connexion</Button>
+
+                    </Form>
+                </div>
+            </section>
+        </Fragment>
     )
 }
 

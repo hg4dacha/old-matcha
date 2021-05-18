@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Navbar from '../NavBar/NavBar';
 import Alert from '../Alert/Alert';
 import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../variables/Regex';
@@ -143,33 +143,28 @@ const Profile = () => {
 </Form>
 
 
-
     return (
-        <div className='BackgroundFirst'>
-            <div className='BackgroundSecond'>
-                <div className='totor'>
-                <Navbar />
-                <Alert />
-                <div className='page-titles'>
-                    <h1 className='FormsTittle center'>
-                        <RiUser3Fill size='22' className='iconsFormsTittles' />
-                    Profil</h1>
+        <Fragment>
+            <Navbar />
+            <Alert />
+            <div className='page-titles'>
+                <h1 className='FormsTittle center'>
+                    <RiUser3Fill size='22' className='iconsFormsTittles' />
+                Profil</h1>
+            </div>
+            <div className='big-info-container centerElementsInPage'>
+                <h2 className='personal-information'>Vos informations personelles</h2>
+                <div className='info-container'>
+                    {infoUser}
                 </div>
-                <div className='big-info-container centerElementsInPage'>
-                    <h2 className='personal-information'>Vos informations personelles</h2>
-                    <div className='info-container'>
-                        {infoUser}
+                <div className='info-container mt-2 mb-5'>
+                    <div>
+                        {infoPassword}
+                        <hr/>
                     </div>
-                    <div className='info-container mt-2 mb-5'>
-                        <div>
-                            {infoPassword}
-                            <hr/>
-                        </div>
-                    </div>
-                </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
 

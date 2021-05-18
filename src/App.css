@@ -1,33 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Train+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-
 html, body {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+}
+
+html {
+    background-image: url(./images/background2.png);
 }
 
 body {
-    background-color: whitesmoke;
+    background-color: rgba(39, 174, 96, 0.8);
 }
 
 #root {
     height: 100%;
+    width: 100%;
     position: relative;
-}
-
-.BackgroundFirst {
-    height: 100%;
-    width: 100%;
-    background-image: url(./images/background2.png);
-}
-
-.BackgroundSecond {
-    height: 100%;
-    width: 100%;
-    background-color: rgba(39, 174, 96, 0.8);
+    /* overflow-x: hidden; */
 }
 
 a, a:hover{

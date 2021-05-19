@@ -2,21 +2,18 @@ import React, { useState, useEffect, Fragment } from 'react';
 import Navbar from '../NavBar/NavBar';
 import Alert from '../Alert/Alert';
 import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../variables/Regex';
-import { userFormInfo } from '../../variables/userFormInfo';
 import { v4 as uuidv4 } from 'uuid';
 import { Form, Button } from 'react-bootstrap'
 import { RiUser3Fill } from 'react-icons/ri';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoSettingsOutline } from 'react-icons/io5';
 
-// console.log(userFormInfo)
+
 
 const Profile = () => {
 
     useEffect( () => {
         document.title = 'Profil - Matcha'
-        // document.querySelector('html').classList.add('BackgroundFirst')
-        // document.querySelector('body').classList.add('BackgroundSecond')
     }, [])
 
 

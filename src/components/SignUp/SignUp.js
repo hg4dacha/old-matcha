@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import FormsHeader from '../FormsHeader/FormsHeader';
 import { Link } from 'react-router-dom'
+import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../variables/Regex';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { FaIdCard } from 'react-icons/fa';
@@ -47,10 +48,6 @@ const SignUp = () => {
         setData({...data, [e.target.id]: e.target.value});
     }
 
-    let NAMES_REGEX = /^[a-zA-Z-]{1,30}$/;
-    let USERNAME_REGEX = /^[a-zA-Z0-9-_]{1,15}$/;
-    let EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})){1,255}$/;
-    let PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,255}$/;
 
     const handleSubmit = e => {
         e.preventDefault()

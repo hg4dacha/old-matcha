@@ -56,7 +56,7 @@ const Profile = () => {
     const handleChange = e => {
 
         setData({...data, [e.target.id]: e.target.value});
-        // console.log(lastname)
+        console.log(e.target.value)
     }
 
 
@@ -73,32 +73,32 @@ const Profile = () => {
             <div key={uuidv4()}>
                 {!info.stateInfo ?
                 <div className='info-rows'>
-                <div className='label-and-info'>
-                    <span className='info-label'>{info.label}</span>
-                    <span className='info-info'>{info.info}</span>
-                </div>
-                <div className='info-links' onClick={() => handleModification(info.id, info.stateInfo)}>
-                    <div className='div-links'>
-                        <div className='setting-and-arrow'>
-                            <IoSettingsOutline className='setting' />
-                            <IoIosArrowForward className='arrow' />
+                    <div className='label-and-info'>
+                        <span className='info-label'>{info.label}</span>
+                        <span className='info-info'>{info.info}</span>
+                    </div>
+                    <div className='info-links' onClick={() => handleModification(info.id, info.stateInfo)}>
+                        <div className='div-links'>
+                            <div className='setting-and-arrow'>
+                                <IoSettingsOutline className='setting' />
+                                <IoIosArrowForward className='arrow' />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div> :
-            <Form className='forms-profile'>
-                <Form.Group controlId={info.id} className='form-group-profile'>
-                    <Form.Label>{info.label}</Form.Label>
-                    <Form.Control onChange={handleChange} value={info.info} type={info.type} placeholder="Entrez le nom" className='form-control-profile' autoFocus/>
-                    <Form.Text className="text-muted">{info.small}</Form.Text>
-                </Form.Group>
-                <div className='div-buttons-form-profile'>
-                    <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-                    <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleModification(info.id, info.stateInfo)}>Annuler</Button>
-                </div>
-            </Form>}
-            <hr/>
-        </div>
+                </div> :
+                <Form className='forms-profile'>
+                    <Form.Group controlId={info.id} className='form-group-profile'>
+                        <Form.Label>{info.label}</Form.Label>
+                        <Form.Control onChange={handleChange} value={info.info} type={info.type} placeholder="Entrez le nom" className='form-control-profile' autoFocus/>
+                        <Form.Text className="text-muted">{info.small}</Form.Text>
+                    </Form.Group>
+                    <div className='div-buttons-form-profile'>
+                        <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
+                        <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleModification(info.id, info.stateInfo)}>Annuler</Button>
+                    </div>
+                </Form>}
+                <hr/>
+            </div>
         )
     })
 

@@ -3,6 +3,10 @@ import { Form, Button } from 'react-bootstrap'
 import { IoSettingsOutline } from 'react-icons/io5';
 import { IoIosArrowForward } from 'react-icons/io';
 
+
+
+
+
 const PasswordSection = (props) => {
 
     const passwordData = !props.stateOfPasswordSection ?

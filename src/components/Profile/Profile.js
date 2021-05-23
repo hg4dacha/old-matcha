@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import Navbar from '../NavBar/NavBar';
 import Alert from '../Alert/Alert';
+import UserInfoSection from './UserInfoSection'
 import PasswordSection from './PasswordSection'
 import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../other/Regex';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,6 +9,8 @@ import { Form, Button } from 'react-bootstrap'
 import { RiUser3Fill } from 'react-icons/ri';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoSettingsOutline } from 'react-icons/io5';
+
+
 
 
 
@@ -19,7 +22,7 @@ const Profile = () => {
 
 
     /* modification of user information */
-    const infoChange = {
+    const infoEdit$ = {
         lastname: false,
         firstname: false,
         username: false,
@@ -27,14 +30,14 @@ const Profile = () => {
         password: false
     }
 
-    const [infoState, setInfoState] = useState(infoChange)
+    const [infoEdit, setInfoEdit] = useState(infoEdit$)
 
-    const handleModification = (info, stateInfo) => {
+    const handleModification = (info, infoEdit) => {
 
-        // this avoids the modification of several information at the same time
-        setInfoState(Object.assign(infoState, infoChange))
+        // ↓ this avoids the modification of several information at the same time
+        setInfoEdit(Object.assign(infoEdit, infoEdit$))
 
-        setInfoState({...infoState, [info]: !stateInfo})
+        setInfoEdit({...infoEdit, [info]: !infoEdit})
     }
 
 
@@ -67,7 +70,7 @@ const Profile = () => {
             id: 'lastname',
             type:'text',
             small: false,
-            stateInfo: infoState.lastname
+            infoEdit: infoEdit.lastname
         },
         {
             label: 'Prénom',
@@ -75,7 +78,7 @@ const Profile = () => {
             id: 'firstname',
             type:'text',
             small: false,
-            stateInfo: infoState.firstname
+            infoEdit: infoEdit.firstname
         },
         {
             label: 'Nom d\'utilisateur',
@@ -83,7 +86,7 @@ const Profile = () => {
             type:'text',
             small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).',
             id: 'username',
-            stateInfo: infoState.username
+            infoEdit: infoEdit.username
         },
         {
             label: 'E-mail',
@@ -91,22 +94,20 @@ const Profile = () => {
             type:'email',
             small: false,
             id: 'email',
-            stateInfo: infoState.email
+            infoEdit: infoEdit.email
         }
     ]
-
-    useState()
 
     const infoUser = userData.map( info => {
         return (
             <div key={uuidv4()}>
-                {!info.stateInfo ?
+                {!info.infoEdit ?
                 <div className='info-rows'>
                     <div className='label-and-info'>
                         <span className='info-label'>{info.label}</span>
                         <span className='info-info'>{info.info}</span>
                     </div>
-                    <div className='info-links' onClick={() => handleModification(info.id, info.stateInfo)}>
+                    <div className='info-links' onClick={() => handleModification(info.id, info.infoEdit)}>
                         <div className='div-links'>
                             <div className='setting-and-arrow'>
                                 <IoSettingsOutline className='setting' />
@@ -123,50 +124,13 @@ const Profile = () => {
                     </Form.Group>
                     <div className='div-buttons-form-profile'>
                         <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-                        <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleModification(info.id, info.stateInfo)}>Annuler</Button>
+                        <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleModification(info.id, info.infoEdit)}>Annuler</Button>
                     </div>
                 </Form>}
                 <hr/>
             </div>
         )
     })
-
-    const infoPassword = !infoState.password ?
-    <div className='info-rows'>
-        <div className='label-and-info'>
-            <span className='info-label'>Mot de passe</span>
-            <span className='info-info'>•••••••••••••</span>
-        </div>
-        <div className='info-links' onClick={() => handleModification('password', infoState.password)}>
-            <div className='div-links'>
-                <div className='setting-and-arrow'>
-                    <IoSettingsOutline className='setting' />
-                    <IoIosArrowForward className='arrow' />
-                </div>
-            </div>
-        </div>
-    </div> :
-    <Form className='forms-profile'>
-    <div className='w-100'>
-        <Form.Group controlId="currentPassword" className='form-group-profile'>
-                <Form.Label>Mot de passe actuel</Form.Label>
-                <Form.Control onChange={handleChange} type="password" placeholder="" className='form-control-profile' autoFocus/>
-        </Form.Group>
-        <Form.Group controlId="newPassword" className='form-group-profile mt-2'>
-                <Form.Label>Nouveau mot de passe</Form.Label>
-                <Form.Control onChange={handleChange} type="password" placeholder="" className='form-control-profile'/>
-                <Form.Text className="text-muted">6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
-        </Form.Group>
-        <Form.Group controlId="newPasswordConfirmation" className='form-group-profile mt-2'>
-                <Form.Label>Confirmer le nouveau mot de passe</Form.Label>
-                <Form.Control onChange={handleChange} type="password" placeholder="" className='form-control-profile'/>
-        </Form.Group>
-    </div>
-    <div className='div-buttons-form-profile'>
-        <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>
-        <Button variant="danger" type="button" className='buttons-form-profile' onClick={() => handleModification('password', infoState.password)}>Annuler</Button>
-    </div>
-</Form>
 
 
     return (
@@ -183,14 +147,29 @@ const Profile = () => {
                 <h2 className='personal-information'>Vos informations personelles</h2>
                 <div className='info-container'>
                     {infoUser}
+                    { userData.map( data => {
+                        return (
+                            <div key={uuidv4()}>
+                                <UserInfoSection label={data.label}
+                                                info={data.info}
+                                                type={data.type}
+                                                small={data.small}
+                                                id={data.id}
+                                                infoEdit={data.infoEdit}
+                                                handleModification={handleModification}
+                                                handleChange={handleChange}
+                                />
+                            </div>
+                        )
+                      })
+                    }
                 </div>
                 <div className='info-container mt-2 mb-5'>
                     <div>
-                        {infoPassword}
-                        <hr/>
-                        <PasswordSection stateOfPasswordSection={infoState.password}
+                        <PasswordSection stateOfPasswordSection={infoEdit.password}
                                          handleModification={handleModification}
-                                         handleChange={handleChange} />
+                                         handleChange={handleChange}
+                        />
                     </div>
                 </div>
             </div>

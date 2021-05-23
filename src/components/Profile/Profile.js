@@ -1,7 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import Navbar from '../NavBar/NavBar';
 import Alert from '../Alert/Alert';
-import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../variables/Regex';
+import PasswordSection from './PasswordSection'
+import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../other/Regex';
 import { v4 as uuidv4 } from 'uuid';
 import { Form, Button } from 'react-bootstrap'
 import { RiUser3Fill } from 'react-icons/ri';
@@ -59,16 +60,44 @@ const Profile = () => {
         console.log(e.target.value)
     }
 
-
-
-    const userFormInfo = [
-        {label: 'Nom', info: lastname, id: 'lastname', type:'text', small: false, stateInfo: infoState.lastname},
-        {label: 'Prénom', info: firstname, id: 'firstname', type:'text', small: false, stateInfo: infoState.firstname},
-        {label: 'Nom d\'utilisateur', info: username, type:'text', small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).', id: 'username', stateInfo: infoState.username},
-        {label: 'E-mail', info: email, type:'email', small: false, id: 'email', stateInfo: infoState.email}
+    const userData = [
+        {
+            label: 'Nom',
+            info: lastname,
+            id: 'lastname',
+            type:'text',
+            small: false,
+            stateInfo: infoState.lastname
+        },
+        {
+            label: 'Prénom',
+            info: firstname,
+            id: 'firstname',
+            type:'text',
+            small: false,
+            stateInfo: infoState.firstname
+        },
+        {
+            label: 'Nom d\'utilisateur',
+            info: username,
+            type:'text',
+            small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).',
+            id: 'username',
+            stateInfo: infoState.username
+        },
+        {
+            label: 'E-mail',
+            info: email,
+            type:'email',
+            small: false,
+            id: 'email',
+            stateInfo: infoState.email
+        }
     ]
 
-    const infoUser = userFormInfo.map( info => {
+    useState()
+
+    const infoUser = userData.map( info => {
         return (
             <div key={uuidv4()}>
                 {!info.stateInfo ?
@@ -147,7 +176,8 @@ const Profile = () => {
             <div className='page-titles'>
                 <h1 className='FormsTittle center'>
                     <RiUser3Fill size='22' className='iconsFormsTittles' />
-                Profil</h1>
+                    Profil
+                </h1>
             </div>
             <div className='big-info-container centerElementsInPage'>
                 <h2 className='personal-information'>Vos informations personelles</h2>
@@ -158,6 +188,9 @@ const Profile = () => {
                     <div>
                         {infoPassword}
                         <hr/>
+                        <PasswordSection stateOfPasswordSection={infoState.password}
+                                         handleModification={handleModification}
+                                         handleChange={handleChange} />
                     </div>
                 </div>
             </div>

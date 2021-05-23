@@ -9,7 +9,6 @@ import Main from './components/Main/Main';
 import NotFound from './components/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
 import './App.css';
-import { useState } from 'react';
 
 function App() {
 

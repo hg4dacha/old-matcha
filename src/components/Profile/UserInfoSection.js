@@ -27,7 +27,7 @@ const UserInfoSection = (props) => {
     <Form className='forms-profile'>
         <Form.Group controlId={props.id} className='form-group-profile'>
             <Form.Label>{props.label}</Form.Label>
-            <Form.Control onChange={props.handleChange} value={props.info} type={props.type} placeholder="Entrez le nom" className='form-control-profile' autoFocus/>
+            <Form.Control onChange={props.handleChange} value={props.info} type={props.type} placeholder="...." className='form-control-profile' autoFocus/>
             <Form.Text className="text-muted">{props.small}</Form.Text>
         </Form.Group>
         <div className='div-buttons-form-profile'>

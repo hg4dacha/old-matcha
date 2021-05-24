@@ -31,6 +31,7 @@ const Profile = () => {
         // ↓ this avoids the modification of several information at the same time
         setInfoEdit(Object.assign(infoEdit, infoEdit$))
 
+        setData(Object.assign(data, loginData))
         setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
     }
 
@@ -55,8 +56,8 @@ const Profile = () => {
         setData({...data, [e.target.id]: e.target.value});
         console.log(e.target.value)
     }
-    
-    
+
+
     const userData = [
         {
             label: 'Nom',
@@ -123,7 +124,7 @@ const Profile = () => {
                         })
                     }
                 </div>
-                <div className='info-container mt-2 mb-5'>
+                <div className='info-container mt-2' style={{marginBottom: '100px'}}>
                     <div>
                         <PasswordSection 
                             stateOfPasswordSection={infoEdit.password}

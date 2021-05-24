@@ -8,7 +8,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 
 
 const UserInfoSection = (props) => {
-console.log('slt')
+
     const userInfo = !props.infoEdit ?
     <div className='info-rows'>
         <div className='label-and-info'>

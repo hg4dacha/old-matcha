@@ -31,7 +31,7 @@ const Profile = () => {
 
     const handleModification = (idInfo, thisInfo) => {
 
-        setInfoEdit(Object.assign(infoEdit, infoEdit$)) // this avoids the modification of several information at the same time
+        setInfoEdit(Object.assign(infoEdit, infoEdit$))
         setData(Object.assign(data, data$))
         setErrorDatas(Object.assign(errorDatas, errorDatas$))
         setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
@@ -56,6 +56,11 @@ const Profile = () => {
     
     const handleChange = e => {
         setData({...data, [e.target.id]: e.target.value});
+    }
+
+    const handleNewValues = () => {
+        setInfoEdit(Object.assign(infoEdit, infoEdit$))
+        setErrorDatas(Object.assign(errorDatas, errorDatas$))
     }
 
 // --------------------------------------------------------
@@ -108,7 +113,6 @@ const Profile = () => {
 
     const handleSubmitPassword = e => {
         e.preventDefault();
-        setErrorDatas({...errorDatas, passwordsError: false})
 
         if (currentPassword !== '' && newPassword !== '' && newPasswordConfirmation !== '') {
             if (currentPassword) { // if the currentPassword === userPassword
@@ -130,14 +134,15 @@ const Profile = () => {
 
 const handleSubmitInfo = e => {
     e.preventDefault();
-    setErrorDatas(Object.assign(errorDatas, errorDatas$))
 
     if (lastname !== '' && firstname !== '' && username !== '' && email !== '') {
         if (!NAMES_REGEX.test(lastname) || !NAMES_REGEX.test(firstname) || !USERNAME_REGEX.test(username) || !EMAIL_REGEX.test(email)) {
             setErrorDatas({...errorDatas, infosError: true})
         }
         else {
-            console.log('"' + lastname + '"\n"' + firstname + '"\n"' + username+ '"\n' + 'is a new infos ✓')
+            handleNewValues()
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+            console.log('"' + lastname + '"\n"' + firstname + '"\n"' + username+ '"\nis a new infos ✓')
         }
     }
 }

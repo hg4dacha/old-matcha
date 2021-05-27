@@ -508,7 +508,7 @@ color: gray;
 }
 
 .personal-information {
-    width: 50%;
+    width: 90%;
     padding: 5px 8px;
     font-weight: bold;
     font-size: 18px;
@@ -517,7 +517,7 @@ color: gray;
 .info-container {
     background-color : rgb(248,249,250);
     padding: 20px 10px;
-    width: 50%;
+    width: 90%;
     border-radius: 5px;
     border: 1px solid grey;
 }

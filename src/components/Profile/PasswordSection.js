@@ -34,16 +34,16 @@ const PasswordSection = (props) => {
         <div className='w-100'>
             <Form.Group controlId="currentPassword" className='form-group-profile'>
                     <Form.Label>Mot de passe actuel</Form.Label>
-                    <Form.Control onChange={props.handleChange} type="password" placeholder="" className='form-control-profile' autoFocus/>
+                    <Form.Control onChange={props.handleChange} type="password" placeholder="" className='form-control-profile' maxLength="250" autoFocus/>
             </Form.Group>
             <Form.Group controlId="newPassword" className='form-group-profile mt-2'>
                     <Form.Label>Nouveau mot de passe</Form.Label>
-                    <Form.Control onChange={props.handleChange} type="password" placeholder="" className='form-control-profile'/>
+                    <Form.Control onChange={props.handleChange} type="password" placeholder="" className='form-control-profile' maxLength="250"/>
                     <Form.Text className="text-muted">6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.</Form.Text>
             </Form.Group>
             <Form.Group controlId="newPasswordConfirmation" className='form-group-profile mt-2'>
                     <Form.Label>Confirmer le nouveau mot de passe</Form.Label>
-                    <Form.Control onChange={props.handleChange} type="password" placeholder="" className='form-control-profile'/>
+                    <Form.Control onChange={props.handleChange} type="password" placeholder="" className='form-control-profile' maxLength="250"/>
             </Form.Group>
             <div style={{position: 'relative'}}>
                 {errorMsg}

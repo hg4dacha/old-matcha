@@ -29,10 +29,10 @@ const UserInfoSection = (props) => {
             </div>
         </div>
     </div> :
-    <Form className='forms-profile'>
+    <Form className='forms-profile' onSubmit={props.handleSubmitInfo}>
         <Form.Group controlId={props.id} className='form-group-profile'>
             <Form.Label>{props.label}</Form.Label>
-            <Form.Control onChange={props.handleChange} value={props.info} type={props.type} placeholder="...." className='form-control-profile' autoFocus/>
+            <Form.Control onChange={props.handleChange} value={props.info} type='text' placeholder="...." className='form-control-profile' maxLength={props.maxLength} autoFocus/>
             <Form.Text className="text-muted">{props.small}</Form.Text>
             <div style={{position: 'relative'}}>
                 {errorMsg}

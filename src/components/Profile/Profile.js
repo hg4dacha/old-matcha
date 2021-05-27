@@ -16,7 +16,7 @@ const Profile = () => {
         document.title = 'Profil - Matcha'
     }, [])
 
-// -------------------------------------------------------
+// --------------------------------------------------------
 
     /* modification of user information */
     const infoEdit$ = {
@@ -37,7 +37,7 @@ const Profile = () => {
         setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
     }
 
-// -------------------------------------------------------
+// --------------------------------------------------------
 
     /* new values */
     const data$ = {
@@ -58,71 +58,65 @@ const Profile = () => {
         setData({...data, [e.target.id]: e.target.value});
     }
 
-// -------------------------------------------------------
+// --------------------------------------------------------
     
     const errorDatas$ = {
-            lastnameError: false,
-            firstnameError: false,
-            usernameError: false,
-            emailError: false,
+            infosError: false,
             passwordsError: false
     }
 
     const [errorDatas, setErrorDatas] = useState(errorDatas$)
 
-// -------------------------------------------------------
+// --------------------------------------------------------
 
     const userData = [
         {
             label: 'Nom',
             info: lastname,
             id: 'lastname',
-            type:'text',
             small: false,
             infoEdit: infoEdit.lastname,
-            errorMsg: errorDatas.lastnameError
+            maxLength: "30"
         },
         {
             label: 'Prénom',
             info: firstname,
             id: 'firstname',
-            type:'text',
             small: false,
             infoEdit: infoEdit.firstname,
-            errorMsg: errorDatas.firstnameError
+            maxLength: "30"
         },
         {
             label: 'Nom d\'utilisateur',
             info: username,
-            type:'text',
             small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).',
             id: 'username',
             infoEdit: infoEdit.username,
-            errorMsg: errorDatas.usernameError
+            maxLength: "15"
         },
         {
             label: 'E-mail',
             info: email,
-            type:'email',
             small: false,
             id: 'email',
             infoEdit: infoEdit.email,
-            errorMsg: errorDatas.emailError
+            maxLength: "250"
         }
     ]
 
-// -------------------------------------------------------
+// ----------------------------PASSWORD CHECKING----------------------------
 
     const handleSubmitPassword = e => {
         e.preventDefault();
         setErrorDatas({...errorDatas, passwordsError: false})
 
         if (currentPassword !== '' && newPassword !== '' && newPasswordConfirmation !== '') {
-
             if (currentPassword) { // if the currentPassword === userPassword
                 if (PASSWORD_REGEX.test(newPassword) && newPassword === newPasswordConfirmation) {
                     handleModification()
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
                     console.log('"' + newPassword + '" is a new password ✓')
+
                 } else {
                     setErrorDatas({...errorDatas, passwordsError: true})
                 }
@@ -132,6 +126,21 @@ const Profile = () => {
         }
     }
 
+// ----------------------------INFO CHECKING----------------------------
+
+const handleSubmitInfo = e => {
+    e.preventDefault();
+    setErrorDatas(Object.assign(errorDatas, errorDatas$))
+
+    if (lastname !== '' && firstname !== '' && username !== '' && email !== '') {
+        if (!NAMES_REGEX.test(lastname) || !NAMES_REGEX.test(firstname) || !USERNAME_REGEX.test(username) || !EMAIL_REGEX.test(email)) {
+            setErrorDatas({...errorDatas, infosError: true})
+        }
+        else {
+            console.log('"' + lastname + '"\n"' + firstname + '"\n"' + username+ '"\n' + 'is a new infos ✓')
+        }
+    }
+}
 
 
     return (
@@ -153,13 +162,14 @@ const Profile = () => {
                                 <UserInfoSection 
                                     label={data.label}
                                     info={data.info}
-                                    type={data.type}
                                     small={data.small}
                                     id={data.id}
                                     infoEdit={data.infoEdit}
                                     handleModification={handleModification}
                                     handleChange={handleChange}
-                                    errorMsg={data.errorMsg}
+                                    handleSubmitInfo={handleSubmitInfo}
+                                    errorMsg={errorDatas.infosError}
+                                    maxLength={data.maxLength}
                                 />
                             </div> )
                         })

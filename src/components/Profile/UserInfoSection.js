@@ -2,12 +2,17 @@ import React, { Fragment } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { IoSettingsOutline } from 'react-icons/io5';
 import { IoIosArrowForward } from 'react-icons/io';
+import { RiErrorWarningLine } from 'react-icons/ri';
 
 
 
 
 
 const UserInfoSection = (props) => {
+
+    const errorMsg = props.errorMsg ?
+    <Form.Text className='generalError generalErrorDisplay' id='generalError' style={{top:'0'}}><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />L'entrée n'est pas valide</Form.Text> :
+    <Form.Text className='generalError' id='generalError' style={{top:'0'}}><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />L'entrée n'est pas valide</Form.Text> ;
 
     const userInfo = !props.infoEdit ?
     <div className='info-rows'>
@@ -29,6 +34,9 @@ const UserInfoSection = (props) => {
             <Form.Label>{props.label}</Form.Label>
             <Form.Control onChange={props.handleChange} value={props.info} type={props.type} placeholder="...." className='form-control-profile' autoFocus/>
             <Form.Text className="text-muted">{props.small}</Form.Text>
+            <div style={{position: 'relative'}}>
+                {errorMsg}
+            </div>
         </Form.Group>
         <div className='div-buttons-form-profile'>
             <Button variant="primary" type="submit" className='buttons-form-profile'>Enregistrer</Button>

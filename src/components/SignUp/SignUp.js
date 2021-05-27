@@ -64,7 +64,7 @@ const SignUp = () => {
     
                 if (NAMES_REGEX.test(lastname) && NAMES_REGEX.test(firstname) && USERNAME_REGEX.test(username) &&
                     PASSWORD_REGEX.test(password) && password === passwordConfirmation) {
-    
+
                         genErrSmall.classList.contains('generalErrorDisplay') &&
                         genErrSmall.classList.remove('generalErrorDisplay')
                 }

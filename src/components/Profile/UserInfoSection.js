@@ -29,7 +29,7 @@ const UserInfoSection = (props) => {
             </div>
         </div>
     </div> :
-    <Form className='forms-profile' onSubmit={props.handleSubmitInfo}>
+    <Form className='forms-profile' onSubmit={props.handleSubmitInfo(props.id, props.infoEdit)}>
         <Form.Group controlId={props.id} className='form-group-profile'>
             <Form.Label>{props.label}</Form.Label>
             <Form.Control onChange={props.handleChange} value={props.info} type='text' placeholder="...." className='form-control-profile' maxLength={props.maxLength} autoFocus/>

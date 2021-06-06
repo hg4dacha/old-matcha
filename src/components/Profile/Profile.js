@@ -32,7 +32,7 @@ const Profile = () => {
     const handleModification = (idInfo, thisInfo) => {
 
         setInfoEdit(Object.assign(infoEdit, infoEdit$))
-        setData(Object.assign(data, data$))
+        setData(Object.assign(data, data$)) // /!\  À revoir. Lors de l'enregistrement de la nouvelle info puis le click sur 'annuler' ou 'modifier' l'info revient à l'origine.
         setErrorDatas(Object.assign(errorDatas, errorDatas$))
         setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
     }
@@ -58,9 +58,10 @@ const Profile = () => {
         setData({...data, [e.target.id]: e.target.value});
     }
 
-    const handleNewValues = () => {
+    const handleNewValues = (idInfo, thisInfo) => {
         setInfoEdit(Object.assign(infoEdit, infoEdit$))
         setErrorDatas(Object.assign(errorDatas, errorDatas$))
+        setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
     }
 
 // --------------------------------------------------------
@@ -118,7 +119,8 @@ const Profile = () => {
             if (currentPassword) { // if the currentPassword === userPassword
                 if (PASSWORD_REGEX.test(newPassword) && newPassword === newPasswordConfirmation) {
                     handleModification()
-                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                    document.body.scrollTop = document.documentElement.scrollTop = 0
+                    handleSuccess()
                     console.log('"' + newPassword + '" is a new password ✓')
 
                 } else {
@@ -132,7 +134,7 @@ const Profile = () => {
 
 // ----------------------------INFO CHECKING----------------------------
 
-const handleSubmitInfo = e => {
+const handleSubmitInfo = (idInfo, thisInfo) => e => {
     e.preventDefault();
 
     if (lastname !== '' && firstname !== '' && username !== '' && email !== '') {
@@ -140,18 +142,35 @@ const handleSubmitInfo = e => {
             setErrorDatas({...errorDatas, infosError: true})
         }
         else {
-            handleNewValues()
-            document.body.scrollTop = document.documentElement.scrollTop = 0;
+            handleNewValues(idInfo, thisInfo)
+            document.body.scrollTop = document.documentElement.scrollTop = 0
+            handleSuccess()
+            console.log(data$)
             console.log('"' + lastname + '"\n"' + firstname + '"\n"' + username+ '"\nis a new infos ✓')
         }
     }
 }
 
+// ----------------------------UDPATE SUCCESS ALERT----------------------------
+
+    const [updateSuccess, setUpdateSuccess] = useState(false)
+
+    const updateSuccessAlert = updateSuccess ?
+    <Alert variant='success' className='update-success-alert update-success-alert-display'><AiOutlineCheck className='iconsNavbar'/>Vos informations ont été mis à jour</Alert> :
+    <Alert variant='success' className='update-success-alert'><AiOutlineCheck className='iconsNavbar'/>Vos informations ont été mis à jour</Alert> ;
+
+    const handleSuccess = () => {
+        setUpdateSuccess(true)
+        setTimeout(() => {
+            setUpdateSuccess(false)
+        }, 5000);
+    }
+
 
     return (
         <Fragment>
             <Navbar />
-            <Alert variant='success' className='complete-profile' style={{border: '2px solid white'}}><AiOutlineCheck className='iconsNavbar'/>Vos informations ont été mis à jour</Alert>
+            {updateSuccessAlert}
             <div className='page-titles'>
                 <h1 className='FormsTittle center'>
                     <RiUser3Fill size='22' className='iconsFormsTittles' />

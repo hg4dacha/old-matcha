@@ -10,6 +10,8 @@ import NotFound from './components/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
 import './App.css';
 
+import Chat from './components/Chat';
+
 function App() {
 
   return (
@@ -23,6 +25,7 @@ function App() {
         <Route path='/NewPassword' component={NewPassword} />
         <Route path='/Main' component={Main} />
         <Route path='/Profile' component={Profile} />
+        <Route path='/Chat' component={Chat} />
         <Route component={NotFound} />
       </Switch>
       

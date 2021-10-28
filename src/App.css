@@ -653,14 +653,14 @@ color: gray;
 }
 
 .chatOpen {
-    width: 25%;
+    width: 30%;
     -webkit-transition: 0.2s ease-in;
     -moz-transition: 0.2s ease-in;
     -o-transition: 0.2s ease-in;
     transition: 0.2s ease-in;
 }
 
-.FaChevronContainer {
+.iconChatDrawerContainer {
     height: 100%;
     display: flex;
     align-items: center;
@@ -668,15 +668,57 @@ color: gray;
     padding: 0;
 }
 
-.FaChevron {
-    cursor: pointer;
-    height: 50px;
-    width: 50px;
-    color: #dfe6e9;
+.iconChatDrawerDiv {
+    position: absolute;
+    height: 15%;
     background: linear-gradient(-90deg, #5758BB, #D980FA);
     box-shadow: -3px 0px 5px 0px #636e72;
     border-radius: 50% 0% 0% 50%;
+    cursor: pointer;
+}
+
+.nb-notif-chat-drawer {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: #EA2027;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.iconChatDrawer {
+    height: 50px;
+    width: 50px;
+    color: #dfe6e9;
     padding:10px;
+}
+
+.discussionContainer {
+    position: absolute;
+    top: 0%;
+    border: 2px solid black;
+    width: 100%;
+    height: 80%;
+}
+
+.interlocutor {
+    border: 2px solid yellow;
+    width: 100%;
+    height: 10%;
+}
+
+.interlocutor-image {
+    width: 7%;
+    border-radius: 50%;
+}
+
+.discussion {
+    border: 2px solid red;
+    width: 100%;
+    height: 90%;
+    padding: 0px 20px;
 }
 
 .text-to-send {
@@ -701,6 +743,7 @@ color: gray;
     font-style: arial;
     padding: 5px 10px;
     outline: none;
+    text-transform: capitalize;
 }
 
 .chat-textarea::placeholder {

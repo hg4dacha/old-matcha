@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from 'react-router-dom';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { GoPrimitiveDot } from "react-icons/go";
-import logoIcon from "../images/favicon.ico";
+import { BiMessageSquareDots } from "react-icons/bi";
 
 import userImage from "../images/user-image.jpg"
 
@@ -43,16 +43,18 @@ const Chat = () => {
             </div>
             <div className='discussionContainer'>
                 <div className='interlocutor'>
-                    <GoPrimitiveDot/>
-                    {/* <img src={logoIcon} alt='' style={{width: '30px'}}/> */}
-                    <div>
-                        <img src={userImage} alt='interlocutor' className='interlocutor-image'/>
-                        <div>username-269428</div>
+                    {/* <GoPrimitiveDot/> */}
+                    <div className='BiMessageSquareDots'>
+                        <BiMessageSquareDots size='25' color='#27ae60' />
                     </div>
-                    <NavDropdown title={<BsThreeDotsVertical/>} id="collasible-nav-dropdown">
-                        <NavLink to="#" className='dropdown-profile'>
-                            <RiDeleteBin5Line className='icons-dropdown'/>Suppr. discussion
-                        </NavLink>
+                    <div className='centerElementsInPage' style={{width: '60%', height: '100%'}}>
+                        <img src={userImage} alt='interlocutor' className='interlocutor-image'/>
+                        <span className='interlocutor-name'>username-269428</span>
+                    </div>
+                    <NavDropdown title={<BsThreeDotsVertical/>} id="dropdown-delete-link" className='dropdown-delete-discussion-div'>
+                        <NavDropdown.Item className='dropdown-delete-discussion'>
+                            <RiDeleteBin5Line className='icons-dropdown' />Suppr. discussion
+                        </NavDropdown.Item>
                     </NavDropdown>
                 </div>
                 <div className='discussion'>

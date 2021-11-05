@@ -10,7 +10,10 @@ import { VscHome } from 'react-icons/vsc';
 import { AiFillStar } from 'react-icons/ai';
 import user from '../../images/user.png';
 
+
+
 const Navbar$ = () => {
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Link to="/Main" className='navbar-brand'><Logo width='150' /></Link>

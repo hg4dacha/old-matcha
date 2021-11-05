@@ -735,6 +735,7 @@ color: gray;
 .interlocutor-name {
     margin: 1%;
     color: whitesmoke;
+    font-weight: bold;
 }
 
 .dropdown-delete-discussion-div {

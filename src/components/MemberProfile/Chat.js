@@ -8,7 +8,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { GoPrimitiveDot } from "react-icons/go";
 import { BiMessageSquareDots } from "react-icons/bi";
 
-import userImage from "../images/user-image.jpg"
+import userImage from "../../images/user-image.jpg"
 
 
 const Chat = () => {

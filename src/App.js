@@ -8,9 +8,10 @@ import Profile from './components/Profile/Profile';
 import Main from './components/Main/Main';
 import NotFound from './components/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
+import MemberProfile from './components/MemberProfile/MemberProfile';
 import './App.css';
 
-import Chat from './components/Chat';
+
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
         <Route path='/NewPassword' component={NewPassword} />
         <Route path='/Main' component={Main} />
         <Route path='/Profile' component={Profile} />
-        <Route path='/Chat' component={Chat} />
+        <Route path='/MemberProfile' component={MemberProfile} />
         <Route component={NotFound} />
       </Switch>
       

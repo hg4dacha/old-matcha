@@ -653,7 +653,7 @@ color: gray;
 /*****************************   CHAT   *****************************/
 
 .chat {
-    background-color: #ECEFF1;
+    background-color: antiquewhite;
     background-image: url('./images/bg-chat.svg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -850,6 +850,7 @@ color: gray;
     width: fit-content;
     max-width: 80%;
     box-shadow: 0px 0px 5px #636e72;
+    opacity: 0.95;
 }
 
 .msg-in-content-div {
@@ -900,7 +901,7 @@ color: gray;
     font-weight: initial;
 }
 
-.send-icone {
+.send-icon {
     height: 50px;
     width: 50px;
     border-radius: 100%;

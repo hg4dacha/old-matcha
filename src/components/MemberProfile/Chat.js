@@ -14,6 +14,7 @@ import userImage from "../../images/user-image.jpg"
 
 const Chat = () => {
 
+    // CHAT DRAWER ↓↓↓
     const [chatDrawer, setChatDrawer] = useState(false)
 
     const moveChatDrawer = e => {
@@ -37,6 +38,21 @@ const Chat = () => {
                         'chat-content-open' :
                         'chat-content-close' ;
 
+
+    // WRITTEN MESSAGE ↓↓↓
+    const [theMessage, SetTheMessage] = useState('')
+
+    const newMessage = (e) => {
+        SetTheMessage(e.target.value)
+    }
+
+    
+    const styleIcon0 = {backgroundColor: '#8FA3AD', cursor: 'initial'}
+    const styleIcon1 = {backgroundColor: '#4285F4', cursor: 'pointer'}
+    const colorSendIcon = theMessage === '' ?
+                          styleIcon0 :
+                          styleIcon1 ; 
+    
     const msgIpsum = 'Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n\'a pas fait que survivre cinq siècles, mais s\'est aussi adapté à la bureautique informatique, sans que son contenu n\'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.'
     
 
@@ -70,11 +86,13 @@ const Chat = () => {
                         <MsgOut msgContent='Bonjour' />
                         <MsgIn msgContent={msgIpsum} />
                         <MsgOut msgContent={msgIpsum} />
+                        <MsgIn msgContent={msgIpsum} />
+                        <MsgOut msgContent={msgIpsum} />
                     </div>
                 </div>
                 <div className='text-to-send'>
-                    <textarea className='chat-textarea' autoComplete='off' placeholder='Message' minLength='1' maxLength='255' autoCapitalize='on'></textarea>
-                    <MdSend className='send-icone'/>
+                    <textarea value={theMessage} onChange={newMessage} className='chat-textarea' autoComplete='off' placeholder='Message' minLength='1' maxLength='255' autoCapitalize='on'></textarea>
+                    <MdSend className='send-icon' style={colorSendIcon} />
                 </div>
             </div>
         </div>

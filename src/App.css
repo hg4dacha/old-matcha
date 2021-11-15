@@ -653,6 +653,7 @@ color: gray;
 /*****************************   CHAT   *****************************/
 
 .chat {
+    z-index: 100;
     background-color: antiquewhite;
     background-image: url('./images/bg-chat.svg');
     background-repeat: no-repeat;
@@ -913,6 +914,52 @@ color: gray;
     cursor: pointer;
     margin: 5px;
 }
+
+.profile-description {
+    position: absolute;
+    height: 92%;
+    width: 70%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.photos-part, .infos-part {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.photos-part {
+    justify-content: center;
+}
+
+.infos-part {
+    justify-content: flex-start;
+}
+
+.photos-list, .infos-list {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.photos-list {
+    align-items: center;
+}
+
+.infos-list {
+
+}
+
+.carousel-div {
+    width: 30%;
+}
+
 
 /*****************************   FOOTER   *****************************/
 

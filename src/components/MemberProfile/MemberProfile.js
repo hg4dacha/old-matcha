@@ -6,9 +6,14 @@ import Button from 'react-bootstrap/Button'
 import { MdBlock } from "react-icons/md";
 import { GoPrimitiveDot } from "react-icons/go";
 
+import jeanma1 from '../../images/jeanma1.jpg'
+import jeanma2 from '../../images/jeanma2.jpg'
+import jeanma3 from '../../images/jeanma3.jpg'
 
 
 const MemberProfile = () => {
+
+    const UserPhotos = [jeanma1, jeanma2, jeanma3]
 
     return (
         <Fragment>
@@ -17,13 +22,13 @@ const MemberProfile = () => {
             <div className='profile-description'>
                 <div className='photos-part'>
                     <div className='photos-list'>
-                        <span>username-269428</span>
-                        <div><GoPrimitiveDot/><span>En ligne</span></div>
-                        <Carousel/>
+                        <Carousel UserPhotos={UserPhotos} />
                     </div>
                 </div>
                 <div className='infos-part'>
                     <div className='infos-list'>
+                        <span>username-269428</span>
+                        <div><GoPrimitiveDot/><span>En ligne</span></div>
                         <span>Nom</span>
                         <span>Prenom</span>
                         <span>Age</span>

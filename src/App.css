@@ -908,8 +908,6 @@ color: gray;
     border-radius: 100%;
     padding: 10px;
     color: #FFFFFF;
-    background-color: #4285F4;
-    /* background-color: #8FA3AD; */
     box-shadow: 0px 1px 10px -2px #506b78;
     cursor: pointer;
     margin: 5px;
@@ -952,12 +950,13 @@ color: gray;
     align-items: center;
 }
 
-.infos-list {
-
+.carousel-div {
+    width: 90%;
 }
 
-.carousel-div {
-    width: 30%;
+.carousel-div>.carousel-inner {
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px #222f3e;
 }
 
 

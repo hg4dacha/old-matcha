@@ -1,26 +1,27 @@
 import React from 'react';
-import Carousel from 'react-bootstrap/Carousel'
-import jeanma1 from '../../images/jeanma1.jpg'
-import jeanma2 from '../../images/jeanma2.jpg'
-import jeanma3 from '../../images/jeanma3.jpg'
+import Carousel from 'react-bootstrap/Carousel';
+import { v4 as uuidv4 } from 'uuid';
 
 
-const Carousel$ = () => {
+
+
+
+const Carousel$ = ({UserPhotos}) => {
+
+    const controls = UserPhotos.length === 1 ? false : true ;
+
+    const nodeRef = React.useRef(null);
 
     return (
-        <Carousel fade interval={null} className='carousel-div'>
+        <Carousel nodeRef={nodeRef} fade={true} interval={null} indicators={false} controls={controls} className='carousel-div'>
 
-            <Carousel.Item>
-                <img className="d-block w-100" src={jeanma1} alt="First photo" />
-            </Carousel.Item>
-
-            <Carousel.Item>
-                <img className="d-block w-100" src={jeanma2} alt="Second photo" />
-            </Carousel.Item>
-
-            <Carousel.Item>
-                <img className="d-block w-100" src={jeanma3} alt="Third photo" />
-            </Carousel.Item>
+            {UserPhotos.map( data => {
+                return (
+                    <Carousel.Item ref={nodeRef} key={uuidv4()}>
+                        <img className="d-block w-100" src={data} alt="Utilisateur" />
+                    </Carousel.Item>
+                )
+            })}
 
         </Carousel>
     )

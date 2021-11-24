@@ -955,10 +955,23 @@ color: gray;
 }
 
 .carousel-div>.carousel-inner {
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: 0px 0px 5px 0px #222f3e;
 }
 
+.btn-prev-nxt, .btn-prev-nxt:focus, .btn-prev-nxt:active {
+	background:none;
+    border: none;
+	outline:none;
+	padding:0;
+}
+
+.like-heart {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    /* transition: transform .6s ease-in-out; */
+}
 
 /*****************************   FOOTER   *****************************/
 

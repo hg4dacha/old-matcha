@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../NavBar/NavBar';
 import Chat from './Chat';
 import Carousel from './Carousel';
@@ -12,11 +12,12 @@ import jeanma1 from '../../images/jeanma1.jpg'
 import jeanma2 from '../../images/jeanma2.jpg'
 import jeanma3 from '../../images/jeanma3.jpg'
 import selfie from '../../images/selfie.jpg'
+import selfie22 from '../../images/selfie22.jpg'
 
 
 const MemberProfile = () => {
 
-    const UserPhotos = [jeanma1, jeanma2, jeanma3, selfie]
+    const UserPhotos = [selfie22, selfie, jeanma1, jeanma2, jeanma3]
 
     // LIKE DISLIKE ↓↓↓
     const [like, setLike] = useState(false)
@@ -30,9 +31,21 @@ const MemberProfile = () => {
                       <IoMdHeart className='like-heart' color='darkred' />
                   </Button> :
                   <Button variant="outline-danger" onClick={likeDislike} style={{boxShadow: 'none', borderColor: '#725551'}}>
-                      <IoMdHeartEmpty className='like-heart' color='#725551
-' />
+                      <IoMdHeartEmpty className='like-heart' color='#725551' />
                   </Button> ;
+
+    // FOR PICTURE SIZE ↓↓↓
+    const [pictureSize, setPictureSize] = useState(null)
+
+    useEffect( () => {
+        const forPictureSize = document.querySelector('.profile-description').offsetHeight
+        setPictureSize(forPictureSize)
+    }, [])
+
+    window.onresize = () => {
+        setPictureSize(document.querySelector('.profile-description').offsetHeight)
+    }
+
 
     return (
         <Fragment>
@@ -41,7 +54,7 @@ const MemberProfile = () => {
             <div className='profile-description'>
                 <div className='photos-part'>
                     <div className='photos-list'>
-                        <Carousel UserPhotos={UserPhotos} />
+                        <Carousel UserPhotos={UserPhotos} forPictureSize={pictureSize} />
                     </div>
                 </div>
                 <div className='infos-part'>

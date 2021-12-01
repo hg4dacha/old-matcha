@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react';
 
 
 
-const Carousel$ = ({UserPhotos}) => {
+const Carousel$ = ({UserPhotos, forPictureSize}) => {
 
 
     const [photo, setPhoto] = useState(0)
@@ -21,7 +21,7 @@ const Carousel$ = ({UserPhotos}) => {
     }
 
     const buttons = UserPhotos.length === 1 ?
-                    null                    :
+                    null :
                     <Fragment>
                         <button onClick={previousImg} className="carousel-control-prev btn-prev-nxt" type="button" data-bs-target="#carouselUserImage" data-bs-slide="prev">
                             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -29,15 +29,19 @@ const Carousel$ = ({UserPhotos}) => {
                         <button onClick={nextImg} className="carousel-control-next btn-prev-nxt" type="button" data-bs-target="#carouselUserImage" data-bs-slide="next">
                             <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         </button>
-                    </Fragment>             ;
+                    </Fragment> ;
     
+    const sizeOfImage = {
+        maxWidth: '100%',
+        maxHeight: forPictureSize
+    }
 
-    
+
     return (
         <div id="carouselUserImage" className="carousel slide carousel-div" data-bs-ride="carousel" data-interval="2000">
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src={UserPhotos[photo]} className="d-block w-100 img-fluid" alt="user"/>
+                    <img src={UserPhotos[photo]} className="d-block img-fluid" style={sizeOfImage} alt="user"/>
                 </div>
             </div>
             {buttons}

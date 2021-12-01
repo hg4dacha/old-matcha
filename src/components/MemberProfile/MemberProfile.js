@@ -38,8 +38,7 @@ const MemberProfile = () => {
     const [pictureSize, setPictureSize] = useState(null)
 
     useEffect( () => {
-        const forPictureSize = document.querySelector('.profile-description').offsetHeight
-        setPictureSize(forPictureSize)
+        setPictureSize(document.querySelector('.profile-description').offsetHeight)
     }, [])
 
     window.onresize = () => {

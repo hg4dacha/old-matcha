@@ -30,15 +30,26 @@ const Carousel$ = ({UserPhotos, forPictureSize}) => {
                             <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         </button>
                     </Fragment> ;
-    
+
+    // DISPLAY AND HIDE OF BUTTONS WHEN MOVING THE MOUSE
+    const displayButtons = () => {
+        if (UserPhotos.length > 1)
+            document.querySelector('.btn-prev-nxt').style.visibility = 'visible'
+    }
+    const hideButtons = () => {
+        if (UserPhotos.length > 1)
+            document.querySelector('.btn-prev-nxt').style.visibility = 'hidden'
+    }
+
+    // FOR PICTURE SIZE ↓↓↓    
     const sizeOfImage = {
         maxWidth: '100%',
-        maxHeight: forPictureSize
+        maxHeight: (forPictureSize / 100) * 90
     }
 
 
     return (
-        <div id="carouselUserImage" className="carousel slide carousel-div" data-bs-ride="carousel" data-interval="2000">
+        <div id="carouselUserImage" className="carousel slide carousel-div" onMouseOver={displayButtons} onMouseOut={hideButtons} data-bs-ride="carousel" data-interval="2000">
             <div className="carousel-inner">
                 <div className="carousel-item active">
                     <img src={UserPhotos[photo]} className="d-block img-fluid" style={sizeOfImage} alt="user"/>

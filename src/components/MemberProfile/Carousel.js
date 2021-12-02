@@ -23,22 +23,26 @@ const Carousel$ = ({UserPhotos, forPictureSize}) => {
     const buttons = UserPhotos.length === 1 ?
                     null :
                     <Fragment>
-                        <button onClick={previousImg} className="carousel-control-prev btn-prev-nxt" type="button" data-bs-target="#carouselUserImage" data-bs-slide="prev">
+                        <button onClick={previousImg} className="carousel-control-prev btn-prev-nxt btn-left" type="button" data-bs-target="#carouselUserImage" data-bs-slide="prev">
                             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                         </button>
-                        <button onClick={nextImg} className="carousel-control-next btn-prev-nxt" type="button" data-bs-target="#carouselUserImage" data-bs-slide="next">
+                        <button onClick={nextImg} className="carousel-control-next btn-prev-nxt btn-right" type="button" data-bs-target="#carouselUserImage" data-bs-slide="next">
                             <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         </button>
                     </Fragment> ;
 
-    // DISPLAY AND HIDE OF BUTTONS WHEN MOVING THE MOUSE
+    // DISPLAY AND HIDE BUTTONS ↓↓↓
     const displayButtons = () => {
-        if (UserPhotos.length > 1)
-            document.querySelector('.btn-prev-nxt').style.visibility = 'visible'
+        if (UserPhotos.length > 1) {
+            document.querySelector('.btn-left').style.visibility = 'visible'
+            document.querySelector('.btn-right').style.visibility = 'visible'
+        }
     }
     const hideButtons = () => {
-        if (UserPhotos.length > 1)
-            document.querySelector('.btn-prev-nxt').style.visibility = 'hidden'
+        if (UserPhotos.length > 1) {
+                document.querySelector('.btn-left').style.visibility = 'hidden'
+                document.querySelector('.btn-right').style.visibility = 'hidden'
+        }
     }
 
     // FOR PICTURE SIZE ↓↓↓    

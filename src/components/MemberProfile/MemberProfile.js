@@ -59,8 +59,8 @@ const MemberProfile = () => {
                 <div className='infos-part'>
                     <div className='infos-list'>
                         <div>
-                            <span>username-269428</span>
-                            <span className='popularity'><AiFillStar className='star'/>1425°</span>
+                            <span className='username-member-profile'>username-269428</span>
+                            <span className='popularity popularity-member-profile'><AiFillStar className='star'/>1425°</span>
                             {heart}
                         </div>
                         <div className='centerElementsInPage'><GoPrimitiveDot color='#009432' /><span>En ligne</span></div>

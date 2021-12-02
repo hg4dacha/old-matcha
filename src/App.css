@@ -966,11 +966,22 @@ color: gray;
 	padding:0;
 }
 
+.username-member-profile {
+    font-weight: bold;
+    color: #222f3e;
+    font-size: larger;
+    margin: 10px;
+}
+
+.popularity-member-profile {
+    margin: 0px;
+    font-size: 15px;
+}
+
 .like-heart {
     width: 25px;
     height: 25px;
     cursor: pointer;
-    /* transition: transform .6s ease-in-out; */
 }
 
 /*****************************   FOOTER   *****************************/

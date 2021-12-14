@@ -9,10 +9,10 @@ import { BiMessageSquareDots } from "react-icons/bi";
 import MsgIn from './MsgIn';
 import MsgOut from './MsgOut';
 
-import userImage from "../../images/user-image.jpg"
+import UserImage from "../../images/user-image.jpg"
 
 
-const Chat = () => {
+const Chat = (props) => {
 
     // CHAT DRAWER ↓↓↓
     const [chatDrawer, setChatDrawer] = useState(false)
@@ -27,6 +27,7 @@ const Chat = () => {
         chatElement.classList.add('chatOpen');
         
         setChatDrawer(!chatDrawer)
+        props.onChatChange(!chatDrawer)
     }
 
     const theChatDrawer = chatDrawer ?
@@ -72,7 +73,7 @@ const Chat = () => {
                             <BiMessageSquareDots size='25' color='whitesmoke' />
                         </div>
                         <div className='centerElementsInPage' style={{width: '60%', height: '100%'}}>
-                            <img src={userImage} alt='interlocutor' className='interlocutor-image'/>
+                            <img src={UserImage} alt='interlocutor' className='interlocutor-image'/>
                             <span className='interlocutor-name'>username-269428</span>
                         </div>
                         <NavDropdown title={<BsThreeDotsVertical size='22' color='whitesmoke'/>} id="dropdown-delete-link" className='dropdown-delete-discussion-div'>

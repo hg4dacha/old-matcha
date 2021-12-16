@@ -43,6 +43,12 @@ a, a:hover{
     align-items: center;
 }
 
+.alignment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 *:disabled {
     cursor: not-allowed;
 }
@@ -851,7 +857,6 @@ color: gray;
     width: fit-content;
     max-width: 80%;
     box-shadow: 0px 0px 5px #636e72;
-    opacity: 0.95;
 }
 
 .msg-in-content-div {
@@ -1029,7 +1034,7 @@ color: gray;
 }
 
 .profile-blurring {
-    filter: blur(4px);
+    filter: blur(5px);
     pointer-events: none;
     cursor: default;
     -webkit-transition: 0.2s ease-in;
@@ -1059,6 +1064,12 @@ color: gray;
 
 }
 
+.infos-list {
+    height: 75%;
+    display: flex;
+    justify-content: space-around;
+}
+
 .photos-list {
     align-items: center;
 }
@@ -1079,10 +1090,20 @@ color: gray;
 	padding:0;
 }
 
+.username-global-div {
+    position: relative;
+}
+
+.username-and-popularity {
+    display: flex;
+    flex-direction: row;
+}
+
 .username-member-profile {
     font-weight: bold;
     color: #222f3e;
     font-size: larger;
+    margin: 0;
     margin-right: 10px;
 }
 
@@ -1093,6 +1114,7 @@ color: gray;
 
 .button-like {
     position: absolute;
+    top: 0;
     right: 0;
 }
 
@@ -1116,6 +1138,35 @@ color: gray;
 .user-connection-status {
     display: flex;
     align-items: center;
+}
+
+.last-connection {
+    font-style: italic;
+    font-size: 11px;
+}
+
+
+.tags-badge {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin: 10px 0;
+}
+
+.danger-buttons-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.danger-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    font-size: 12px;
+    margin: 0 2px;
 }
 
 

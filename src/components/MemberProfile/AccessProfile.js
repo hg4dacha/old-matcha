@@ -1,11 +1,22 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Chat from './Chat';
 import Carousel from './Carousel';
+import TagsBadge from './TagsBadge';
 import Button from 'react-bootstrap/Button'
 import { MdBlock } from "react-icons/md";
 import { GoPrimitiveDot } from "react-icons/go";
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { IoMdHeartEmpty, IoMdHeart, IoMdFlashlight } from "react-icons/io";
 import { AiFillStar } from 'react-icons/ai';
+import { GiPositionMarker } from 'react-icons/gi';
+import { TiWarningOutline } from "react-icons/ti";
+import { BiSearch } from "react-icons/bi";
+import { RiUser3Line } from "react-icons/ri";
+import { FiCalendar } from "react-icons/fi";
+import { IoMaleFemaleSharp } from "react-icons/io5";
+
+
+
+
 
 import jeanma1 from '../../images/jeanma1.jpg'
 import jeanma2 from '../../images/jeanma2.jpg'
@@ -35,7 +46,7 @@ const AccessProfile = () => {
                   </Button> ;
 
     // INLINE OFFLINE ↓↓↓
-    const [inline, setInline] = useState(true)
+    const [inline, setInline] = useState(false)
 
     // const inlineOffline = () => {
     //     setInline(!inline)
@@ -43,7 +54,9 @@ const AccessProfile = () => {
 
     const connectionState = inline ?
                             <small className='user-connection-status'><GoPrimitiveDot color='#009432' />En ligne</small> :
-                            <small className='user-connection-status'><GoPrimitiveDot color='#353b48' />Hors ligne</small> ;
+                            <small className='user-connection-status'><GoPrimitiveDot color='#353b48' />
+                                Hors ligne<span className='last-connection'>&nbsp;&nbsp;Dernière connexion le 25/02/22 à 13h46</span>
+                            </small> ;
 
     // FOR PICTURE SIZE ↓↓↓
     const [pictureSize, setPictureSize] = useState(null)
@@ -81,18 +94,36 @@ const AccessProfile = () => {
                 </div>
                 <div className='infos-part'>
                     <div className='infos-list'>
-                        <div>
-                            <span className='username-member-profile'>username-269428</span>
-                            <span className='popularity popularity-member-profile'><AiFillStar className='star'/>1425°</span>
+                        <div className='username-global-div'>
+                            <div className='username-and-popularity'>
+                                <h1 className='username-member-profile'>username-269428</h1>
+                                <span className='popularity popularity-member-profile'><AiFillStar className='star'/>1425°</span>
+                            </div>
+                            {connectionState}
                             {heart}
                         </div>
-                        {connectionState}
-                        <span>Nom</span>
-                        <span>Prenom</span>
-                        <span>Age</span>
-                        <span>Sexe</span>
-                        <span>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n\'a pas fait que survivre cinq siècles, mais s\'est aussi adapté à la bureautique informatique, sans que son contenu n\'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</span>
-                        <Button variant="danger" className='centerElementsInPage' style={{width: 'fit-content'}} ><MdBlock/>Bloquer</Button>
+                        <div>
+                            <div className='alignment'><RiUser3Line color='#0a3d62'/>Michel Dupont</div>
+                            <div className='alignment'><FiCalendar color='#0a3d62'/>36 ans</div>
+                            <div className='alignment'><GiPositionMarker color='#0a3d62'/>Paris, Ile-de-France (France)</div>
+                            <div className='alignment'><IoMaleFemaleSharp color='#0a3d62'/>Je suis<span className='bold'>&nbsp;un homme</span></div>
+                            <div className='alignment'><BiSearch color='#0a3d62'/>Je cherche<span className='bold'>&nbsp;une femme</span></div>
+                        </div>
+                        <div className='about-me-div'>
+                            <div className='alignment'><IoMdFlashlight style={{transform: 'rotate(90deg)'}}/><span>À propos de moi</span></div>
+                            <div className='tags-badge'>
+                                <TagsBadge tag='#gourmand' />
+                                <TagsBadge tag='#curieux' />
+                                <TagsBadge tag='#intello' />
+                                <TagsBadge tag='#codeur' />
+                                <TagsBadge tag='#dormeur' />
+                            </div>
+                            <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n\'a pas fait que survivre cinq siècles, mais s\'est aussi adapté à la bureautique informatique, sans que son contenu n\'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                        </div>
+                        <div className='danger-buttons-div'>
+                            <Button variant="danger" className='danger-buttons'><MdBlock style={{marginRight: '3px'}}/>Bloquer</Button>
+                            <Button variant="danger" className='danger-buttons'><TiWarningOutline style={{marginRight: '3px'}}/>Signaler</Button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import ConfirmWindow from '../ConfirmWindow/ConfirmWindow';
 import Chat from './Chat';
 import Carousel from './Carousel';
 import TagsBadge from './TagsBadge';
@@ -25,10 +27,20 @@ import selfie from '../../images/selfie.jpg'
 import selfie22 from '../../images/selfie22.jpg'
 
 
+const tags = [
+    '#gourmand',
+    '#curieux',
+    '#intello',
+    '#codeur',
+    '#dormeur'
+]
 
-const AccessProfile = () => {
+
+const AccessProfile = (props) => {
 
     const UserPhotos = [selfie22, selfie, jeanma1, jeanma2, jeanma3]
+
+
 
     // LIKE DISLIKE ↓↓↓
     const [like, setLike] = useState(false)
@@ -45,6 +57,8 @@ const AccessProfile = () => {
                       <IoMdHeartEmpty className='like-heart' color='#725551' />
                   </Button> ;
 
+
+
     // INLINE OFFLINE ↓↓↓
     const [inline, setInline] = useState(false)
 
@@ -58,16 +72,22 @@ const AccessProfile = () => {
                                 Hors ligne<span className='last-connection'>&nbsp;&nbsp;Dernière connexion le 25/02/22 à 13h46</span>
                             </small> ;
 
+
+
     // FOR PICTURE SIZE ↓↓↓
     const [pictureSize, setPictureSize] = useState(null)
 
     useEffect( () => {
+
         setPictureSize(document.querySelector('.profile-description').offsetHeight)
+
+        window.onresize = () => {
+            setPictureSize(document.querySelector('.profile-description').offsetHeight)
+        }
+
     }, [])
 
-    window.onresize = () => {
-        setPictureSize(document.querySelector('.profile-description').offsetHeight)
-    }
+
 
     // BLUR WHEN OPENING CHAT ↓↓↓
     const [chatState, setChatState] = useState(false)
@@ -82,9 +102,47 @@ const AccessProfile = () => {
     }
 
 
+    // CONFIRMATION WINDOW ↓↓↓
+    const [confirmWindow, setConfirmWindow] = useState(false)
+
+    const blockProfileConfirm = () => {
+        props.onBlockingConfirmation('302')
+    }
+
+    const blockProfile = {
+        act: "Bloquer l'utilisateur",
+        quest: "bloquer l'utilisateur",
+        onConfirm: blockProfileConfirm
+    }
+
+    const reportProfile = {
+        act: "Signaler le profil",
+        quest: "signaler le profil commme étant faux",
+        onConfirm: blockProfileConfirm
+    }
+
+    const displayConfirmWindow = (act) => {
+        setMsgConfirmWindow(act)
+        setConfirmWindow(true)
+    }
+
+    const [msgConfirmWindow, setMsgConfirmWindow] = useState(null)
+
+    const confirmationWindow = confirmWindow ?
+                               <ConfirmWindow
+                                    act={msgConfirmWindow.act}
+                                    quest={msgConfirmWindow.quest}
+                                    onCancel={setConfirmWindow}
+                                    onConfirm={msgConfirmWindow.onConfirm}
+                               /> :
+                               null ;
+
+
+
 
     return (
         <Fragment>
+            {confirmationWindow}
             <Chat onChatChange={blurFunc} />
             <div className='profile-description'>
                 <div className='photos-part'>
@@ -103,26 +161,48 @@ const AccessProfile = () => {
                             {heart}
                         </div>
                         <div>
-                            <div className='alignment'><RiUser3Line color='#0a3d62'/>Michel Dupont</div>
-                            <div className='alignment'><FiCalendar color='#0a3d62'/>36 ans</div>
-                            <div className='alignment'><GiPositionMarker color='#0a3d62'/>Paris, Ile-de-France (France)</div>
-                            <div className='alignment'><IoMaleFemaleSharp color='#0a3d62'/>Je suis<span className='bold'>&nbsp;un homme</span></div>
-                            <div className='alignment'><BiSearch color='#0a3d62'/>Je cherche<span className='bold'>&nbsp;une femme</span></div>
+                            <div className='alignment'>
+                                <RiUser3Line color='#0a3d62'/>Michel Dupont
+                            </div>
+                            <div className='alignment'>
+                                <FiCalendar color='#0a3d62'/>36 ans
+                            </div>
+                            <div className='alignment'>
+                                <GiPositionMarker color='#0a3d62'/>Paris, Ile-de-France (France)
+                            </div>
+                            <div className='alignment'>
+                                <IoMaleFemaleSharp color='#0a3d62'/>Je suis
+                                <span className='bold' style={{color: '#222f3e'}}>&nbsp;un homme</span>
+                            </div>
+                            <div className='alignment'>
+                                <BiSearch color='#0a3d62'/>Je cherche
+                                <span className='bold' style={{color: '#30336b'}}>&nbsp;une femme</span>
+                            </div>
                         </div>
                         <div className='about-me-div'>
-                            <div className='alignment'><IoMdFlashlight style={{transform: 'rotate(90deg)'}}/><span>À propos de moi</span></div>
-                            <div className='tags-badge'>
-                                <TagsBadge tag='#gourmand' />
-                                <TagsBadge tag='#curieux' />
-                                <TagsBadge tag='#intello' />
-                                <TagsBadge tag='#codeur' />
-                                <TagsBadge tag='#dormeur' />
+                            <div className='alignment'>
+                                <IoMdFlashlight style={{transform: 'rotate(90deg)', marginRight: '3px'}}/>
+                                <span>À propos de moi</span>
                             </div>
-                            <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n\'a pas fait que survivre cinq siècles, mais s\'est aussi adapté à la bureautique informatique, sans que son contenu n\'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                            <div className='tags-badge'>
+                                {tags.map( tag => {
+                                    return (
+                                        <TagsBadge
+                                            key={uuidv4()}
+                                            tag={tag}
+                                        />)
+                                    })
+                                }
+                            </div>
+                            <p>Je ne suis à la recherche, ni d'une relation éphémère, ni d'amies, ni d'échanges pour combler une solitude. Ma vie est saine, équilibrée, et je souhaite simplement vous rencontrer pour une relation durable, sereine, apaisante, et harmonieuse. Dans laquelle chacun apportera sa joie de vivre, sa « vraie valeur ajoutée » ! Saurai-je être l'épice de votre vie ? Celle qui donnera de la saveur à votre quotidien, fera briller vos yeux, et adoucira vos vieux jours ? Bon, j'arrête là  mon délire aromatique, faute de quoi, je vais passer pour un poète illuminé, bercé par les vapeurs d'absinthe !</p>
                         </div>
                         <div className='danger-buttons-div'>
-                            <Button variant="danger" className='danger-buttons'><MdBlock style={{marginRight: '3px'}}/>Bloquer</Button>
-                            <Button variant="danger" className='danger-buttons'><TiWarningOutline style={{marginRight: '3px'}}/>Signaler</Button>
+                            <Button onClick={() => displayConfirmWindow(blockProfile)} variant="danger" className='danger-buttons'>
+                                <MdBlock style={{marginRight: '3px'}}/>Bloquer
+                            </Button>
+                            <Button onClick={() => displayConfirmWindow(reportProfile)} variant="danger" className='danger-buttons'>
+                                <TiWarningOutline style={{marginRight: '3px'}}/>Signaler
+                            </Button>
                         </div>
                     </div>
                 </div>

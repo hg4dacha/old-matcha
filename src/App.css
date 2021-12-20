@@ -1149,7 +1149,7 @@ color: gray;
 .tags-badge {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-start;
     margin: 10px 0;
 }
 
@@ -1169,6 +1169,107 @@ color: gray;
     margin: 0 2px;
 }
 
+
+/*****************************   CONFIRM WINDOW   *****************************/
+
+
+.confirm-window {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-window-frame {
+    background-color: transparent;
+    width: 30%;
+    height: 20%;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 6px 1px #222f3e;;
+}
+
+.confirm-window-top {
+    background-color: #343a40;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.confirm-window-middle {
+    background-color: whitesmoke;
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.confirm-window-bottom {
+    background-color: #E2E1E2;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2%;
+}
+
+.confirm-window-title {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    color: whitesmoke;
+    margin-left: 2%;
+}
+
+.btn.confirm-action, .btn.cancel-action {
+    border-color: #008176;
+    font-weight: bold;
+    margin: 0 0.5%;
+
+}
+
+.btn.confirm-action {
+    background-color: #008176;
+    color: whitesmoke;
+}
+
+.btn.cancel-action {
+    background-color: whitesmoke;
+    color: #008176;
+}
+
+.btn.confirm-action:hover {
+    background-color: #16a085;
+}
+
+.btn.cancel-action:hover {
+    background-color: #c8d6e5;
+}
+
+.btn.confirm-action:active {
+    background-color: #006266!important;
+}
+
+.btn.cancel-action:active {
+    background-color: whitesmoke!important;
+    color: #008176!important;
+}
 
 /*****************************   FOOTER   *****************************/
 

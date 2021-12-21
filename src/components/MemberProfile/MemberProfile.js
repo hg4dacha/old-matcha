@@ -3,6 +3,7 @@ import Navbar from '../NavBar/NavBar';
 import BlockedProfile from './BlockedProfile';
 import BlockedUser from './BlockedUser';
 import AccessProfile from './AccessProfile';
+import Spinner from 'react-bootstrap/Spinner'
 
 
 
@@ -19,7 +20,7 @@ const MemberProfile = () => {
 
     // PROFILE DISPLAY ↓↓↓
     const [profileStatus, setProfileStatus] = useState('200')
-    
+
 
     function ProfileDisplay() {
         if (profileStatus === '302') {
@@ -36,6 +37,7 @@ const MemberProfile = () => {
 
     return (
         <Fragment>
+            <Spinner animation="border" />
             <Navbar />
             <ProfileDisplay />
         </Fragment>

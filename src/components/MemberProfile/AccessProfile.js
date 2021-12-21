@@ -85,6 +85,10 @@ const AccessProfile = (props) => {
             setPictureSize(document.querySelector('.profile-description').offsetHeight)
         }
 
+        return () => {
+            window.onresize = () => null
+        }
+
     }, [])
 
 

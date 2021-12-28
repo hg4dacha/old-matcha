@@ -15,8 +15,7 @@ import { BiSearch } from "react-icons/bi";
 import { RiUser3Line } from "react-icons/ri";
 import { FiCalendar } from "react-icons/fi";
 import { IoMaleFemaleSharp } from "react-icons/io5";
-
-
+import { HiBadgeCheck } from "react-icons/hi";
 
 
 
@@ -109,8 +108,9 @@ const AccessProfile = (props) => {
     // CONFIRMATION WINDOW ↓↓↓
     const [confirmWindow, setConfirmWindow] = useState(false)
 
+    //..... BLOCKING .....
     const blockProfileConfirm = () => {
-        props.onBlockingConfirmation('302')
+        props.onBlockingConfirmation()
     }
 
     const blockProfile = {
@@ -119,12 +119,18 @@ const AccessProfile = (props) => {
         onConfirm: blockProfileConfirm
     }
 
+    //..... REPORT .....
+    const reportProfileConfirm = () => {
+        props.onBlockingConfirmation()
+    }
+
     const reportProfile = {
         act: "Signaler le profil",
         quest: "signaler le profil commme étant faux",
-        onConfirm: blockProfileConfirm
+        onConfirm: reportProfileConfirm
     }
 
+    //..... DISPLAY CONFIRM WINDOW .....
     const displayConfirmWindow = (act) => {
         setMsgConfirmWindow(act)
         setConfirmWindow(true)
@@ -140,8 +146,6 @@ const AccessProfile = (props) => {
                                     onConfirm={msgConfirmWindow.onConfirm}
                                /> :
                                null ;
-
-
 
 
     return (
@@ -162,7 +166,10 @@ const AccessProfile = (props) => {
                                 <span className='popularity popularity-member-profile'><AiFillStar className='star'/>1425°</span>
                             </div>
                             {connectionState}
-                            {heart}
+                            <div className='button-like-div'>
+                                {heart}
+                                <HiBadgeCheck className='was-liked' />
+                            </div>
                         </div>
                         <div>
                             <div className='alignment'>

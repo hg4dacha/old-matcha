@@ -13,7 +13,7 @@ import UserImage from "../../images/user-image.jpg"
 const BlockedProfile = (props) => {
 
     const unblockProfile = () => {
-        props.onUnblockConfirmation('200')
+        props.onUnblockConfirmation()
     }
 
     // CONFIRMATION WINDOW ↓↓↓

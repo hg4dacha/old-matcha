@@ -659,7 +659,7 @@ color: gray;
 /*****************************   CHAT   *****************************/
 
 .chat {
-    z-index: 100;
+    z-index: 98;
     background-color: antiquewhite;
     background-image: url('./images/bg-chat.svg');
     background-repeat: no-repeat;
@@ -1112,10 +1112,14 @@ color: gray;
     font-size: 15px;
 }
 
-.button-like {
+.button-like-div {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.button-like {
+    position: relative;
 }
 
 .button-like.act {
@@ -1133,6 +1137,13 @@ color: gray;
     width: 25px;
     height: 25px;
     cursor: pointer;
+}
+
+.was-liked {
+    position: absolute;
+    top: -9px;
+    right: -9px;
+    color: #0984e3;
 }
 
 .user-connection-status {
@@ -1168,6 +1179,40 @@ color: gray;
     font-size: 12px;
     margin: 0 2px;
 }
+
+
+/*****************************   ALERT MSG  *****************************/
+
+
+.alert-msg {
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    position: absolute;
+    -webkit-transition: 0.2s ease-in;
+    -moz-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in;
+    animation: displayAlert 4s linear 1;
+}
+
+@keyframes displayAlert {
+    0%, 100% {
+        top: 0;
+    }
+    10% {
+        top: 8%;
+    }
+    90% {
+        top: 8%;
+    }
+}
+
+
 
 
 /*****************************   CONFIRM WINDOW   *****************************/

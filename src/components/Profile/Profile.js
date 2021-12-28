@@ -156,8 +156,12 @@ const handleSubmitInfo = (idInfo, thisInfo) => e => {
     const [updateSuccess, setUpdateSuccess] = useState(false)
 
     const updateSuccessAlert = updateSuccess ?
-    <Alert variant='success' className='update-success-alert update-success-alert-display'><AiOutlineCheck className='iconsNavbar'/>Vos informations ont été mis à jour</Alert> :
-    <Alert variant='success' className='update-success-alert'><AiOutlineCheck className='iconsNavbar'/>Vos informations ont été mis à jour</Alert> ;
+                               <Alert variant='success' className='update-success-alert update-success-alert-display'>
+                                   <AiOutlineCheck className='iconsNavbar'/>Vos informations ont été mis à jour
+                               </Alert>      :
+                               <Alert variant='success' className='update-success-alert'>
+                                   <AiOutlineCheck className='iconsNavbar'/>Vos informations ont été mis à jour
+                               </Alert>      ;
 
     const handleSuccess = () => {
         setUpdateSuccess(true)

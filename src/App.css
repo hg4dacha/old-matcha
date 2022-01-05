@@ -37,6 +37,10 @@ a, a:hover{
     font-weight: bold;
 }
 
+.none {
+    display: none;
+}
+
 .centerElementsInPage {
     display: flex;
     justify-content: center;
@@ -1193,10 +1197,6 @@ color: gray;
     padding: 10px;
     margin: 0 auto;
     position: absolute;
-    -webkit-transition: 0.2s ease-in;
-    -moz-transition: 0.2s ease-in;
-    -o-transition: 0.2s ease-in;
-    transition: 0.2s ease-in;
     animation: displayAlert 4s linear 1;
 }
 

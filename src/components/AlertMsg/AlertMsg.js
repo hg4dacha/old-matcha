@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Alert from 'react-bootstrap/Alert'
 import { AiFillWarning, AiFillCheckCircle } from 'react-icons/ai';
 import { RiInformationFill } from 'react-icons/ri';
@@ -23,12 +23,26 @@ const AlertMsg = ({variant, information}) => {
             return null
     }
 
+    const [show, setShow] = useState(true)
+
+    useEffect( () => {
+
+        let countDown = setTimeout( () => {
+            setShow(false)
+        } , 6000)
+
+        return () => {
+            clearTimeout(countDown)
+        }
+
+    }, [])
+
 
     return (
-            <Alert variant={variant} className='alert-msg'>
+            <Alert variant={variant} show={show} transition={null} id='alert' className='alert-msg'>
                 <Icon/>
                 {information}
-            </Alert>       
+            </Alert>
     )
 }
 

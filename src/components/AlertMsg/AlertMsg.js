@@ -7,7 +7,7 @@ import { RiInformationFill } from 'react-icons/ri';
 
 
 
-const AlertMsg = ({variant, information}) => {
+const AlertMsg = ({variant, information, setAlertMessages, alertMessages}) => {
 
     function Icon() {
         if (variant === 'success') {
@@ -31,11 +31,12 @@ const AlertMsg = ({variant, information}) => {
             setShow(false)
         } , 6000)
 
-        return () => {
-            clearTimeout(countDown)
-        }
+        // return () => {
+        //     clearTimeout(countDown)
+        //     setAlertMessages(alertMessages.slice(1))
+        // }
 
-    }, [])
+    }, [setAlertMessages, alertMessages])
 
 
     return (

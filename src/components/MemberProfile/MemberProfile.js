@@ -12,72 +12,112 @@ import AlertMsg from '../AlertMsg/AlertMsg';
 
 
 const MemberProfile = () => {
-
+    
     useEffect( () => {
         document.title = 'Profil membre - Matcha'
     }, [])
-
-// --------------------------------------------------------
-
-    // PROFILE DISPLAY ↓↓↓
-    const [profileStatus, setProfileStatus] = useState('200')
-
-
-    const unblockConfirmation = () => {
-        setProfileStatus('200')
-        // handleDisplayAlertMsg("success", "Le profil a été débloqué")
-        handleNewAlert({variant: "success", information: "Le profil a été débloqué"})
-    }
-
-    const blockConfirmation = () => {
-        setProfileStatus('302')
-        // handleDisplayAlertMsg("secondary", "Le profil a été bloqué")
-        handleNewAlert({variant: "secondary", information: "Le profil a été bloqué"})
-    }
-
-
-    function ProfileDisplay() {
-        if (profileStatus === '302') {
-            return <BlockedProfile onUnblockConfirmation={unblockConfirmation} />
-        }
-        else if (profileStatus === '403') {
-            return <BlockedUser />
-        }
-        else if (profileStatus === '200') {
-            return <AccessProfile onBlockingConfirmation={blockConfirmation} />
-        }
-    }
-
-
-    // ALERT MSG ↓↓↓
-    // const [displayAlertMsg, setDisplayAlertMsg] = useState({
-    //                                                         variant: '',
-    //                                                         information: ''
-    //                                                     })
-
-    // const handleDisplayAlertMsg = (variant, information) => {
-
-    //     setDisplayAlertMsg(prevState => ({
-    //                             variant: variant,
-    //                             information: information
-    //                     }))
-    // }
-
     
+    // --------------------------------------------------------
+    
+
+    // ALERT ↓↓↓
     const [alertMessages, setAlertMessages] = useState([])
     
     const handleNewAlert = (newAlert) => {
         setAlertMessages([...alertMessages, newAlert])
     }
 
+
+    // PROFILE DISPLAY ↓↓↓
+    const [profileStatus, setProfileStatus] = useState('200')
+
+    const [componentDisplay, setComponentDisplay] = useState(null)
+
+
+    useEffect( () => {
+
+        const unblockConfirmation = () => {
+            setProfileStatus('200')
+            handleNewAlert({variant: "success",
+                            information: "Le profil a été débloqué"})
+        }
     
-    // useEffect( () => {
-    //     alertMessages.length !== 0 &&
-    //         setTimeout( () => {
-    //             setAlertMessages(alertMessages.slice(1))
-    //             console.log('DELETE!')
-    //         } , 6000)
-    // }, [alertMessages])
+        const blockConfirmation = () => {
+            setProfileStatus('302')
+            handleNewAlert({variant: "secondary",
+                            information: "Le profil a été bloqué"})
+        }
+    
+        const onLike = () => {
+            handleNewAlert({variant: "success", information: "Le profil a été liké"})
+        }
+    
+        const onDislike = () => {
+            handleNewAlert({variant: "secondary", information: "Le profil a été disliké"})
+        }
+
+        if (profileStatus === '302') {
+            setComponentDisplay(
+                <BlockedProfile
+                    onUnblockConfirmation={unblockConfirmation}
+                />
+            )
+        }
+        else if (profileStatus === '403') {
+            setComponentDisplay(
+                <BlockedUser />
+            )
+        }
+        else if (profileStatus === '200') {
+            setComponentDisplay(
+                <AccessProfile
+                    onBlockingConfirmation={blockConfirmation}
+                    onLike={onLike}
+                    onDislike={onDislike}
+                />
+            )
+        }
+        else {
+            setComponentDisplay(null)
+        }
+
+    }, [profileStatus])
+
+    // const unblockConfirmation = () => {
+    //     setProfileStatus('200')
+    //     handleNewAlert({variant: "success", information: "Le profil a été débloqué"})
+    // }
+
+    // const blockConfirmation = () => {
+    //     setProfileStatus('302')
+    //     handleNewAlert({variant: "secondary", information: "Le profil a été bloqué"})
+    // }
+
+    // const onLike = () => {
+    //     handleNewAlert({variant: "success", information: "Le profil a été liké"})
+    // }
+
+    // const onDislike = () => {
+    //     handleNewAlert({variant: "secondary", information: "Le profil a été disliké"})
+    // }
+
+
+    // function ProfileDisplay() {
+    //     if (profileStatus === '302') {
+    //         return <BlockedProfile onUnblockConfirmation={unblockConfirmation} />
+    //     }
+    //     else if (profileStatus === '403') {
+    //         return <BlockedUser />
+    //     }
+    //     else if (profileStatus === '200') {
+    //         return <AccessProfile
+    //                     onBlockingConfirmation={blockConfirmation}
+    //                     onLike={onLike}
+    //                     onDislike={onDislike}
+    //                />
+    //     }
+    // }
+
 
     return (
         <Fragment>
@@ -88,10 +128,13 @@ const MemberProfile = () => {
                         key={uuidv4()}
                         variant={alert.variant}
                         information={alert.information}
+                        setAlertMessages={setAlertMessages}
+                        alertMessages={alertMessages}
                     />
                 )
             })}
-            <ProfileDisplay />
+            {/* <ProfileDisplay /> */}
+            {componentDisplay}
         </Fragment>
     )
 }

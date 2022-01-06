@@ -44,18 +44,23 @@ const AccessProfile = (props) => {
     // LIKE DISLIKE ↓↓↓
     const [like, setLike] = useState(false)
 
-    const likeDislike = () => {
-        setLike(!like)
+    const onLike = () => {
+        setLike(true)
+        props.onLike()
+    }
+
+    const onDislike = () => {
+        setLike(false)
+        props.onDislike()
     }
 
     const heart = like ?
-                  <Button variant="offline-danger" onClick={likeDislike} className='button-like act' style={{boxShadow: '0px 0px 10px 3px white', borderColor: '#dc3545', backgroundColor: '#dc3545'}}>
+                  <Button variant="offline-danger" onClick={ () => onDislike() } className='button-like act'>
                       <IoMdHeart className='like-heart' color='darkred' />
                   </Button> :
-                  <Button variant="offline-danger" onClick={likeDislike} className='button-like dis' style={{boxShadow: 'none', borderColor: '#725551'}}>
+                  <Button variant="offline-danger" onClick={ () => onLike() } className='button-like dis'>
                       <IoMdHeartEmpty className='like-heart' color='#725551' />
                   </Button> ;
-
 
 
     // INLINE OFFLINE ↓↓↓

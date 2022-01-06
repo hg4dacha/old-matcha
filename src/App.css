@@ -1127,14 +1127,14 @@ color: gray;
 }
 
 .button-like.act {
-    box-shadow: '0px 0px 10px 3px white';
-    border-color: '#dc3545';
-    background-color: '#dc3545';
+    box-shadow: 0px 0px 10px 3px white;
+    border-color: #dc3545;
+    background-color: #dc3545;
 }
 
 .button-like.dis {
-    box-shadow: 'none';
-    border-color: '#725551';
+    box-shadow: none;
+    border-color: #725551;
 }
 
 .like-heart {

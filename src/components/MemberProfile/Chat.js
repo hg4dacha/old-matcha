@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { FaChevronRight } from "react-icons/fa";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { MdSend } from "react-icons/md";
@@ -39,32 +40,103 @@ const Chat = (props) => {
                         'chat-content-open' :
                         'chat-content-close' ;
 
-
+    
+                        
+    const allChat = [
+        {
+            msg: "Salut",
+            userID: '934'
+        },
+        {
+            msg: "Bonjour",
+            userID: '000'
+        },
+        {
+            msg: "Comment ca va ?",
+            userID: '934'
+        },
+        {
+            msg: "Ca va et toi",
+            userID: '000'
+        },
+        {
+            msg: "Oui ca va. Tu fais quoi ?",
+            userID: '934'
+        },
+        {
+            msg: "Rien de special et toi",
+            userID: '000'
+        },
+        {
+            msg: "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte",
+            userID: '934'
+        },
+        {
+            msg: "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. ",
+            userID: '000'
+        },
+        {
+            msg: "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte",
+            userID: '934'
+        },
+        {
+            msg: "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. ",
+            userID: '000'
+        },
+        {
+            msg: "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte",
+            userID: '934'
+        },
+        {
+            msg: "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. ",
+            userID: '000'
+        },
+        {
+            msg: "Non meme pas...",
+            userID: '934'
+        },
+        {
+            msg: "Au revoir",
+            userID: '000'
+        }
+    ]
+    
     // WRITTEN MESSAGE ↓↓↓
     const [theMessage, SetTheMessage] = useState('')
-
+    
     const newMessage = (e) => {
         SetTheMessage(e.target.value)
     }
-
+    
+    const handleAddNewMsg = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (theMessage !== '') {
+            setChatMessages(prevState => [...prevState, {
+                msg: theMessage,
+                userID: '000'
+            }]);
+            SetTheMessage('');
+        }
+    }
+    
     
     const styleIcon0 = {backgroundColor: '#8FA3AD', cursor: 'initial'}
     const styleIcon1 = {backgroundColor: '#4285F4', cursor: 'pointer'}
-    const colorSendIcon = theMessage === '' ?
-                          styleIcon0 :
-                          styleIcon1 ; 
+    const colorSendIcon = theMessage === '' ? styleIcon0 : styleIcon1 ;
     
-    const msgIpsum = 'Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n\'a pas fait que survivre cinq siècles, mais s\'est aussi adapté à la bureautique informatique, sans que son contenu n\'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.'
-
+    
+    // CHAT MESSAGES ↓↓↓
+    const [chatMessages, setChatMessages] = useState(allChat)
+    
+        
     // SCROLL IN BOTTOM ↓↓↓
     useEffect( () => {
         const scrollChat = document.querySelector('.discussion')
         scrollChat.scrollTop = scrollChat.scrollHeight
-    }, [])
-
+    }, [chatMessages])
     
-
-
+    
     return (
         <div className='chat'>
             <div className='iconChatDrawerContainer'>
@@ -90,17 +162,34 @@ const Chat = (props) => {
                         </NavDropdown>
                     </div>
                     <div className='discussion'>
-                        <MsgIn msgContent='Salut' />
-                        <MsgOut msgContent='Bonjour' />
-                        <MsgIn msgContent={msgIpsum} />
-                        <MsgOut msgContent={msgIpsum} />
-                        <MsgIn msgContent={msgIpsum} />
-                        <MsgOut msgContent={msgIpsum} />
+                        {chatMessages.map( msg => {
+                            if (msg.userID === '000'){
+                                return <MsgIn key={uuidv4()} msgContent={msg.msg} />
+                            }
+                            else {
+                                return <MsgOut key={uuidv4()} msgContent={msg.msg} />
+                            }
+                        })}
                     </div>
                 </div>
                 <div className='text-to-send'>
-                    <textarea value={theMessage} onChange={newMessage} className='chat-textarea' autoComplete='off' placeholder='Message' minLength='1' maxLength='255' autoCapitalize='on'></textarea>
-                    <MdSend className='send-icon' style={colorSendIcon} />
+                    <form onSubmit={handleAddNewMsg}>
+                        <input
+                            type='text'
+                            value={theMessage}
+                            onChange={newMessage}
+                            className='chat-textarea'
+                            autoComplete='off'
+                            placeholder='Message'
+                            minLength='1'
+                            maxLength='255'
+                            autoCapitalize='on'
+                        >
+                        </input>
+                        <button type='submit'>
+                            <MdSend className='send-icon' style={colorSendIcon} />
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

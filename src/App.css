@@ -1193,22 +1193,29 @@ color: gray;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    padding: 10px;
-    margin: 0 auto;
+    width: fit-content;
+    padding: 10px 30px;
     position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 3px 1px #636e72;
+    border: 1px #009432 solid;
     animation: displayAlert 4s linear 1;
 }
 
 @keyframes displayAlert {
     0%, 100% {
-        top: 0;
+        top: -10%;
     }
-    10% {
-        top: 8%;
+    8% {
+        top: 8.5%;
+    }
+    88% {
+        top: 8.5%;
     }
     90% {
-        top: 8%;
+        top: 12%;
     }
 }
 

@@ -44,23 +44,24 @@ const AccessProfile = (props) => {
     // LIKE DISLIKE ↓↓↓
     const [like, setLike] = useState(false)
 
-    const onLike = () => {
+    const toLike = () => {
         setLike(true)
         props.onLike()
     }
 
-    const onDislike = () => {
+    const toDislike = () => {
         setLike(false)
         props.onDislike()
     }
 
     const heart = like ?
-                  <Button variant="offline-danger" onClick={ () => onDislike() } className='button-like act'>
+                  <Button variant="offline-danger" onClick={ () => toDislike() } className='button-like act'>
                       <IoMdHeart className='like-heart' color='darkred' />
                   </Button> :
-                  <Button variant="offline-danger" onClick={ () => onLike() } className='button-like dis'>
+                  <Button variant="offline-danger" onClick={ () => toLike() } className='button-like dis'>
                       <IoMdHeartEmpty className='like-heart' color='#725551' />
                   </Button> ;
+
 
 
     // INLINE OFFLINE ↓↓↓
@@ -114,25 +115,17 @@ const AccessProfile = (props) => {
     const [confirmWindow, setConfirmWindow] = useState(false)
 
     //..... BLOCKING .....
-    const blockProfileConfirm = () => {
-        props.onBlockingConfirmation()
-    }
-
     const blockProfile = {
         act: "Bloquer l'utilisateur",
         quest: "bloquer l'utilisateur",
-        onConfirm: blockProfileConfirm
+        onConfirm: props.onBlockingConfirmation
     }
 
     //..... REPORT .....
-    const reportProfileConfirm = () => {
-        props.onBlockingConfirmation()
-    }
-
     const reportProfile = {
         act: "Signaler le profil",
         quest: "signaler le profil commme étant faux",
-        onConfirm: reportProfileConfirm
+        onConfirm: props.onReportConfirmation
     }
 
     //..... DISPLAY CONFIRM WINDOW .....
@@ -152,7 +145,7 @@ const AccessProfile = (props) => {
                                /> :
                                null ;
 
-
+    
     return (
         <Fragment>
             {confirmationWindow}

@@ -8,6 +8,11 @@ import { ImCross } from 'react-icons/im';
 const ConfirmWindow = (props) => {
 
 
+    const handleConfirm = () => {
+        props.onCancel(false);
+        props.onConfirm();
+    }
+
     return (
         <div className='confirm-window'>
             <div className='confirm-window-frame'>
@@ -21,7 +26,7 @@ const ConfirmWindow = (props) => {
                     <div className='ml-3'>Êtes-vous sûr(e) de vouloir<span>&nbsp;{props.quest}&nbsp;</span>?</div>
                 </div>
                 <div className='confirm-window-bottom'>
-                    <Button onClick={() => props.onConfirm()} size='sm' className='confirm-action'>Confirmer</Button>
+                    <Button onClick={() => handleConfirm()} size='sm' className='confirm-action'>Confirmer</Button>
                     <Button onClick={() => props.onCancel(false)} size='sm' className='cancel-action'>Annuler</Button>
                 </div>
             </div>

@@ -19,41 +19,51 @@ const MemberProfile = () => {
     
     // --------------------------------------------------------
     
+    
+    // PROFILE DISPLAY ↓↓↓
+    const [profileStatus, setProfileStatus] = useState('200')
+    
+    const [componentDisplay, setComponentDisplay] = useState(null)
+    
 
     // ALERT ↓↓↓
     const [alertMessages, setAlertMessages] = useState([])
     
-    const handleNewAlert = (newAlert) => {
-        setAlertMessages([...alertMessages, newAlert])
-    }
-
-
-    // PROFILE DISPLAY ↓↓↓
-    const [profileStatus, setProfileStatus] = useState('200')
-
-    const [componentDisplay, setComponentDisplay] = useState(null)
-
 
     useEffect( () => {
+
+        const handleNewAlert = (newAlert) => {
+
+            setAlertMessages(prevState => prevState.slice(1));
+            setAlertMessages(prevState => [...prevState, newAlert]);
+        }
+
 
         const unblockConfirmation = () => {
             setProfileStatus('200')
             handleNewAlert({variant: "success",
                             information: "Le profil a été débloqué"})
         }
-    
+
         const blockConfirmation = () => {
             setProfileStatus('302')
             handleNewAlert({variant: "secondary",
                             information: "Le profil a été bloqué"})
         }
-    
-        const onLike = () => {
-            handleNewAlert({variant: "success", information: "Le profil a été liké"})
+
+        const reportConfirmation = () => {
+            handleNewAlert({variant: "success",
+                            information: "Votre signalement a bien été pris en compte. Le compte de cet utilisateur sera vérifié"})
         }
     
+        const onLike = () => {
+            handleNewAlert({variant: "success",
+                            information: "J'aime !"})
+        }
+
         const onDislike = () => {
-            handleNewAlert({variant: "secondary", information: "Le profil a été disliké"})
+            handleNewAlert({variant: "secondary",
+                            information: "Le j'aime a été retiré"})
         }
 
         if (profileStatus === '302') {
@@ -71,9 +81,10 @@ const MemberProfile = () => {
         else if (profileStatus === '200') {
             setComponentDisplay(
                 <AccessProfile
-                    onBlockingConfirmation={blockConfirmation}
                     onLike={onLike}
                     onDislike={onDislike}
+                    onBlockingConfirmation={blockConfirmation}
+                    onReportConfirmation={reportConfirmation}
                 />
             )
         }
@@ -81,42 +92,10 @@ const MemberProfile = () => {
             setComponentDisplay(null)
         }
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [profileStatus])
 
-    // const unblockConfirmation = () => {
-    //     setProfileStatus('200')
-    //     handleNewAlert({variant: "success", information: "Le profil a été débloqué"})
-    // }
 
-    // const blockConfirmation = () => {
-    //     setProfileStatus('302')
-    //     handleNewAlert({variant: "secondary", information: "Le profil a été bloqué"})
-    // }
-
-    // const onLike = () => {
-    //     handleNewAlert({variant: "success", information: "Le profil a été liké"})
-    // }
-
-    // const onDislike = () => {
-    //     handleNewAlert({variant: "secondary", information: "Le profil a été disliké"})
-    // }
-
-
-    // function ProfileDisplay() {
-    //     if (profileStatus === '302') {
-    //         return <BlockedProfile onUnblockConfirmation={unblockConfirmation} />
-    //     }
-    //     else if (profileStatus === '403') {
-    //         return <BlockedUser />
-    //     }
-    //     else if (profileStatus === '200') {
-    //         return <AccessProfile
-    //                     onBlockingConfirmation={blockConfirmation}
-    //                     onLike={onLike}
-    //                     onDislike={onDislike}
-    //                />
-    //     }
-    // }
 
 
     return (
@@ -128,12 +107,9 @@ const MemberProfile = () => {
                         key={uuidv4()}
                         variant={alert.variant}
                         information={alert.information}
-                        setAlertMessages={setAlertMessages}
-                        alertMessages={alertMessages}
                     />
                 )
             })}
-            {/* <ProfileDisplay /> */}
             {componentDisplay}
         </Fragment>
     )

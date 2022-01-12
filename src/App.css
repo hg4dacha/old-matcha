@@ -896,30 +896,56 @@ color: gray;
     width: 80%;
     height: 85%;
     border: 0;
-    border-radius: 5% / 30%;
+    border-radius: 10px;
     box-shadow: 0px 1px 10px -2px #506b78;
     background-color: #FFFFFF;
-    color: #273c75;
+    color: whitesmoke;
     font-style: arial;
     padding: 7px 13px;
     outline: none;
-    font-weight: bold;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: initial;
+    background-color: #32383B;
 }
 
 .chat-textarea::placeholder {
-    color: #506B78;
+    color: #838688;
     font-weight: initial;
 }
 
-.send-icon {
-    height: 50px;
-    width: 50px;
-    border-radius: 100%;
-    padding: 10px;
-    color: #FFFFFF;
+.chat-textarea::-webkit-scrollbar {
+    width: 18px;
+}
+
+.chat-textarea::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.chat-textarea::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 25px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+.chat-textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+}
+
+.send-button {
     box-shadow: 0px 1px 10px -2px #506b78;
     cursor: pointer;
     margin: 5px;
+    border: 0;
+    border-radius: 100%;
+    padding: 15px;
+}
+
+.send-icon {
+    height: 30px;
+    width: 30px;
+    color: #FFFFFF;
 }
 
 /*****************************   BLOCKEDPROFILE - BLOCKEDUSER  *****************************/

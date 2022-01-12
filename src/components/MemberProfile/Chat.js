@@ -102,12 +102,12 @@ const Chat = (props) => {
     ]
     
     // WRITTEN MESSAGE ↓↓↓
-    const [theMessage, SetTheMessage] = useState('')
+    const [theMessage, setTheMessage] = useState('')
     
     const newMessage = (e) => {
-        SetTheMessage(e.target.value)
+        setTheMessage(e.target.value)
     }
-    
+
     const handleAddNewMsg = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -116,16 +116,26 @@ const Chat = (props) => {
                 msg: theMessage,
                 userID: '000'
             }]);
-            SetTheMessage('');
+            setTheMessage('');
         }
     }
-    
-    
+
+
     const styleIcon0 = {backgroundColor: '#8FA3AD', cursor: 'initial'}
     const styleIcon1 = {backgroundColor: '#4285F4', cursor: 'pointer'}
     const colorSendIcon = theMessage === '' ? styleIcon0 : styleIcon1 ;
-    
-    
+
+    // SEND MSG WITH ENTER KEY ↓↓↓
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            handleAddNewMsg(e);
+        }
+        // else if (e.key === 'Enter' && e.shiftKey) {
+        //     setTheMessage(prevState => prevState + '\n');
+        // }
+    }
+
+
     // CHAT MESSAGES ↓↓↓
     const [chatMessages, setChatMessages] = useState(allChat)
     
@@ -172,25 +182,22 @@ const Chat = (props) => {
                         })}
                     </div>
                 </div>
-                <div className='text-to-send'>
-                    <form onSubmit={handleAddNewMsg}>
-                        <input
-                            type='text'
-                            value={theMessage}
-                            onChange={newMessage}
-                            className='chat-textarea'
-                            autoComplete='off'
-                            placeholder='Message'
-                            minLength='1'
-                            maxLength='255'
-                            autoCapitalize='on'
-                        >
-                        </input>
-                        <button type='submit'>
-                            <MdSend className='send-icon' style={colorSendIcon} />
-                        </button>
-                    </form>
-                </div>
+                <form className='text-to-send' onSubmit={handleAddNewMsg}>
+                    <textarea
+                        value={theMessage}
+                        onChange={newMessage}
+                        onKeyDown={handleKeyDown}
+                        className='chat-textarea'
+                        autoComplete='off'
+                        placeholder='Taper un message'
+                        minLength='1'
+                        maxLength='255'
+                        autoCapitalize='on'
+                    />
+                    <button type='submit'className='send-button' style={colorSendIcon} >
+                        <MdSend className='send-icon' />
+                    </button>
+                </form>
             </div>
         </div>
     )

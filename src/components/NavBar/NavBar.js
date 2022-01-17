@@ -15,7 +15,7 @@ import user from '../../images/user.png';
 const Navbar$ = () => {
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect bg="dark" variant="dark" expand="lg">
             <Link to="/Main" className='navbar-brand'><Logo width='150' /></Link>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

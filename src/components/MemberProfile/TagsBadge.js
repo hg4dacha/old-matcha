@@ -1,5 +1,6 @@
 import React from 'react';
 import Badge from 'react-bootstrap/Badge'
+import { FaSlackHash } from "react-icons/fa";
 
 
 
@@ -8,14 +9,17 @@ import Badge from 'react-bootstrap/Badge'
 const TagsBadge = (props) => {
 
     const badgeStyle = {
-        backgroundColor: '#8c7ae6',
-        color: 'whitesmoke',
+        backgroundColor: '#bdc3c7',
+        color: '#050505',
         width: 'fit-content',
-        margin: '1%'
+        margin: '1%',
+        padding: '5px 10px',
+        borderRadius: '50px'
     }
 
     return (
-        <Badge style={badgeStyle}>
+        <Badge style={badgeStyle} className='centerElementsInPage'>
+            <FaSlackHash/>
             {props.tag}
         </Badge>
     )

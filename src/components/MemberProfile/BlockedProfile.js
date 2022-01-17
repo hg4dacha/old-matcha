@@ -41,7 +41,7 @@ const BlockedProfile = (props) => {
                     <span className='blocked-user-username'>username-269428</span>
                     <div className='info-deblocked'>
                         <span className='blocking-information'>username-269428 est bloqué, vous ne pouvez pas accéder à son profil.</span>
-                        <Button onClick={displayConfirmWindow} variant="secondary" className='centerElementsInPage' style={{width: 'fit-content'}}>
+                        <Button onClick={displayConfirmWindow} variant="secondary" className='centerElementsInPage blocked' style={{width: 'fit-content'}}>
                             <BiLockOpenAlt/>Débloquer
                         </Button>
                     </div>

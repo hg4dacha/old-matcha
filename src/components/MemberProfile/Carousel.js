@@ -56,7 +56,7 @@ const Carousel$ = ({UserPhotos, forPictureSize}) => {
         <div id="carouselUserImage" className="carousel slide carousel-div" onMouseOver={displayButtons} onMouseOut={hideButtons} data-bs-ride="carousel" data-interval="2000">
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src={UserPhotos[photo]} className="d-block img-fluid" style={sizeOfImage} alt="user"/>
+                    <img src={UserPhotos[photo]} className="d-block img-fluid carousel-images" style={sizeOfImage} alt="user"/>
                 </div>
             </div>
             {buttons}

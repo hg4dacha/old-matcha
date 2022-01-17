@@ -23,7 +23,7 @@ const ConfirmWindow = (props) => {
                     </Button>
                 </div>
                 <div className='confirm-window-middle'>
-                    <div className='ml-3'>Êtes-vous sûr(e) de vouloir<span>&nbsp;{props.quest}&nbsp;</span>?</div>
+                    <div className='ml-3 quest'>Êtes-vous sûr(e) de vouloir<span>&nbsp;{props.quest}&nbsp;</span>?</div>
                 </div>
                 <div className='confirm-window-bottom'>
                     <Button onClick={() => handleConfirm()} size='sm' className='confirm-action'>Confirmer</Button>

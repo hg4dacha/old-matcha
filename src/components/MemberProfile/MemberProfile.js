@@ -42,18 +42,18 @@ const MemberProfile = () => {
         const unblockConfirmation = () => {
             setProfileStatus('200')
             handleNewAlert({variant: "success",
-                            information: "Le profil a été débloqué"})
+                            information: "Le profil a été débloqué."})
         }
 
         const blockConfirmation = () => {
             setProfileStatus('302')
             handleNewAlert({variant: "secondary",
-                            information: "Le profil a été bloqué"})
+                            information: "Le profil a été bloqué."})
         }
 
         const reportConfirmation = () => {
             handleNewAlert({variant: "success",
-                            information: "Votre signalement a bien été pris en compte. Le compte de cet utilisateur sera vérifié"})
+                            information: "Votre signalement a bien été pris en compte. Le compte de cet utilisateur sera vérifié."})
         }
     
         const onLike = () => {
@@ -63,7 +63,12 @@ const MemberProfile = () => {
 
         const onDislike = () => {
             handleNewAlert({variant: "secondary",
-                            information: "Le j'aime a été retiré"})
+                            information: "Le j'aime a été retiré."})
+        }
+
+        const deleteDiscussionConfirmation = () => {
+            handleNewAlert({variant: "secondary",
+            information: "La discussion a été supprimée."})
         }
 
         if (profileStatus === '302') {
@@ -85,6 +90,7 @@ const MemberProfile = () => {
                     onDislike={onDislike}
                     onBlockingConfirmation={blockConfirmation}
                     onReportConfirmation={reportConfirmation}
+                    onDeleteDiscussionConfirmation={deleteDiscussionConfirmation}
                 />
             )
         }

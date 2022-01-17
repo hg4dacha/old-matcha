@@ -27,11 +27,11 @@ import selfie22 from '../../images/selfie22.jpg'
 
 
 const tags = [
-    '#gourmand',
-    '#curieux',
-    '#intello',
-    '#codeur',
-    '#dormeur'
+    'gourmand',
+    'curieux',
+    'intello',
+    'codeur',
+    'dormeur'
 ]
 
 
@@ -65,7 +65,7 @@ const AccessProfile = (props) => {
 
 
     // INLINE OFFLINE ↓↓↓
-    const [inline, setInline] = useState(false)
+    const [inline, setInline] = useState(true)
 
     // const inlineOffline = () => {
     //     setInline(!inline)
@@ -73,7 +73,7 @@ const AccessProfile = (props) => {
 
     const connectionState = inline ?
                             <small className='user-connection-status'><GoPrimitiveDot color='#009432' />En ligne</small> :
-                            <small className='user-connection-status'><GoPrimitiveDot color='#353b48' />
+                            <small className='user-connection-status'><GoPrimitiveDot color='#7f8c8d' />
                                 Hors ligne<span className='last-connection'>&nbsp;&nbsp;Dernière connexion le 25/02/22 à 13h46</span>
                             </small> ;
 
@@ -149,7 +149,11 @@ const AccessProfile = (props) => {
     return (
         <Fragment>
             {confirmationWindow}
-            <Chat onChatChange={blurFunc} />
+            <Chat
+                onChatChange={blurFunc}
+                onDeleteDiscussion={displayConfirmWindow}
+                onDeleteDiscussionConfirmation={props.onDeleteDiscussionConfirmation}
+            />
             <div className='profile-description'>
                 <div className='photos-part'>
                     <div className='photos-list'>
@@ -171,21 +175,21 @@ const AccessProfile = (props) => {
                         </div>
                         <div>
                             <div className='alignment'>
-                                <RiUser3Line color='#0a3d62'/>Michel Dupont
+                                <RiUser3Line color='#9862FD' className='mr-1'/>Michel Dupont
                             </div>
                             <div className='alignment'>
-                                <FiCalendar color='#0a3d62'/>36 ans
+                                <FiCalendar color='#9862FD' className='mr-1'/>36 ans
                             </div>
                             <div className='alignment'>
-                                <GiPositionMarker color='#0a3d62'/>Paris, Ile-de-France (France)
+                                <GiPositionMarker color='#9862FD' className='mr-1'/>Paris, Ile-de-France (France)
                             </div>
                             <div className='alignment'>
-                                <IoMaleFemaleSharp color='#0a3d62'/>Je suis
-                                <span className='bold' style={{color: '#222f3e'}}>&nbsp;un homme</span>
+                                <IoMaleFemaleSharp color='#9862FD' className='mr-1'/>Je suis
+                                <span className='bold' style={{color: '#40739e'}}>&nbsp;un homme</span>
                             </div>
                             <div className='alignment'>
-                                <BiSearch color='#0a3d62'/>Je cherche
-                                <span className='bold' style={{color: '#30336b'}}>&nbsp;une femme</span>
+                                <BiSearch color='#9862FD' className='mr-1'/>Je cherche
+                                <span className='bold' style={{color: '#58B19F'}}>&nbsp;une femme</span>
                             </div>
                         </div>
                         <div className='about-me-div'>
@@ -203,7 +207,9 @@ const AccessProfile = (props) => {
                                     })
                                 }
                             </div>
-                            <p>Je ne suis à la recherche, ni d'une relation éphémère, ni d'amies, ni d'échanges pour combler une solitude. Ma vie est saine, équilibrée, et je souhaite simplement vous rencontrer pour une relation durable, sereine, apaisante, et harmonieuse. Dans laquelle chacun apportera sa joie de vivre, sa « vraie valeur ajoutée » ! Saurai-je être l'épice de votre vie ? Celle qui donnera de la saveur à votre quotidien, fera briller vos yeux, et adoucira vos vieux jours ? Bon, j'arrête là  mon délire aromatique, faute de quoi, je vais passer pour un poète illuminé, bercé par les vapeurs d'absinthe !</p>
+                            <p className='user-description'>
+                                Je ne suis à la recherche, ni d'une relation éphémère, ni d'amies, ni d'échanges pour combler une solitude. Ma vie est saine, équilibrée, et je souhaite simplement vous rencontrer pour une relation durable, sereine, apaisante, et harmonieuse. Dans laquelle chacun apportera sa joie de vivre, sa « vraie valeur ajoutée » ! Saurai-je être l'épice de votre vie ? Celle qui donnera de la saveur à votre quotidien, fera briller vos yeux, et adoucira vos vieux jours ? Bon, j'arrête là  mon délire aromatique, faute de quoi, je vais passer pour un poète illuminé, bercé par les vapeurs d'absinthe !
+                            </p>
                         </div>
                         <div className='danger-buttons-div'>
                             <Button onClick={() => displayConfirmWindow(blockProfile)} variant="danger" className='danger-buttons'>

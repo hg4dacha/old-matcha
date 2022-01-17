@@ -22,7 +22,7 @@ const BlockedUser = () => {
                 <span className='blocked-user-username'>username-269428</span>
                 <div className='info-deblocked'>
                     <span className='blocking-information'>username-269428 vous a bloqué, vous ne pouvez pas accéder à son profil.</span>
-                    <Button  onClick={previousPage} variant="primary" className='centerElementsInPage' style={{width: 'fit-content'}}>
+                    <Button  onClick={previousPage} variant="primary" className='centerElementsInPage blocked' style={{width: 'fit-content'}}>
                         <IoReturnUpBack style={{marginRight: '3px'}}/>Retour
                     </Button>
                 </div>

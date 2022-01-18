@@ -93,7 +93,7 @@ const SignIn = () => {
                             <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Vos entrées ne sont pas valides</Form.Text>
                             <Link to='/ForgotPassword' className='forgotPassword' >Mot de passe oubllié?</Link>
                         </div>
-                        <Button variant="light" type='submit' className='submitBtnSmall' disabled={true}>Connexion</Button>
+                        <Button variant="primary" type='submit' className='submitBtnSmall' disabled={true}>Connexion</Button>
 
                     </Form>
                 </div>

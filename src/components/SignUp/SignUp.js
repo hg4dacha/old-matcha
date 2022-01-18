@@ -153,7 +153,7 @@ const SignUp = () => {
 
                         <div className='centerElementsInPage' style={{position:'relative', width: '100%'}}>
                             <Form.Text className='generalError' id='generalError'><RiErrorWarningLine style={{marginTop: '-2px', marginRight: '2px'}} />Certaines de vos entrées ne sont pas valides</Form.Text>
-                            <Button variant="light" type='submit' className='submitBtnSignUp' disabled={true}>S'inscrire</Button>
+                            <Button variant="primary" type='submit' className='submitBtnSignUp' disabled={true}>S'inscrire</Button>
                         </div>
 
                     </Form>

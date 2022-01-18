@@ -94,7 +94,7 @@ const NewPassword = () => {
                             <Link to='/SignIn' className='forgotPassword' >Annuler</Link>
                         </div>
 
-                        <Button variant="light" type='submit' className='submitBtnLarge' disabled={true}>Réinitialiser le mot de passe</Button>
+                        <Button variant="primary" type='submit' className='submitBtnLarge' disabled={true}>Réinitialiser le mot de passe</Button>
 
                     </Form>
                 </div>

@@ -79,7 +79,7 @@ const ForgotPassword = () => {
                         </Form.Group>
 
                         <Link to='/SignIn' className='forgotPassword' >Retour à la connexion</Link>
-                        <Button variant="light" type='submit' className='submitBtnLarge' disabled={true}>Envoyer le mail de réinitialisation</Button>
+                        <Button variant="primary" type='submit' className='submitBtnLarge' disabled={true}>Envoyer le mail de réinitialisation</Button>
 
                     </Form>
                 </div>

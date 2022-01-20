@@ -84,7 +84,7 @@ const SignUp = () => {
     return (
         <Fragment>
             <FormsHeader />
-            <section className='centerElementsInPage FormsSection'>
+            <section className='centerElementsInPage FormsSectionSignUp'>
                 <div className='centerElementsInPage formContent signUpSizeContent'>
                     <div className='tittleDiv'>
                         <FiEdit size='21' className='iconsFormsTittles' />

@@ -34,8 +34,8 @@ const Chat = (props) => {
     }
 
     const theChatDrawer = chatDrawer ?
-                          <FaChevronRight className='iconChatDrawer' color='whitesmoke'/> :
-                          <IoChatbubblesSharp className='iconChatDrawer' color='rgba(255,255,255,.5)'/> ;
+                          <FaChevronRight className='iconChatDrawer' /> :
+                          <IoChatbubblesSharp className='iconChatDrawer' /> ;
 
     const chatContent = chatDrawer ?
                         'chat-content-open' :
@@ -138,7 +138,7 @@ const Chat = (props) => {
 
     // SEND BUTTON STYLE ↓↓↓
     const sendCursor = theMessage === '' ? 'initial' : 'pointer' ;
-    const sendColor = theMessage === '' ? '#8FA3AD' : '#A159F5' ;
+    const sendColor = theMessage === '' ? '#8FA3AD' : '#007bff' ;
 
 
     // SCROLL IN BOTTOM ↓↓↓
@@ -187,7 +187,7 @@ const Chat = (props) => {
                         <div className='interlocutor-right-part'>
                             <IoMdHeart size='23' color='#010103' className='m-1' />
                             <Dropdown className='m-1'>
-                                <Dropdown.Toggle id='tututi' className='toogle-delete-discussion'>
+                                <Dropdown.Toggle className='toogle-delete-discussion'>
                                     <BsThreeDots size='27' color='#010103' className='dlt-disc-icon' />
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>

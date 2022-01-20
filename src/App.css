@@ -16,7 +16,7 @@ html {
 
 body {
     /* background-color: rgba(39, 174, 96, 0.8); */
-    background-color: white;
+    background-color: whitesmoke;
 }
 
 #root {
@@ -130,7 +130,7 @@ p.slogan {
     }
 
     .logo {
-        width: 150px;
+        width: 110px;
     }
 
     .sign-in {
@@ -159,16 +159,24 @@ p.slogan {
 /*****************************   FORMS PROPERTIES   *****************************/
 
 .FormsHeader {
-    background-color: #343a40;
-    box-shadow: #2c3e50 0px 2px 10px;
-    padding: 10px;
+    background-color: white;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 10px 20px;
     height: 11%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.FormsSection, .FormsSectionSignUp {
+    height: 89%;
     width: 100%;
 }
 
 .FormsSection {
-    height: 89%;
-    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 .sectionContentSize {
@@ -312,7 +320,7 @@ p.slogan {
 }
 
 .form-label {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .iconsFormsInputs {
@@ -342,9 +350,12 @@ color: #ced6e0;
 
 @media all and (max-width: 600px)
 {
+    .FormsHeader {
+        padding: 5px 10px;
+    }
+
     .FormsSection {
         padding: 0;
-        margin-top: 50px;
     }
 
     .sectionContentSize {
@@ -422,7 +433,6 @@ color: #ced6e0;
     width: 100% !important;
     top: 0 !important;
     z-index: 100 !important;
-    box-shadow: #2c3e50 0px 2px 10px !important;
 }
 
 .navbar-brand {
@@ -460,17 +470,14 @@ color: #ced6e0;
 }
 
 .star {
-    color: #fdee00;
+    color: #DAA520;
     margin-top: -3px;
     margin-right: 2px;
 }
 
 .popularity {
-    color: whitesmoke;
+    color: rgb(1, 1, 3);
     margin-right: 10px;
-    background-color: #40739e;
-    border-radius: 7px;
-    padding: 0px 7px;
 }
 
 .profilePicture {
@@ -699,16 +706,16 @@ color: #ced6e0;
 }
 
 .iconChatDrawerDiv {
-    background-color: #343a40;
+    background-color: #007bff;
     position: absolute;
     height: 15%;
     top: 50%;
     transform: translateY(-50%);
     left: -51px;
-    border-left: 1px solid #343a40;
-    border-top: 1px solid #343a40;
-    border-bottom: 1px solid #343a40;
-    box-shadow: #2c3e50 0px 0px 10px !important;
+    border-left: 1px solid #007bff;
+    border-top: 1px solid #007bff;
+    border-bottom: 1px solid #007bff;
+    box-shadow: #7f8c8d -2px 0px 10px !important;
     border-radius: 50% 0% 0% 50%;
     cursor: pointer;
     -webkit-transition: 0.2s ease-in;
@@ -732,6 +739,7 @@ color: #ced6e0;
     height: 50px;
     width: 50px;
     padding:10px;
+    color: white;
 }
 
 .chat-content-open {
@@ -887,7 +895,7 @@ color: #ced6e0;
 }
 
 .msg-in-content-div {
-    background-color: #A159F5;
+    background-color: #007bff;
     right: 3%;
     border-radius: 20px 2px 20px 20px;
 }
@@ -918,12 +926,9 @@ color: #ced6e0;
     transform: translateY(-50%);
     margin: 0 auto;
     font-weight: bold;
-    backdrop-filter: blur(5px);
     width: fit-content;
     padding: 15px 20px;
-    border-radius: 50px;
-    color: #32383B;
-    box-shadow: 0 0 5px 1px white;
+    color: rgb(1, 1, 3);
 }
 
 .text-to-send {
@@ -996,12 +1001,9 @@ color: #ced6e0;
 
 @media all and (max-width: 1030px)
 {
-
-}
-
-@media all and (max-width: 950px)
-{
-
+    .chatOpen {
+        width: 80%;
+    }
 }
 
 @media all and (max-width: 600px)
@@ -1181,23 +1183,37 @@ color: #ced6e0;
 
 .photos-part, .infos-part {
     width: 50%;
-    height: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .photos-part {
     justify-content: center;
+    height: 90%;
+    position: relative;
 }
 
 .infos-part {
     justify-content: flex-start;
+    height: 85%;
 }
 
 .photos-list, .infos-list {
     display: flex;
     flex-direction: column;
 
+}
+
+.block-signal-dropdown {
+    position: absolute;
+    top: 0;
+    right: 5px;
+}
+
+.block-signal-dots {
+    color: rgb(1, 1, 3);
+    width: 25px;
+    height: 25px;
 }
 
 .infos-list {
@@ -1215,8 +1231,7 @@ color: #ced6e0;
 }
 
 .carousel-div>.carousel-inner {
-    border-radius: 3px;
-    box-shadow: 0px 0px 5px 0px #222f3e;
+    border-radius: 2px;
 }
 
 .btn-prev-nxt, .btn-prev-nxt:focus, .btn-prev-nxt:active {
@@ -1233,6 +1248,7 @@ color: #ced6e0;
 .username-and-popularity {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .username-member-profile {
@@ -1240,12 +1256,15 @@ color: #ced6e0;
     color: #222f3e;
     font-size: larger;
     margin: 0;
-    margin-right: 10px;
+    padding-right: 5px;
 }
 
 .popularity-member-profile {
     margin: 0px;
     font-size: 15px;
+    padding-left: 5px;
+    padding-right: 10px;
+    border-left: 1px #bdc3c7 solid;
 }
 
 .button-like-div {
@@ -1259,27 +1278,26 @@ color: #ced6e0;
 }
 
 .button-like.act {
-    box-shadow: 0px 0px 10px 3px white;
-    border-color: #dc3545;
-    background-color: #dc3545;
+    box-shadow: none;
+    border-color: transparent;
+    background-color: transparent;
 }
 
 .button-like.dis {
     box-shadow: none;
-    border-color: #725551;
+    border-color: transparent;
 }
 
 .like-heart {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
 }
 
 .was-liked {
-    position: absolute;
-    top: -9px;
-    right: -9px;
     color: #0984e3;
+    width: 18px;
+    height: 18px;
 }
 
 .user-connection-status {
@@ -1292,6 +1310,12 @@ color: #ced6e0;
     font-size: 11px;
 }
 
+.user-infos-icons {
+    color: rgb(1, 1, 3);
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+}
 
 .tags-badge {
     display: flex;
@@ -1314,18 +1338,35 @@ color: #ced6e0;
     width: fit-content;
     font-size: 12px;
     margin: 0 2px;
-    background-color: #fd79a8;
-    border-color: #fd79a8;
+    color: #dc3545;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.danger-buttons:focus,
+.danger-buttons:active {
+    background-color: transparent;
+    border-color: transparent;
+    color: #dc3545;
+    box-shadow: none;
+}
+
+.danger-buttons:hover {
+    color: red;
 }
 
 @media all and (max-width: 1030px)
 {
-
-}
-
-@media all and (max-width: 950px)
-{
-
+    .profile-description {
+        width: 90%;
+    }
+    .photos-part {
+        height: 83%;
+    }
+    .infos-part {
+        height: 90%;
+    }
 }
 
 @media all and (max-width: 600px)
@@ -1341,12 +1382,10 @@ color: #ced6e0;
     .infos-part {
         width: 90%;
         height: 60%;
+        align-items: center;
     }
     .carousel-images {
         max-height: 220px!important;
-    }
-    .username-and-popularity {
-        align-items: baseline;
     }
     .username-member-profile {
         font-size: 11px;
@@ -1359,6 +1398,10 @@ color: #ced6e0;
         font-size: 45%;
         margin-bottom: 6px;
     }
+    .was-liked {
+        width: 10px;
+        height: 10px;
+    }
     .last-connection {
         font-size: 6px;
     }
@@ -1367,8 +1410,8 @@ color: #ced6e0;
         padding: 2px 9px;
     }
     .like-heart {
-        width: 15px;
-        height: 15px;
+        width: 21px;
+        height: 21px;
     }
     .was-liked {
         top: -8px;
@@ -1377,8 +1420,13 @@ color: #ced6e0;
     .alignment {
         font-size: 9px;
     }
+    .user-infos-icons {
+        width: 12px;
+        height: 12px;
+    }
     .tags-badge {
-        margin: 8px 0;
+        margin: 5px 0;
+        justify-content: center;
     }
     .badge {
         font-size: 50%;
@@ -1401,15 +1449,15 @@ color: #ced6e0;
     justify-content: center;
     align-items: center;
     width: fit-content;
-    padding: 10px 30px;
     position: absolute;
     margin: 0 auto;
     left: 0;
     right: 0;
-    box-shadow: 0 0 3px 1px #636e72;
-    border: 1px #009432 solid;
-    animation: displayAlert 4s linear 1;
+    color: whitesmoke;
     text-align: center;
+    box-shadow: 0 0 3px -2px #636e72;
+    border-radius: 1px;
+    animation: displayAlert 4s linear 1;
 }
 
 @keyframes displayAlert {
@@ -1425,6 +1473,21 @@ color: #ced6e0;
     90% {
         top: 12%;
     }
+}
+
+.alert-msg.success {
+    background-color: #00B462;
+    border-color: #00B462;
+}
+
+.alert-msg.info {
+    background-color: #4b6584;
+    border-color: #4b6584;
+}
+
+.alert-msg.error {
+    background-color: #C9252C;
+    border-color: #C9252C;
 }
 
 @media all and (max-width: 600px)

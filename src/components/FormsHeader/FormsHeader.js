@@ -3,20 +3,20 @@ import Logo from '../Logo/Logo';
 
 const FormsHeader = () => {
 
-    const logoWidthBase = window.screen.width <= 600 ? '210' : '250'
+    const logoWidthBase = window.screen.width <= 600 ? '110' : '150'
     const [logoWidth, setlogoWidth] = useState(logoWidthBase)
 
     
     document.querySelector('body').onresize = () => {
         if (window.screen.width <= 600) {
-            setlogoWidth('210');
+            setlogoWidth('110');
         } else {
-            setlogoWidth('250');
+            setlogoWidth('150');
         }
     }
 
     return (
-        <header className='centerElementsInPage FormsHeader'>
+        <header className='FormsHeader'>
             <Logo width={logoWidth} />
         </header>
     )

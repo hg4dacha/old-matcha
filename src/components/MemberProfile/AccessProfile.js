@@ -17,8 +17,6 @@ import { FiCalendar } from "react-icons/fi";
 import { IoMaleFemaleSharp } from "react-icons/io5";
 import { HiBadgeCheck } from "react-icons/hi";
 
-
-
 import jeanma1 from '../../images/jeanma1.jpg'
 import jeanma2 from '../../images/jeanma2.jpg'
 import jeanma3 from '../../images/jeanma3.jpg'
@@ -59,7 +57,7 @@ const AccessProfile = (props) => {
                       <IoMdHeart className='like-heart' color='darkred' />
                   </Button> :
                   <Button variant="offline-danger" onClick={ () => toLike() } className='button-like dis'>
-                      <IoMdHeartEmpty className='like-heart' color='#725551' />
+                      <IoMdHeartEmpty className='like-heart' color='rgb(1, 1, 3)' />
                   </Button> ;
 
 
@@ -145,7 +143,7 @@ const AccessProfile = (props) => {
                                /> :
                                null ;
 
-    
+
     return (
         <Fragment>
             {confirmationWindow}
@@ -166,29 +164,29 @@ const AccessProfile = (props) => {
                             <div className='username-and-popularity'>
                                 <h1 className='username-member-profile'>username-269428</h1>
                                 <span className='popularity popularity-member-profile'><AiFillStar className='star'/>1425°</span>
+                                <HiBadgeCheck className='was-liked' />
                             </div>
                             {connectionState}
                             <div className='button-like-div'>
                                 {heart}
-                                <HiBadgeCheck className='was-liked' />
                             </div>
                         </div>
                         <div>
                             <div className='alignment'>
-                                <RiUser3Line color='#9862FD' className='mr-1'/>Michel Dupont
+                                <RiUser3Line className='user-infos-icons'/>Michel Dupont
                             </div>
                             <div className='alignment'>
-                                <FiCalendar color='#9862FD' className='mr-1'/>36 ans
+                                <FiCalendar className='user-infos-icons'/>36 ans
                             </div>
                             <div className='alignment'>
-                                <GiPositionMarker color='#9862FD' className='mr-1'/>Paris, Ile-de-France (France)
+                                <GiPositionMarker className='user-infos-icons'/>Paris, Ile-de-France (France)
                             </div>
                             <div className='alignment'>
-                                <IoMaleFemaleSharp color='#9862FD' className='mr-1'/>Je suis
+                                <IoMaleFemaleSharp className='user-infos-icons'/>Je suis
                                 <span className='bold' style={{color: '#40739e'}}>&nbsp;un homme</span>
                             </div>
                             <div className='alignment'>
-                                <BiSearch color='#9862FD' className='mr-1'/>Je cherche
+                                <BiSearch className='user-infos-icons'/>Je cherche
                                 <span className='bold' style={{color: '#58B19F'}}>&nbsp;une femme</span>
                             </div>
                         </div>
@@ -212,12 +210,12 @@ const AccessProfile = (props) => {
                             </p>
                         </div>
                         <div className='danger-buttons-div'>
-                            <Button onClick={() => displayConfirmWindow(blockProfile)} variant="danger" className='danger-buttons'>
-                                <MdBlock style={{marginRight: '3px'}}/>Bloquer
-                            </Button>
-                            <Button onClick={() => displayConfirmWindow(reportProfile)} variant="danger" className='danger-buttons'>
-                                <TiWarningOutline style={{marginRight: '3px'}}/>Signaler
-                            </Button>
+                            <button onClick={() => displayConfirmWindow(blockProfile)} className='danger-buttons'>
+                                <MdBlock className='mr-1' />Bloquer
+                            </button>
+                            <button onClick={() => displayConfirmWindow(reportProfile)} className='danger-buttons'>
+                                <TiWarningOutline className='mr-1' />Signaler
+                            </button>
                         </div>
                     </div>
                 </div>

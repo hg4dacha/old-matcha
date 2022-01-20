@@ -47,13 +47,13 @@ const MemberProfile = () => {
 
         const blockConfirmation = () => {
             setProfileStatus('302')
-            handleNewAlert({variant: "secondary",
+            handleNewAlert({variant: "info",
                             information: "Le profil a été bloqué."})
         }
 
         const reportConfirmation = () => {
-            handleNewAlert({variant: "success",
-                            information: "Votre signalement a bien été pris en compte. Le compte de cet utilisateur sera vérifié."})
+            handleNewAlert({variant: "info",
+                            information: "Le compte de cet utilisateur sera vérifié."})
         }
     
         const onLike = () => {
@@ -62,12 +62,12 @@ const MemberProfile = () => {
         }
 
         const onDislike = () => {
-            handleNewAlert({variant: "secondary",
+            handleNewAlert({variant: "info",
                             information: "Le j'aime a été retiré."})
         }
 
         const deleteDiscussionConfirmation = () => {
-            handleNewAlert({variant: "secondary",
+            handleNewAlert({variant: "info",
             information: "La discussion a été supprimée."})
         }
 

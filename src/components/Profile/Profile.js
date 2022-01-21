@@ -2,12 +2,15 @@ import React, { useState, useEffect, Fragment } from 'react';
 import Navbar from '../NavBar/NavBar';
 import UserInfoSection from './UserInfoSection'
 import PasswordSection from './PasswordSection'
+import AlertMsg from '../AlertMsg/AlertMsg';
 import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../other/Regex';
 import { v4 as uuidv4 } from 'uuid';
 import Alert from 'react-bootstrap/Alert'
+import Form from 'react-bootstrap/Form'
 import { RiUser3Fill } from 'react-icons/ri';
 import { AiOutlineCheck } from 'react-icons/ai';
 
+import { RiErrorWarningLine } from 'react-icons/ri';
 
 
 const Profile = () => {
@@ -19,50 +22,61 @@ const Profile = () => {
 // --------------------------------------------------------
 
     /* modification of user information */
-    const infoEdit$ = {
-        lastname: false,
-        firstname: false,
-        username: false,
-        email: false,
-        password: false
-    }
+    // const infoEdit$ = {
+    //     lastname: false,
+    //     firstname: false,
+    //     username: false,
+    //     email: false,
+    //     password: false
+    // }
 
-    const [infoEdit, setInfoEdit] = useState(infoEdit$)
+    // const [infoEdit, setInfoEdit] = useState(infoEdit$)
 
-    const handleModification = (idInfo, thisInfo) => {
+    // const handleModification = (idInfo, thisInfo) => {
 
-        setInfoEdit(Object.assign(infoEdit, infoEdit$))
-        setData(Object.assign(data, data$)) // /!\  À revoir. Lors de l'enregistrement de la nouvelle info puis le click sur 'annuler' ou 'modifier' l'info revient à l'origine.
-        setErrorDatas(Object.assign(errorDatas, errorDatas$))
-        setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
-    }
+    //     setInfoEdit(Object.assign(infoEdit, infoEdit$))
+    //     setData(Object.assign(data, _data)) // /!\  À revoir. Lors de l'enregistrement de la nouvelle info puis le click sur 'annuler' ou 'modifier' l'info revient à l'origine.
+    //     setErrorDatas(Object.assign(errorDatas, errorDatas$))
+    //     setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
+    // }
 
 // --------------------------------------------------------
 
-    /* new values */
-    const data$ = {
+    // USER'S PERSONAL INFORMATION ↓↓↓
+    const _usersPersonalInformation = {
         lastname: 'Gadacha',
         firstname: 'Honsse',
         username: 'Username93',
-        email: 'test@gmail.com',
+        email: 'test@gmail.com'
+    }
+
+    const [usersPersonalInformation, setUsersPersonalInformation] = useState(_usersPersonalInformation);
+
+    const handlePersonalInformationChange = e => {
+        setUsersPersonalInformation({...usersPersonalInformation, [e.target.id]: e.target.value});
+    }
+
+
+    // USER PASSWORD ↓↓↓
+    const _userPassword = {
         currentPassword: '',
         newPassword: '',
         newPasswordConfirmation: ''
     }
 
-    const [data, setData] = useState(data$);
+    const [userPassword, setUserPassword] = useState(_userPassword);
     
-    const { lastname, firstname, username, email, currentPassword, newPassword, newPasswordConfirmation } = data
-    
-    const handleChange = e => {
-        setData({...data, [e.target.id]: e.target.value});
+    const handlePasswordChange = e => {
+        setUserPassword({...userPassword, [e.target.id]: e.target.value});
     }
 
-    const handleNewValues = (idInfo, thisInfo) => {
-        setInfoEdit(Object.assign(infoEdit, infoEdit$))
-        setErrorDatas(Object.assign(errorDatas, errorDatas$))
-        setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
-    }
+
+
+    // const handleNewValues = (idInfo, thisInfo) => {
+    //     setInfoEdit(Object.assign(infoEdit, infoEdit$))
+    //     setErrorDatas(Object.assign(errorDatas, errorDatas$))
+    //     setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
+    // }
 
 // --------------------------------------------------------
     
@@ -77,35 +91,55 @@ const Profile = () => {
 
     const userData = [
         {
-            label: 'Nom',
-            info: lastname,
+            value: usersPersonalInformation.lastname,
             id: 'lastname',
-            small: false,
-            infoEdit: infoEdit.lastname,
+            label: 'Nom',
+            placeholder: '...',
             maxLength: "30"
         },
         {
-            label: 'Prénom',
-            info: firstname,
+            value: usersPersonalInformation.firstname,
             id: 'firstname',
-            small: false,
-            infoEdit: infoEdit.firstname,
+            label: 'Prénom',
+            placeholder: '...',
             maxLength: "30"
         },
         {
-            label: 'Nom d\'utilisateur',
-            info: username,
-            small: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).',
+            value: usersPersonalInformation.username,
             id: 'username',
-            infoEdit: infoEdit.username,
+            label: 'Nom d\'utilisateur',
+            placeholder: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).',
             maxLength: "15"
         },
         {
-            label: 'E-mail',
-            info: email,
-            small: false,
+            value: usersPersonalInformation.email,
             id: 'email',
-            infoEdit: infoEdit.email,
+            label: 'E-mail',
+            placeholder: 'abc@exemple.com',
+            maxLength: "250"
+        }
+    ]
+
+    const passwordData = [
+        {
+            value: userPassword.currentPassword,
+            id: 'currentPassword',
+            label: 'Actuel',
+            placeholder: '...',
+            maxLength: "250"
+        },
+        {
+            value: userPassword.newPassword,
+            id: 'newPassword',
+            label: 'Nouveau',
+            placeholder: '6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.',
+            maxLength: "250"
+        },
+        {
+            value: userPassword.newPasswordConfirmation,
+            id: 'newPasswordConfirmation',
+            label: 'Confirmation',
+            placeholder: '...',
             maxLength: "250"
         }
     ]
@@ -115,104 +149,128 @@ const Profile = () => {
     const handleSubmitPassword = e => {
         e.preventDefault();
 
-        if (currentPassword !== '' && newPassword !== '' && newPasswordConfirmation !== '') {
-            if (currentPassword) { // if the currentPassword === userPassword
-                if (PASSWORD_REGEX.test(newPassword) && newPassword === newPasswordConfirmation) {
-                    handleModification()
-                    document.body.scrollTop = document.documentElement.scrollTop = 0
-                    handleSuccess()
-                    console.log('"' + newPassword + '" is a new password ✓')
+        // if (currentPassword !== '' && newPassword !== '' && newPasswordConfirmation !== '') {
+        //     if (currentPassword) { // if the currentPassword === userPassword
+        //         if (PASSWORD_REGEX.test(newPassword) && newPassword === newPasswordConfirmation) {
+        //             handleModification();
+        //             document.body.scrollTop = document.documentElement.scrollTop = 0
+        //             updateSuccessAlert();
+        //             console.log('"' + newPassword + '" is a new password ✓');
 
-                } else {
-                    setErrorDatas({...errorDatas, passwordsError: true})
-                }
-            } else {
-                setErrorDatas({...errorDatas, passwordsError: true})
-            }
-        }
+        //         } else {
+        //             setErrorDatas({...errorDatas, passwordsError: true})
+        //         }
+        //     } else {
+        //         setErrorDatas({...errorDatas, passwordsError: true})
+        //     }
+        // }
     }
 
 // ----------------------------INFO CHECKING----------------------------
 
-const handleSubmitInfo = (idInfo, thisInfo) => e => {
+const handleSubmitUpdatedInformation = e => {
     e.preventDefault();
 
-    if (lastname !== '' && firstname !== '' && username !== '' && email !== '') {
-        if (!NAMES_REGEX.test(lastname) || !NAMES_REGEX.test(firstname) || !USERNAME_REGEX.test(username) || !EMAIL_REGEX.test(email)) {
+    if (usersPersonalInformation.lastname !== '' && usersPersonalInformation.firstname !== '' &&
+        usersPersonalInformation.username !== '' && usersPersonalInformation.email !== '')
+    {
+        if (!NAMES_REGEX.test(usersPersonalInformation.lastname) || !NAMES_REGEX.test(usersPersonalInformation.firstname) ||
+            !USERNAME_REGEX.test(usersPersonalInformation.username) || !EMAIL_REGEX.test(usersPersonalInformation.email))
+        {
             setErrorDatas({...errorDatas, infosError: true})
         }
-        else {
-            handleNewValues(idInfo, thisInfo)
-            document.body.scrollTop = document.documentElement.scrollTop = 0
-            handleSuccess()
-            console.log(data$)
-            console.log('"' + lastname + '"\n"' + firstname + '"\n"' + username+ '"\nis a new infos ✓')
+        else
+        {
+            updateSuccessAlert();
+            // document.body.scrollTop = document.documentElement.scrollTop = 0;
+            console.log(_usersPersonalInformation);
+            console.log('"' + usersPersonalInformation.lastname + '"\n"' + usersPersonalInformation.firstname + '"\n"' + usersPersonalInformation.username+ '"\nis a new infos ✓');
         }
     }
 }
 
-// ----------------------------UDPATE SUCCESS ALERT----------------------------
 
-    const [updateSuccess, setUpdateSuccess] = useState(false)
+    // ALERT ↓↓↓
+    const [alertMessages, setAlertMessages] = useState([])
 
-    const updateSuccessAlert = updateSuccess ?
-                               <Alert variant='success' className='update-success-alert update-success-alert-display'>
-                                   <AiOutlineCheck className='iconsNavbar'/>Vos informations ont été mis à jour
-                               </Alert>      :
-                               <Alert variant='success' className='update-success-alert'>
-                                   <AiOutlineCheck className='iconsNavbar'/>Vos informations ont été mis à jour
-                               </Alert>      ;
 
-    const handleSuccess = () => {
-        setUpdateSuccess(true)
-        setTimeout(() => {
-            setUpdateSuccess(false)
-        }, 5000);
+    const handleNewAlert = (newAlert) => {
+
+        setAlertMessages(prevState => prevState.slice(1));
+        setAlertMessages(prevState => [...prevState, newAlert]);
     }
+
+    const updateSuccessAlert = () => {
+        handleNewAlert({variant: "success",
+                        information: "Les données ont été mises à jour."})
+    }
+
 
 
     return (
         <Fragment>
             <Navbar />
-            {updateSuccessAlert}
-            <div className='page-titles'>
-                <h1 className='FormsTittle center'>
-                    <RiUser3Fill size='22' className='iconsFormsTittles' />
-                    Profil
-                </h1>
-            </div>
+            {alertMessages.map( alert => {
+                return (
+                    <AlertMsg
+                        key={uuidv4()}
+                        variant={alert.variant}
+                        information={alert.information}
+                    />
+                )
+            })}
             <div className='big-info-container centerElementsInPage'>
                 <h2 className='personal-information'>Vos informations personelles</h2>
-                <div className='info-container'>
-                    { userData.map( data => {
-                        return (
-                            <div key={uuidv4()}>
-                                <UserInfoSection 
-                                    label={data.label}
-                                    info={data.info}
-                                    small={data.small}
+                <div className='info-container mb-2'>
+                    <Form onSubmit={handleSubmitUpdatedInformation}>
+                        { userData.map( (data, index) => {
+                            return (
+                                <UserInfoSection
+                                    key={index}
+                                    value={data.value}
+                                    handlePersonalInformationChange={handlePersonalInformationChange}
                                     id={data.id}
-                                    infoEdit={data.infoEdit}
-                                    handleModification={handleModification}
-                                    handleChange={handleChange}
-                                    handleSubmitInfo={handleSubmitInfo}
-                                    errorMsg={errorDatas.infosError}
+                                    label={data.label}
+                                    placeholder={data.placeholder}
                                     maxLength={data.maxLength}
                                 />
-                            </div> )
-                        })
-                    }
+                            )
+                          })
+                        }
+                        <button type='submit' className='buttons-form-profile'>
+                            Enregistrer
+                        </button>
+                        <Form.Text className='error-update-profile'>
+                            <RiErrorWarningLine/>
+                            L'entrée n'est pas valide
+                        </Form.Text>
+                    </Form>
                 </div>
-                <div className='info-container mt-2' style={{marginBottom: '100px'}}>
-                    <div>
-                        <PasswordSection 
-                            passwordEdit={infoEdit.password}
-                            handleModification={handleModification}
-                            handleChange={handleChange}
-                            handleSubmitPassword={handleSubmitPassword}
-                            errorMsg={errorDatas.passwordsError}
-                        />
-                    </div>
+                <h2 className='personal-information'>Modifier votre mot de passe</h2>
+                <div className='info-container'>
+                    <Form onSubmit={handleSubmitPassword}>
+                        { passwordData.map( (data, index) => {
+                            return (
+                                <PasswordSection
+                                    key={index}
+                                    value={data.value}
+                                    handlePasswordChange={handlePasswordChange}
+                                    id={data.id}
+                                    label={data.label}
+                                    placeholder={data.placeholder}
+                                    maxLength={data.maxLength}
+                                />
+                            )
+                          })
+                        }
+                        <button type='submit' className='buttons-form-profile'>
+                            Enregistrer
+                        </button>
+                        <Form.Text className='error-update-profile'>
+                            <RiErrorWarningLine/>
+                            L'entrée n'est pas valide
+                        </Form.Text>
+                    </Form>
                 </div>
             </div>
         </Fragment>

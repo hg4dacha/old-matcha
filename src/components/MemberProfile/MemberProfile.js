@@ -68,7 +68,7 @@ const MemberProfile = () => {
 
         const deleteDiscussionConfirmation = () => {
             handleNewAlert({variant: "info",
-            information: "La discussion a été supprimée."})
+                            information: "La discussion a été supprimée."})
         }
 
         if (profileStatus === '302') {

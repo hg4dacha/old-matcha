@@ -1,10 +1,7 @@
-import React, { Fragment } from 'react';
-import { Form, Button } from 'react-bootstrap'
+import React from 'react';
+import { Form } from 'react-bootstrap'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { IoSettingsOutline } from 'react-icons/io5';
-import { IoIosArrowForward } from 'react-icons/io';
-import { RiErrorWarningLine } from 'react-icons/ri';
 
 
 

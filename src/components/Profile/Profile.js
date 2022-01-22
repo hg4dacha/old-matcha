@@ -1,16 +1,14 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, useRef } from 'react';
 import Navbar from '../NavBar/NavBar';
 import UserInfoSection from './UserInfoSection'
 import PasswordSection from './PasswordSection'
 import AlertMsg from '../AlertMsg/AlertMsg';
-import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../other/Regex';
-import { v4 as uuidv4 } from 'uuid';
-import Alert from 'react-bootstrap/Alert'
 import Form from 'react-bootstrap/Form'
-import { RiUser3Fill } from 'react-icons/ri';
-import { AiOutlineCheck } from 'react-icons/ai';
-
+import { v4 as uuidv4 } from 'uuid';
+import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../other/Regex';
 import { RiErrorWarningLine } from 'react-icons/ri';
+
+
 
 
 const Profile = () => {
@@ -21,26 +19,10 @@ const Profile = () => {
 
 // --------------------------------------------------------
 
-    /* modification of user information */
-    // const infoEdit$ = {
-    //     lastname: false,
-    //     firstname: false,
-    //     username: false,
-    //     email: false,
-    //     password: false
-    // }
 
-    // const [infoEdit, setInfoEdit] = useState(infoEdit$)
 
-    // const handleModification = (idInfo, thisInfo) => {
+// _-_-_-_-_-_-_-_-_- USER PERSONAL INFORMATION SECTION -_-_-_-_-_-_-_-_-_
 
-    //     setInfoEdit(Object.assign(infoEdit, infoEdit$))
-    //     setData(Object.assign(data, _data)) // /!\  À revoir. Lors de l'enregistrement de la nouvelle info puis le click sur 'annuler' ou 'modifier' l'info revient à l'origine.
-    //     setErrorDatas(Object.assign(errorDatas, errorDatas$))
-    //     setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
-    // }
-
-// --------------------------------------------------------
 
     // USER'S PERSONAL INFORMATION ↓↓↓
     const _usersPersonalInformation = {
@@ -57,6 +39,58 @@ const Profile = () => {
     }
 
 
+    // INCORRECT DATA ↓↓↓
+    const [infoDataError, setInfoDataError] = useState(false)
+
+
+    // PREVIOUS VALUE ↓↓↓
+    const prevUsersPersonalInformationRef = useRef();
+
+    useEffect( () => {
+        prevUsersPersonalInformationRef.current = usersPersonalInformation;
+    });
+
+    const prevUsersPersonalInformation = prevUsersPersonalInformationRef.current;
+
+
+    // ON SUBMIT NEW INFORMATION ↓↓↓
+    const handleSubmitUpdatedInformation = e => {
+        e.preventDefault();
+
+        if (prevUsersPersonalInformation !== usersPersonalInformation)
+        {
+            if ( usersPersonalInformation.lastname !== '' && usersPersonalInformation.firstname !== '' &&
+                usersPersonalInformation.username !== '' && usersPersonalInformation.email !== '' )
+            {
+                if ( !(usersPersonalInformation.lastname.length > 30) && !(usersPersonalInformation.firstname.length > 30) &&
+                    !(usersPersonalInformation.username.length > 15) && !(usersPersonalInformation.email.length > 250) )
+                {
+                    if ( NAMES_REGEX.test(usersPersonalInformation.lastname) && NAMES_REGEX.test(usersPersonalInformation.firstname) &&
+                        USERNAME_REGEX.test(usersPersonalInformation.username) && EMAIL_REGEX.test(usersPersonalInformation.email) )
+                    {
+                        setInfoDataError(false);
+                        updateSuccessAlert();
+                    }
+                    else
+                    {
+                        setInfoDataError(true);
+                    }
+                }
+                else
+                {
+                    setInfoDataError(true);
+                }
+            }
+        }
+    }
+
+
+
+
+
+// _-_-_-_-_-_-_-_-_- USER PERSONAL INFORMATION SECTION -_-_-_-_-_-_-_-_-_
+
+
     // USER PASSWORD ↓↓↓
     const _userPassword = {
         currentPassword: '',
@@ -71,25 +105,60 @@ const Profile = () => {
     }
 
 
+    // INCORRECT DATA ↓↓↓
+    const [passwordDataError, setPasswordDataError] = useState(false)
 
-    // const handleNewValues = (idInfo, thisInfo) => {
-    //     setInfoEdit(Object.assign(infoEdit, infoEdit$))
-    //     setErrorDatas(Object.assign(errorDatas, errorDatas$))
-    //     setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
-    // }
 
-// --------------------------------------------------------
-    
-    const errorDatas$ = {
-            infosError: false,
-            passwordsError: false
+    // ON SUBMIT NEW PASSWORD ↓↓↓
+    const handleSubmitPassword = e => {
+        e.preventDefault();
+
+        if (userPassword.currentPassword !== '' && userPassword.newPassword !== '' && userPassword.newPasswordConfirmation !== '')
+        {
+            if ( !(userPassword.currentPassword.length > 250) &&
+                 !(userPassword.newPassword.length > 250) &&
+                 !(userPassword.newPasswordConfirmation.length > 250) )
+            {
+                if ( PASSWORD_REGEX.test(userPassword.newPassword) &&
+                     userPassword.newPassword === userPassword.newPasswordConfirmation )
+                {
+                    if (userPassword.currentPassword)// if the currentPassword === userPassword
+                    {
+                        setPasswordDataError(false)
+                        setUserPassword(
+                            {
+                            currentPassword: '',
+                            newPassword: '',
+                            newPasswordConfirmation: ''
+                            })
+                        updateSuccessAlert();
+                    }
+                    else
+                    {
+                        setPasswordDataError(true)
+                    }
+                }
+                else
+                {
+                    setPasswordDataError(true)
+                }
+            }
+            else
+            {
+                setPasswordDataError(true)
+            }
+        }
     }
 
-    const [errorDatas, setErrorDatas] = useState(errorDatas$)
 
-// --------------------------------------------------------
 
-    const userData = [
+
+
+// _-_-_-_-_-_-_-_-_- SECTION DATA -_-_-_-_-_-_-_-_-_
+
+
+    // INFORMATION DATA ↓↓↓
+    const infoData = [
         {
             value: usersPersonalInformation.lastname,
             id: 'lastname',
@@ -120,6 +189,8 @@ const Profile = () => {
         }
     ]
 
+
+    // PASSWORD DATA ↓↓↓
     const passwordData = [
         {
             value: userPassword.currentPassword,
@@ -144,53 +215,42 @@ const Profile = () => {
         }
     ]
 
-// ----------------------------PASSWORD CHECKING----------------------------
 
-    const handleSubmitPassword = e => {
-        e.preventDefault();
+    /* modification of user information */
+    // const infoEdit$ = {
+    //     lastname: false,
+    //     firstname: false,
+    //     username: false,
+    //     email: false,
+    //     password: false
+    // }
 
-        // if (currentPassword !== '' && newPassword !== '' && newPasswordConfirmation !== '') {
-        //     if (currentPassword) { // if the currentPassword === userPassword
-        //         if (PASSWORD_REGEX.test(newPassword) && newPassword === newPasswordConfirmation) {
-        //             handleModification();
-        //             document.body.scrollTop = document.documentElement.scrollTop = 0
-        //             updateSuccessAlert();
-        //             console.log('"' + newPassword + '" is a new password ✓');
+    // const [infoEdit, setInfoEdit] = useState(infoEdit$)
 
-        //         } else {
-        //             setErrorDatas({...errorDatas, passwordsError: true})
-        //         }
-        //     } else {
-        //         setErrorDatas({...errorDatas, passwordsError: true})
-        //     }
-        // }
-    }
+    // const handleModification = (idInfo, thisInfo) => {
 
-// ----------------------------INFO CHECKING----------------------------
-
-const handleSubmitUpdatedInformation = e => {
-    e.preventDefault();
-
-    if (usersPersonalInformation.lastname !== '' && usersPersonalInformation.firstname !== '' &&
-        usersPersonalInformation.username !== '' && usersPersonalInformation.email !== '')
-    {
-        if (!NAMES_REGEX.test(usersPersonalInformation.lastname) || !NAMES_REGEX.test(usersPersonalInformation.firstname) ||
-            !USERNAME_REGEX.test(usersPersonalInformation.username) || !EMAIL_REGEX.test(usersPersonalInformation.email))
-        {
-            setErrorDatas({...errorDatas, infosError: true})
-        }
-        else
-        {
-            updateSuccessAlert();
-            // document.body.scrollTop = document.documentElement.scrollTop = 0;
-            console.log(_usersPersonalInformation);
-            console.log('"' + usersPersonalInformation.lastname + '"\n"' + usersPersonalInformation.firstname + '"\n"' + usersPersonalInformation.username+ '"\nis a new infos ✓');
-        }
-    }
-}
+    //     setInfoEdit(Object.assign(infoEdit, infoEdit$))
+    //     setData(Object.assign(data, _data)) // /!\  À revoir. Lors de l'enregistrement de la nouvelle info puis le click sur 'annuler' ou 'modifier' l'info revient à l'origine.
+    //     setErrorDatas(Object.assign(errorDatas, errorDatas$))
+    //     setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
+    // }
 
 
-    // ALERT ↓↓↓
+        // const handleNewValues = (idInfo, thisInfo) => {
+    //     setInfoEdit(Object.assign(infoEdit, infoEdit$))
+    //     setErrorDatas(Object.assign(errorDatas, errorDatas$))
+    //     setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
+    // }
+
+    // --------------------------------------------------------
+
+// --------------------------------------------------------
+
+
+
+// _-_-_-_-_-_-_-_-_- ALERT -_-_-_-_-_-_-_-_-_
+
+
     const [alertMessages, setAlertMessages] = useState([])
 
 
@@ -201,7 +261,8 @@ const handleSubmitUpdatedInformation = e => {
     }
 
     const updateSuccessAlert = () => {
-        handleNewAlert({variant: "success",
+        handleNewAlert({id: uuidv4(),
+                        variant: "success",
                         information: "Les données ont été mises à jour."})
     }
 
@@ -210,10 +271,10 @@ const handleSubmitUpdatedInformation = e => {
     return (
         <Fragment>
             <Navbar />
-            {alertMessages.map( alert => {
+            {alertMessages.map( (alert, index) => {
                 return (
                     <AlertMsg
-                        key={uuidv4()}
+                        key={alert.id}
                         variant={alert.variant}
                         information={alert.information}
                     />
@@ -223,10 +284,10 @@ const handleSubmitUpdatedInformation = e => {
                 <h2 className='personal-information'>Vos informations personelles</h2>
                 <div className='info-container mb-2'>
                     <Form onSubmit={handleSubmitUpdatedInformation}>
-                        { userData.map( (data, index) => {
+                        { infoData.map( data => {
                             return (
                                 <UserInfoSection
-                                    key={index}
+                                    key={data.id}
                                     value={data.value}
                                     handlePersonalInformationChange={handlePersonalInformationChange}
                                     id={data.id}
@@ -240,19 +301,22 @@ const handleSubmitUpdatedInformation = e => {
                         <button type='submit' className='buttons-form-profile'>
                             Enregistrer
                         </button>
+                        {
+                        infoDataError &&
                         <Form.Text className='error-update-profile'>
                             <RiErrorWarningLine/>
-                            L'entrée n'est pas valide
+                            Vos entrées ne sont pas valide
                         </Form.Text>
+                        }
                     </Form>
                 </div>
                 <h2 className='personal-information'>Modifier votre mot de passe</h2>
                 <div className='info-container'>
                     <Form onSubmit={handleSubmitPassword}>
-                        { passwordData.map( (data, index) => {
+                        { passwordData.map( data => {
                             return (
                                 <PasswordSection
-                                    key={index}
+                                    key={data.id}
                                     value={data.value}
                                     handlePasswordChange={handlePasswordChange}
                                     id={data.id}
@@ -266,15 +330,19 @@ const handleSubmitUpdatedInformation = e => {
                         <button type='submit' className='buttons-form-profile'>
                             Enregistrer
                         </button>
+                        {
+                        passwordDataError &&
                         <Form.Text className='error-update-profile'>
                             <RiErrorWarningLine/>
-                            L'entrée n'est pas valide
+                            Vos entrées ne sont pas valide
                         </Form.Text>
+                        }
                     </Form>
                 </div>
             </div>
         </Fragment>
     )
 }
+
 
 export default Profile

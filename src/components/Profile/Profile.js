@@ -1,12 +1,14 @@
 import React, { useState, useEffect, Fragment, useRef } from 'react';
 import Navbar from '../NavBar/NavBar';
-import UserInfoSection from './UserInfoSection'
-import PasswordSection from './PasswordSection'
+import UserInformationSection from './UserInformationSection'
+import GenderAndOrientation from './GenderAndOrientation'
+import PasswordChangeSection from './PasswordChangeSection'
 import AlertMsg from '../AlertMsg/AlertMsg';
 import Form from 'react-bootstrap/Form'
 import { v4 as uuidv4 } from 'uuid';
 import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../other/Regex';
 import { RiErrorWarningLine } from 'react-icons/ri';
+
 
 
 
@@ -17,7 +19,7 @@ const Profile = () => {
         document.title = 'Profil - Matcha'
     }, [])
 
-// --------------------------------------------------------
+
 
 
 
@@ -49,15 +51,16 @@ const Profile = () => {
     useEffect( () => {
         prevUsersPersonalInformationRef.current = usersPersonalInformation;
     });
-
+    
     const prevUsersPersonalInformation = prevUsersPersonalInformationRef.current;
-
+    
 
     // ON SUBMIT NEW INFORMATION ↓↓↓
     const handleSubmitUpdatedInformation = e => {
         e.preventDefault();
 
-        if (prevUsersPersonalInformation !== usersPersonalInformation)
+        if ( prevUsersPersonalInformation !== usersPersonalInformation &&
+             prevUsersPersonalInformation !== undefined )
         {
             if ( usersPersonalInformation.lastname !== '' && usersPersonalInformation.firstname !== '' &&
                 usersPersonalInformation.username !== '' && usersPersonalInformation.email !== '' )
@@ -85,6 +88,39 @@ const Profile = () => {
     }
 
 
+
+
+
+
+// _-_-_-_-_-_-_-_-_- GENDER AND ORIENTATION SECTION -_-_-_-_-_-_-_-_-_
+
+
+    // GENDER (RADIO) ↓↓↓
+    const _genderChecked = {
+        maleGender: true,
+        femaleGender: false
+    }
+
+    const [genderChecked, setGenderChecked] = useState(_genderChecked)
+
+    const handleGenderChange = () => {
+        setGenderChecked({maleGender: !genderChecked.maleGender,
+                          femaleGender: !genderChecked.femaleGender})
+    }
+
+
+    // ORIENTATION (CHECKBOX) ↓↓↓
+    const _orientationChecked = {
+        maleOrientation: false,
+        femaleOrientation: true
+    }
+
+    const [orientationChecked, setOrientationChecked] = useState(_orientationChecked)
+
+    const handleOrientationChange = e => {
+        console.log(e.target.checked)
+        setOrientationChecked({...orientationChecked, [e.target.id]: ![e.target.checked]})
+    }
 
 
 
@@ -216,35 +252,6 @@ const Profile = () => {
     ]
 
 
-    /* modification of user information */
-    // const infoEdit$ = {
-    //     lastname: false,
-    //     firstname: false,
-    //     username: false,
-    //     email: false,
-    //     password: false
-    // }
-
-    // const [infoEdit, setInfoEdit] = useState(infoEdit$)
-
-    // const handleModification = (idInfo, thisInfo) => {
-
-    //     setInfoEdit(Object.assign(infoEdit, infoEdit$))
-    //     setData(Object.assign(data, _data)) // /!\  À revoir. Lors de l'enregistrement de la nouvelle info puis le click sur 'annuler' ou 'modifier' l'info revient à l'origine.
-    //     setErrorDatas(Object.assign(errorDatas, errorDatas$))
-    //     setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
-    // }
-
-
-        // const handleNewValues = (idInfo, thisInfo) => {
-    //     setInfoEdit(Object.assign(infoEdit, infoEdit$))
-    //     setErrorDatas(Object.assign(errorDatas, errorDatas$))
-    //     setInfoEdit({...infoEdit, [idInfo]: !thisInfo})
-    // }
-
-    // --------------------------------------------------------
-
-// --------------------------------------------------------
 
 
 
@@ -286,7 +293,7 @@ const Profile = () => {
                     <Form onSubmit={handleSubmitUpdatedInformation}>
                         { infoData.map( data => {
                             return (
-                                <UserInfoSection
+                                <UserInformationSection
                                     key={data.id}
                                     value={data.value}
                                     handlePersonalInformationChange={handlePersonalInformationChange}
@@ -310,12 +317,34 @@ const Profile = () => {
                         }
                     </Form>
                 </div>
+                <div className='info-container mb-2'>
+                    <Form onSubmit={null}>
+                        <GenderAndOrientation
+                            genderChecked={genderChecked}
+                            onGenderChange={handleGenderChange}
+                            orientationChecked={orientationChecked}
+                            onOrientationChange={handleOrientationChange}
+                        />
+                        <button type='submit' className='buttons-form-profile'>
+                            Enregistrer
+                        </button>
+                    </Form>
+                </div>
+                <h2 className='personal-information'>Votre description</h2>
+                <div className='info-container mb-2'>
+                    <Form onSubmit={null}>
+                        <textarea></textarea>
+                        <button type='submit' className='buttons-form-profile'>
+                                Enregistrer
+                        </button>
+                    </Form>
+                </div>
                 <h2 className='personal-information'>Modifier votre mot de passe</h2>
                 <div className='info-container'>
                     <Form onSubmit={handleSubmitPassword}>
                         { passwordData.map( data => {
                             return (
-                                <PasswordSection
+                                <PasswordChangeSection
                                     key={data.id}
                                     value={data.value}
                                     handlePasswordChange={handlePasswordChange}

@@ -63,11 +63,12 @@ const AccessProfile = (props) => {
 
 
     // INLINE OFFLINE ↓↓↓
-    const [inline, setInline] = useState(true)
+    const [inline, setInline] = useState(false)
 
     // const inlineOffline = () => {
     //     setInline(!inline)
     // }
+
 
     const connectionState = inline ?
                             <small className='user-connection-status'><GoPrimitiveDot color='#009432' />En ligne</small> :

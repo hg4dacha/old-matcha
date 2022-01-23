@@ -6,9 +6,11 @@ import { Link, NavLink } from 'react-router-dom'
 import Logo from '../Logo/Logo'
 import LogOut from '../LogOut/LogOut'
 import { RiUser3Line } from 'react-icons/ri';
-import { VscHome } from 'react-icons/vsc';
+import { CgHome } from 'react-icons/cg';
 import { AiFillStar } from 'react-icons/ai';
 import user from '../../images/user.png';
+
+
 
 
 
@@ -20,8 +22,8 @@ const Navbar$ = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <NavLink to="/Main" className='nav-link'><VscHome className='iconsNavbar'/>Acceuil</NavLink>
-                    <NavLink to="/Profile" className='nav-link'><RiUser3Line className='iconsNavbar'/>Profil</NavLink>
+                    <NavLink to="/Main" className='nav-link'><CgHome size={14} className='iconsNavbar'/>Acceuil</NavLink>
+                    <NavLink to="/Profile" className='nav-link'><RiUser3Line size={16} className='iconsNavbar'/>Profil</NavLink>
                 </Nav>
                 <Nav>
                     <div className='centerElementsInPage' style={{flexDirection: 'row'}}>

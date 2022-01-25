@@ -2,12 +2,14 @@ import React, { useState, useEffect, Fragment, useRef } from 'react';
 import Navbar from '../NavBar/NavBar';
 import UserInformationSection from './UserInformationSection'
 import GenderAndOrientation from './GenderAndOrientation'
+import TagsBadge from '../MemberProfile/TagsBadge';
 import PasswordChangeSection from './PasswordChangeSection'
 import AlertMsg from '../AlertMsg/AlertMsg';
 import Form from 'react-bootstrap/Form'
 import { v4 as uuidv4 } from 'uuid';
 import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../other/Regex';
 import { RiErrorWarningLine } from 'react-icons/ri';
+import { CgCloseO } from 'react-icons/cg';
 
 
 
@@ -91,7 +93,6 @@ const Profile = () => {
 
 
 
-
 // _-_-_-_-_-_-_-_-_- GENDER AND ORIENTATION SECTION -_-_-_-_-_-_-_-_-_
 
 
@@ -118,13 +119,69 @@ const Profile = () => {
     const [orientationChecked, setOrientationChecked] = useState(_orientationChecked)
 
     const handleOrientationChange = e => {
-        console.log(e.target.checked)
+        console.log(e.target.value)
         setOrientationChecked({...orientationChecked, [e.target.id]: ![e.target.checked]})
+    }
+
+    const tutu = e => {
+        e.preventDefault();
+
+        console.log(orientationChecked)
     }
 
 
 
-// _-_-_-_-_-_-_-_-_- USER PERSONAL INFORMATION SECTION -_-_-_-_-_-_-_-_-_
+
+
+// _-_-_-_-_-_-_-_-_- PROFILE DESCRIPTION SECTION -_-_-_-_-_-_-_-_-_
+
+
+    const _description = "Je ne suis à la recherche, ni d'une relation éphémère, ni d'amies, ni d'échanges pour combler une solitude. Ma vie est saine, équilibrée, et je souhaite simplement vous rencontrer pour une relation durable, sereine, apaisante, et harmonieuse. Dans laquelle chacun apportera sa joie de vivre, sa « vraie valeur ajoutée » ! Saurai-je être l'épice de votre vie ? Celle qui donnera de la saveur à votre quotidien, fera briller vos yeux, et adoucira vos vieux jours ? Bon, j'arrête là mon délire aromatique, faute de quoi, je vais passer pour un poète illuminé, bercé par les vapeurs d'absinthe !"
+
+    const [description, setDescription] = useState(_description)
+
+    const handleDescriptionChange = e => {
+        setDescription(e.target.value)
+    }
+
+    // SCROLL IN BOTTOM ↓↓↓
+    useEffect( () => {
+        const scrollChat = document.querySelector('.profile-description-textarea')
+        scrollChat.scrollTop = scrollChat.scrollHeight
+    }, [handleDescriptionChange])
+
+
+
+
+    // _-_-_-_-_-_-_-_-_- TAGS SECTION -_-_-_-_-_-_-_-_-_
+    
+    
+    // USER PASSWORD ↓↓↓
+    const _userTags = [
+        "actualite",
+        "politique",
+        "fitness",
+        "aventure",
+        "geek"
+    ]
+    
+    const [userTags, setUserTags] = useState(_userTags)
+
+    const handleAddTag = (e) => {
+        if ( (userTags.length < 5) && !(userTags.includes(e.target.id)) )
+        {
+            setUserTags(prevState => [...prevState, e.target.id]);
+        }
+    }
+
+    const handleRemoveTag = (e) => {
+        userTags.length > 0 &&
+        setUserTags(userTags.filter(tag => tag !== e.currentTarget.id));
+    }
+
+
+
+// _-_-_-_-_-_-_-_-_- PASSWORD MODIFICATION SECTION -_-_-_-_-_-_-_-_-_
 
 
     // USER PASSWORD ↓↓↓
@@ -190,7 +247,7 @@ const Profile = () => {
 
 
 
-// _-_-_-_-_-_-_-_-_- SECTION DATA -_-_-_-_-_-_-_-_-_
+// _-_-_-_-_-_-_-_-_- DATA SECTION -_-_-_-_-_-_-_-_-_
 
 
     // INFORMATION DATA ↓↓↓
@@ -251,6 +308,16 @@ const Profile = () => {
         }
     ]
 
+
+    // TAGS DATA ↓↓↓
+    const tagsData = ["food", "science", "intello", "coding", "dodo", "bio", "geek", "vegan",
+                      "artiste", "meditation", "paresse", "fitness", "aventure", "timide", "marketing",
+                      "fastfood", "intelligence", "humour", "cool", "highTech", "globetrotting", "histoire",
+                      "shopping", "nature", "sport", "football", "literature", "math", "action", "faitsDivers",
+                      "decouverte", "cinema", "musique", "actualite", "politique", "social", "etudes",
+                      "cuisine", "humanitaire", "animaux", "environnement", "jeuxVideo", "peinture", "dessin",
+                      "ecriture", "lecture", "photographie", "chasse", "randonnee", "marche", "plage", "detente",
+                      "automobile", "couture", "innovation", "terroir", "informatique", "marathon", "blogging"]
 
 
 
@@ -317,8 +384,8 @@ const Profile = () => {
                         }
                     </Form>
                 </div>
-                <div className='info-container mb-2'>
-                    <Form onSubmit={null}>
+                <div className='info-container'>
+                    <Form onSubmit={tutu}>
                         <GenderAndOrientation
                             genderChecked={genderChecked}
                             onGenderChange={handleGenderChange}
@@ -331,13 +398,50 @@ const Profile = () => {
                     </Form>
                 </div>
                 <h2 className='personal-information'>Votre description</h2>
-                <div className='info-container mb-2'>
+                <div className='info-container'>
                     <Form onSubmit={null}>
-                        <textarea></textarea>
+                        <textarea
+                            className='profile-description-textarea'
+                            value={description}
+                            onChange={handleDescriptionChange}
+                            autoComplete='off'
+                            placeholder='650 caractères max.'
+                            minLength='1'
+                            maxLength='650'
+                            autoCapitalize='on'
+                        >
+                        </textarea>
                         <button type='submit' className='buttons-form-profile'>
                                 Enregistrer
                         </button>
                     </Form>
+                </div>
+                <h2 className='personal-information'>Vos tags</h2>
+                <div className='info-container'>
+                    <div className='tags-section'>
+                        { tagsData.map( data => {
+                            return (
+                                <div key={uuidv4()} className='tag-list-div'>
+                                    <TagsBadge tag={data} id={data} onClick={handleAddTag} />
+                                </div>
+                            )
+                        })
+                        }
+                    </div>
+                    <div className='user-tags-selected'>
+                        { userTags.map( data => {
+                            return (
+                                <div key={uuidv4()} id={data} onClick={handleRemoveTag} className='user-tags-div'>
+                                    <TagsBadge tag={data} />
+                                    <CgCloseO className='tag-hide' />
+                                </div>
+                            )
+                        })
+                        }
+                    </div>
+                    <button type='submit' className='buttons-form-profile'>
+                        Enregistrer
+                    </button>
                 </div>
                 <h2 className='personal-information'>Modifier votre mot de passe</h2>
                 <div className='info-container'>

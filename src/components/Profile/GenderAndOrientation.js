@@ -45,7 +45,7 @@ const GenderAndOrientation = (props) => {
                         inline
                         label="Un homme"
                         type='checkbox'
-                        checked={props.orientationChecked.maleOrientation}
+                        defaultChecked={props.orientationChecked.maleOrientation}
                         onChange={props.onOrientationChange}
                         name="maleOrientation"
                         id='maleOrientation'
@@ -55,7 +55,7 @@ const GenderAndOrientation = (props) => {
                         inline
                         label="Une femme"
                         type='checkbox'
-                        checked={props.orientationChecked.femaleOrientation}
+                        defaultChecked={props.orientationChecked.femaleOrientation}
                         onChange={props.onOrientationChange}
                         name="femaleOrientation"
                         id='femaleOrientation'

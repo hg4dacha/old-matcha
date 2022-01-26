@@ -10,11 +10,7 @@ const TagsBadge = (props) => {
 
 
     return (
-        <Badge
-            id={props.id}    
-            onClick={props.onClick}
-            className='tags-badge-style'
-        >
+        <Badge className='tags-badge-style'>
             <FaSlackHash/>
             {props.tag}
         </Badge>

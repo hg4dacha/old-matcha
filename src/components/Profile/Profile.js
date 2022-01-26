@@ -123,11 +123,11 @@ const Profile = () => {
         setOrientationChecked({...orientationChecked, [e.target.id]: ![e.target.checked]})
     }
 
-    const tutu = e => {
-        e.preventDefault();
+    // const tutu = e => {
+    //     e.preventDefault();
 
-        console.log(orientationChecked)
-    }
+    //     console.log(orientationChecked)
+    // }
 
 
 
@@ -144,19 +144,53 @@ const Profile = () => {
         setDescription(e.target.value)
     }
 
+    // INCORRECT DATA ↓↓↓
+    const [descriptionDataError, setDescriptionDataError] = useState(false)
+
+
     // SCROLL IN BOTTOM ↓↓↓
     useEffect( () => {
         const scrollChat = document.querySelector('.profile-description-textarea')
         scrollChat.scrollTop = scrollChat.scrollHeight
-    }, [handleDescriptionChange])
+    }, [])
 
 
+    // PREVIOUS VALUE ↓↓↓
+    const prevDescriptionRef = useRef();
+
+    useEffect( () => {
+        prevDescriptionRef.current = description;
+    });
+    
+    const prevDescription = prevDescriptionRef.current;
+    
+
+    // ON SUBMIT NEW DESCRIPTION ↓↓↓
+    const handleSubmitUpdatedDescription = e => {
+        e.preventDefault();
+
+        if ( prevDescription !== description && prevDescription !== undefined )
+        {
+            if ( description !== '' )
+            {
+                if ( description.length <= 650 )
+                {
+                    setDescriptionDataError(false);
+                    updateSuccessAlert();
+                }
+                else
+                {
+                    setDescriptionDataError(true);
+                }
+            }
+        }
+    }
 
 
     // _-_-_-_-_-_-_-_-_- TAGS SECTION -_-_-_-_-_-_-_-_-_
     
     
-    // USER PASSWORD ↓↓↓
+    // USER TAGS ↓↓↓
     const _userTags = [
         "actualite",
         "politique",
@@ -167,18 +201,55 @@ const Profile = () => {
     
     const [userTags, setUserTags] = useState(_userTags)
 
+
     const handleAddTag = (e) => {
-        if ( (userTags.length < 5) && !(userTags.includes(e.target.id)) )
+
+        const tagID = e.currentTarget.id
+        if ( (userTags.length < 5) && !(userTags.includes(tagID)) )
         {
-            setUserTags(prevState => [...prevState, e.target.id]);
+            setUserTags(prevState => [...prevState, tagID]);
         }
     }
 
+
     const handleRemoveTag = (e) => {
+
         userTags.length > 0 &&
         setUserTags(userTags.filter(tag => tag !== e.currentTarget.id));
     }
 
+
+    // INCORRECT DATA ↓↓↓
+    const [userTagsDataError, setUserTagsDataError] = useState(false)
+
+
+    // PREVIOUS VALUE ↓↓↓
+    const prevUserTagsRef = useRef();
+
+    useEffect( () => {
+        prevUserTagsRef.current = userTags;
+    });
+    
+    const prevUserTags = prevUserTagsRef.current;
+    
+
+    // ON SUBMIT NEW TAGS ↓↓↓
+    const handleSubmitUpdatedUserTags = e => {
+        e.preventDefault();
+
+        if ( prevUserTags !== userTags && prevUserTags !== undefined )
+        {
+            if ( userTags.length === 5 )
+            {
+                setUserTagsDataError(false);
+                updateSuccessAlert();
+            }
+            else
+            {
+                setUserTagsDataError(true);
+            }
+        }
+    }
 
 
 // _-_-_-_-_-_-_-_-_- PASSWORD MODIFICATION SECTION -_-_-_-_-_-_-_-_-_
@@ -344,8 +415,7 @@ const Profile = () => {
 
     return (
         <Fragment>
-            <Navbar />
-            {alertMessages.map( (alert, index) => {
+            {alertMessages.map( alert => {
                 return (
                     <AlertMsg
                         key={alert.id}
@@ -354,6 +424,7 @@ const Profile = () => {
                     />
                 )
             })}
+            <Navbar />
             <div className='big-info-container centerElementsInPage'>
                 <h2 className='personal-information'>Vos informations personelles</h2>
                 <div className='info-container mb-2'>
@@ -384,8 +455,9 @@ const Profile = () => {
                         }
                     </Form>
                 </div>
+                <h2 className='personal-information'>Genre et orientation</h2>
                 <div className='info-container'>
-                    <Form onSubmit={tutu}>
+                    <Form onSubmit={null}>
                         <GenderAndOrientation
                             genderChecked={genderChecked}
                             onGenderChange={handleGenderChange}
@@ -399,7 +471,7 @@ const Profile = () => {
                 </div>
                 <h2 className='personal-information'>Votre description</h2>
                 <div className='info-container'>
-                    <Form onSubmit={null}>
+                    <Form onSubmit={handleSubmitUpdatedDescription}>
                         <textarea
                             className='profile-description-textarea'
                             value={description}
@@ -414,34 +486,50 @@ const Profile = () => {
                         <button type='submit' className='buttons-form-profile'>
                                 Enregistrer
                         </button>
+                        {
+                        descriptionDataError &&
+                        <Form.Text className='error-update-profile'>
+                            <RiErrorWarningLine/>
+                            Vos entrées ne sont pas valide
+                        </Form.Text>
+                        }
                     </Form>
                 </div>
                 <h2 className='personal-information'>Vos tags</h2>
                 <div className='info-container'>
-                    <div className='tags-section'>
-                        { tagsData.map( data => {
-                            return (
-                                <div key={uuidv4()} className='tag-list-div'>
-                                    <TagsBadge tag={data} id={data} onClick={handleAddTag} />
-                                </div>
-                            )
-                        })
+                    <Form onSubmit={handleSubmitUpdatedUserTags}>
+                        <div className='tags-section'>
+                            { tagsData.map( data => {
+                                return (
+                                    <div key={uuidv4()} id={data} onClick={handleAddTag} className='tag-list-div'>
+                                        <TagsBadge tag={data} />
+                                    </div>
+                                )
+                            })
+                            }
+                        </div>
+                        <div className='user-tags-selected'>
+                            { userTags.map( data => {
+                                return (
+                                    <div key={uuidv4()} id={data} onClick={handleRemoveTag} className='user-tags-div'>
+                                        <TagsBadge tag={data} />
+                                        <CgCloseO className='tag-hide' />
+                                    </div>
+                                )
+                            })
+                            }
+                        </div>
+                        <button type='submit' className='buttons-form-profile'>
+                            Enregistrer
+                        </button>
+                        {
+                        userTagsDataError &&
+                        <Form.Text className='error-update-profile' style={{right: '6%'}}>
+                            <RiErrorWarningLine/>
+                            Veuillez sélectionner 5 tags de la liste
+                        </Form.Text>
                         }
-                    </div>
-                    <div className='user-tags-selected'>
-                        { userTags.map( data => {
-                            return (
-                                <div key={uuidv4()} id={data} onClick={handleRemoveTag} className='user-tags-div'>
-                                    <TagsBadge tag={data} />
-                                    <CgCloseO className='tag-hide' />
-                                </div>
-                            )
-                        })
-                        }
-                    </div>
-                    <button type='submit' className='buttons-form-profile'>
-                        Enregistrer
-                    </button>
+                    </Form>
                 </div>
                 <h2 className='personal-information'>Modifier votre mot de passe</h2>
                 <div className='info-container'>

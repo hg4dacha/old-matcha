@@ -202,8 +202,6 @@ const AccessProfile = (props) => {
                                         <TagsBadge
                                             key={uuidv4()}
                                             tag={tag}
-                                            id={null}
-                                            onClick={null}
                                         />)
                                     })
                                 }

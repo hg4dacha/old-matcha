@@ -560,7 +560,7 @@ color: #ced6e0;
     border-radius: 1px;
     border: 1px solid #dbdbdb;
     position: relative;
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
 }
 
 .form-group-profile {
@@ -582,10 +582,51 @@ color: #ced6e0;
     color: #8395a7;
 }
 
-.gender-and-orientation>.form-check-label {
+.gender-and-orientation {
     color: rgb(1, 1, 3) !important;
     font-size: 15px !important;
     font-weight: 500 !important;
+}
+
+.old-orientation-check, .old-gender-check {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.orientation-check, .gender-check {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background: #fff;
+    border: 3px #ddd solid;
+    margin-right: 4px;
+    -webkit-transition: 0.2s ease-in;
+    -moz-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in;
+}
+
+.orientation-check--active, .gender-check--active {
+    border-radius: 10px;
+    -webkit-transition: 0.2s ease-in;
+    -moz-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in;
+}
+
+.orientation-check--active {
+    border-color: #10ac84;
+    background: #10ac84;
+}
+
+.gender-check--active {
+    border-color: #0a3d62;
+    background: #0a3d62;
 }
 
 .profile-description-textarea {
@@ -596,7 +637,7 @@ color: #ced6e0;
     padding: 7px 13px;
     outline: none;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.8;
     border: 1px solid #dbdbdb;
     border-radius: 2px;
@@ -688,6 +729,56 @@ color: #ced6e0;
     cursor: pointer;
 }
 
+.info-container.account-deletion {
+    margin-bottom: 8%;
+    padding: 35px 10px;
+}
+
+.account-deletion-form-group,
+.account-deletion-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-deletion-form-group {
+    margin-bottom: 0 !important;
+}
+
+.account-deletion-logo {
+    width: 30px;
+    height: 30px;
+    color: #84202A;
+}
+
+.personal-information.account-deletion {
+    color: #84202A;
+}
+
+.form-control-profile-account-deletion {
+    width: 60% !important;
+    border: 1px solid #dbdbdb !important;
+    color: rgb(1, 1, 3) !important;
+    border-radius: 2px !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+}
+
+.form-control-profile-account-deletion::placeholder {
+    font-weight: normal;
+    font-size: 12px;
+    color: #b33939;
+}
+
+.buttons-form-profile.account-deletion {
+    color: #84202A;
+    right: 8%;
+}
+
+.buttons-form-profile.account-deletion:hover {
+    color: #b33939;
+}
+
 .div-buttons-form-profile {
     display: flex;
     flex-direction: row;
@@ -723,6 +814,16 @@ color: #ced6e0;
     -o-transition: 0.2s ease-in;
     transition: 0.2s ease-in;
 }
+
+.hr-profile {
+    width: 49%;
+    border-top: 1px solid #a4b0be;
+}
+
+.hr-profile.account-deletion {
+    border-top: 1px solid #84202A;
+}
+
 
 /*****************************   ALERT   *****************************/
 

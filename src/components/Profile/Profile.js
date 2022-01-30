@@ -5,11 +5,15 @@ import GenderAndOrientation from './GenderAndOrientation'
 import TagsBadge from '../MemberProfile/TagsBadge';
 import PasswordChangeSection from './PasswordChangeSection'
 import AlertMsg from '../AlertMsg/AlertMsg';
+import ConfirmWindow from '../ConfirmWindow/ConfirmWindow';
 import Form from 'react-bootstrap/Form'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import { v4 as uuidv4 } from 'uuid';
 import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../other/Regex';
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { CgCloseO } from 'react-icons/cg';
+import { BsShieldLockFill } from 'react-icons/bs';
 
 
 
@@ -104,10 +108,6 @@ const Profile = () => {
 
     const [genderChecked, setGenderChecked] = useState(_genderChecked)
 
-    const handleGenderChange = () => {
-        setGenderChecked({maleGender: !genderChecked.maleGender,
-                          femaleGender: !genderChecked.femaleGender})
-    }
 
 
     // ORIENTATION (CHECKBOX) ↓↓↓
@@ -118,16 +118,35 @@ const Profile = () => {
 
     const [orientationChecked, setOrientationChecked] = useState(_orientationChecked)
 
-    const handleOrientationChange = e => {
-        console.log(e.target.value)
-        setOrientationChecked({...orientationChecked, [e.target.id]: ![e.target.checked]})
+
+    // PREVIOUS VALUE ↓↓↓
+    const prevGenderCheckedRef = useRef();
+    const prevOrientationCheckedRef = useRef();
+
+    useEffect( () => {
+        prevGenderCheckedRef.current = genderChecked;
+        prevOrientationCheckedRef.current = orientationChecked;
+    });
+    
+    const prevGenderChecked = prevGenderCheckedRef.current;
+    const prevOrientationChecked = prevOrientationCheckedRef.current;
+
+
+    const handleSubmitUpdatedGenderAndOrientation = e => {
+        e.preventDefault();
+
+        if ( (prevGenderChecked !== genderChecked && prevGenderChecked !== undefined) ||
+             (prevOrientationChecked !== orientationChecked && prevOrientationChecked !== undefined) )
+        {
+            // console.log("SUCCESS!")
+            console.log(prevGenderChecked !== genderChecked && prevGenderChecked !== undefined)
+            // console.log(prevGenderChecked);
+            // console.log(genderChecked);
+            console.log(prevOrientationChecked !== orientationChecked && prevOrientationChecked !== undefined)
+            // console.log(prevOrientationChecked);
+            // console.log(orientationChecked);
+        }
     }
-
-    // const tutu = e => {
-    //     e.preventDefault();
-
-    //     console.log(orientationChecked)
-    // }
 
 
 
@@ -318,6 +337,54 @@ const Profile = () => {
 
 
 
+// _-_-_-_-_-_-_-_-_- ACCOUNT DELETION SECTION -_-_-_-_-_-_-_-_-_
+
+    const [passwordAccountDeletion, setPasswordAccountDeletion] = useState('');
+
+
+    const handlePasswordAccountDeletionChange = e => {
+        setPasswordAccountDeletion(e.target.value);
+    }
+
+
+    // INCORRECT DATA ↓↓↓
+    const [passwordAccountDeletionDataError, setPasswordAccountDeletionDataError] = useState(false)
+
+
+    // ON CONFIRM ACCOUNT DELETION ↓↓↓
+    const handleConfirmAccountDeletion = () => {
+
+        if (passwordAccountDeletion !== '')
+        {
+            setPasswordAccountDeletionDataError(false);
+            setPasswordAccountDeletion('');
+        }
+        else
+        {
+            setPasswordAccountDeletionDataError(true);
+        }
+    }
+
+
+    // CONFIRM WINDOW DATA ↓↓↓
+    const deleteAccount = {
+        act: "Supprimer mon compte",
+        quest: <>supprimer <strong>définitivement</strong> votre compte</>,
+        onConfirm: handleConfirmAccountDeletion
+    }
+    
+
+    // ON SUBMIT ACCOUNT DELETION ↓↓↓
+    const handleSubmitAccountDeletion = e => {
+        e.preventDefault();
+
+        if (passwordAccountDeletion !== '')
+        {
+            displayConfirmWindow(deleteAccount);
+        }
+    }
+
+
 // _-_-_-_-_-_-_-_-_- DATA SECTION -_-_-_-_-_-_-_-_-_
 
 
@@ -341,7 +408,7 @@ const Profile = () => {
             value: usersPersonalInformation.username,
             id: 'username',
             label: 'Nom d\'utilisateur',
-            placeholder: 'ex: pseudo, pseudo46, pseudo-46, pseudo_46 (15 car. max).',
+            placeholder: 'ex: pseudo • pseudo46 • pseudo-46 • pseudo_46 • (15 caract max)',
             maxLength: "15"
         },
         {
@@ -360,21 +427,21 @@ const Profile = () => {
             value: userPassword.currentPassword,
             id: 'currentPassword',
             label: 'Actuel',
-            placeholder: '...',
+            placeholder: 'Saisissez votre MDP actuel',
             maxLength: "250"
         },
         {
             value: userPassword.newPassword,
             id: 'newPassword',
             label: 'Nouveau',
-            placeholder: '6 caract. min, 1 majusc., 1 chiffre et 1 caract. spécial.',
+            placeholder: 'Nouveau MDP | 6 caract min • 1 majusc • 1 chiffre • 1 caract spécial',
             maxLength: "250"
         },
         {
             value: userPassword.newPasswordConfirmation,
             id: 'newPasswordConfirmation',
             label: 'Confirmation',
-            placeholder: '...',
+            placeholder: 'Confirmez votre nouveau MDP',
             maxLength: "250"
         }
     ]
@@ -413,21 +480,47 @@ const Profile = () => {
 
 
 
+// _-_-_-_-_-_-_-_-_- CONFIRM WINDOW -_-_-_-_-_-_-_-_-_
+
+    // CONFIRMATION WINDOW ↓↓↓
+    const [confirmWindow, setConfirmWindow] = useState(false)
+
+    const displayConfirmWindow = (act) => {
+        setMsgConfirmWindow(act)
+        setConfirmWindow(true)
+    }
+
+    const [msgConfirmWindow, setMsgConfirmWindow] = useState(null)
+
+
+
+
     return (
         <Fragment>
-            {alertMessages.map( alert => {
-                return (
-                    <AlertMsg
-                        key={alert.id}
-                        variant={alert.variant}
-                        information={alert.information}
-                    />
-                )
-            })}
+            {
+                alertMessages.map( alert => {
+                    return (
+                        <AlertMsg
+                            key={alert.id}
+                            variant={alert.variant}
+                            information={alert.information}
+                        />
+                    )
+                })
+            }
+            {
+                confirmWindow &&
+                <ConfirmWindow
+                    act={msgConfirmWindow.act}
+                    quest={msgConfirmWindow.quest}
+                    onCancel={setConfirmWindow}
+                    onConfirm={msgConfirmWindow.onConfirm}
+                />
+            }
             <Navbar />
             <div className='big-info-container centerElementsInPage'>
                 <h2 className='personal-information'>Vos informations personelles</h2>
-                <div className='info-container mb-2'>
+                <div className='info-container'>
                     <Form onSubmit={handleSubmitUpdatedInformation}>
                         { infoData.map( data => {
                             return (
@@ -455,20 +548,22 @@ const Profile = () => {
                         }
                     </Form>
                 </div>
+            <hr className='hr-profile'/>
                 <h2 className='personal-information'>Genre et orientation</h2>
                 <div className='info-container'>
-                    <Form onSubmit={null}>
+                    <Form onSubmit={handleSubmitUpdatedGenderAndOrientation}>
                         <GenderAndOrientation
                             genderChecked={genderChecked}
-                            onGenderChange={handleGenderChange}
+                            setGenderChecked={setGenderChecked}
                             orientationChecked={orientationChecked}
-                            onOrientationChange={handleOrientationChange}
+                            setOrientationChecked={setOrientationChecked}
                         />
                         <button type='submit' className='buttons-form-profile'>
                             Enregistrer
                         </button>
                     </Form>
                 </div>
+            <hr className='hr-profile'/>
                 <h2 className='personal-information'>Votre description</h2>
                 <div className='info-container'>
                     <Form onSubmit={handleSubmitUpdatedDescription}>
@@ -495,6 +590,7 @@ const Profile = () => {
                         }
                     </Form>
                 </div>
+            <hr className='hr-profile'/>
                 <h2 className='personal-information'>Vos tags</h2>
                 <div className='info-container'>
                     <Form onSubmit={handleSubmitUpdatedUserTags}>
@@ -531,8 +627,9 @@ const Profile = () => {
                         }
                     </Form>
                 </div>
+            <hr className='hr-profile'/>
                 <h2 className='personal-information'>Modifier votre mot de passe</h2>
-                <div className='info-container'>
+                <div className='info-container mb-5'>
                     <Form onSubmit={handleSubmitPassword}>
                         { passwordData.map( data => {
                             return (
@@ -556,6 +653,38 @@ const Profile = () => {
                         <Form.Text className='error-update-profile'>
                             <RiErrorWarningLine/>
                             Vos entrées ne sont pas valide
+                        </Form.Text>
+                        }
+                    </Form>
+                </div>
+            <hr className='hr-profile account-deletion'/>
+                <h2 className='personal-information account-deletion'>Supprimer votre compte</h2>
+                <div className='info-container account-deletion'>
+                    <Form onSubmit={handleSubmitAccountDeletion}>
+                        <Form.Group as={Row} className='account-deletion-form-group' controlId='passwordAccountDeletion'>
+                            <Form.Label className='account-deletion-label' column sm="2">
+                                <BsShieldLockFill className='account-deletion-logo' />
+                            </Form.Label>
+                            <Col sm="10">
+                                <Form.Control
+                                    value={passwordAccountDeletion}
+                                    onChange={handlePasswordAccountDeletionChange}
+                                    placeholder='Saisissez votre mot de passe'
+                                    type="password"
+                                    autoComplete='off'
+                                    maxLength='250'
+                                    className='form-control-profile-account-deletion'
+                                />
+                            </Col>
+                        </Form.Group>
+                        <button type='submit' className='buttons-form-profile account-deletion'>
+                            Supprimer mon compte
+                        </button>
+                        {
+                        passwordAccountDeletionDataError &&
+                        <Form.Text className='error-update-profile account-deletion'>
+                            <RiErrorWarningLine/>
+                            Votre entrée n'est pas valide
                         </Form.Text>
                         }
                     </Form>

@@ -9,33 +9,6 @@ const GenderAndOrientation = (props) => {
 
     return (
         <Fragment>
-            {/* <Form.Group as={Row} className="mb-2 d-flex align-items-center">
-                <Form.Label column sm="2">
-                    Je suis
-                </Form.Label>
-                <Col sm="10">
-                    <Form.Check
-                        inline
-                        label="Un homme"
-                        type='radio'
-                        checked={props.genderChecked.maleGender}
-                        onChange={props.onGenderChange}
-                        name="maleGender"
-                        id='maleGender'
-                        className='gender-and-orientation'
-                    />
-                    <Form.Check
-                        inline
-                        label="Une femme"
-                        type='radio'
-                        checked={props.genderChecked.femaleGender}
-                        onChange={props.onGenderChange}
-                        name="femaleGender"
-                        id='femaleGender'
-                        className='gender-and-orientation'
-                    />
-                </Col>
-            </Form.Group> */}
             <Form.Group as={Row} className="mb-3 d-flex align-items-center">
                 <Form.Label column sm="2">
                     Je suis
@@ -53,20 +26,6 @@ const GenderAndOrientation = (props) => {
                                 })
                             }}
                         />
-                        {/* <svg
-                            className={`orientation-check ${props.genderChecked.maleGender ? "orientation-check--active" : ""}`}
-                            fill={props.genderChecked.maleGender ? "#fff" : "none"}
-                            stroke={props.genderChecked.maleGender ? "#fff" : "none"}
-                            strokeWidth="2"
-                            aria-hidden="true"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"
-                                fillRule="evenodd"
-                            />
-                        </svg> */}
                         <svg
                             className={`gender-check ${props.genderChecked.maleGender ? "gender-check--active" : ""}`}
                             fill={props.genderChecked.maleGender ? "#F5F5F5" : "none"}
@@ -95,20 +54,6 @@ const GenderAndOrientation = (props) => {
                                 })
                             }}
                         />
-                        {/* <svg
-                            className={`orientation-check ${props.genderChecked.femaleGender ? "orientation-check--active" : ""}`}
-                            fill={props.genderChecked.femaleGender ? "#fff" : "none"}
-                            stroke={props.genderChecked.femaleGender ? "#fff" : "none"}
-                            strokeWidth="2"
-                            aria-hidden="true"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"
-                                fillRule="evenodd"
-                            />
-                        </svg> */}
                         <svg
                             className={`gender-check ${props.genderChecked.femaleGender ? "gender-check--active" : ""}`}
                             fill={props.genderChecked.femaleGender ? "#F5F5F5" : "none"}
@@ -127,33 +72,6 @@ const GenderAndOrientation = (props) => {
                     </label>
                 </Col>
             </Form.Group>
-            {/* <Form.Group as={Row} className="mb-1 d-flex align-items-center">
-                <Form.Label column sm="2">
-                    Je cherche
-                </Form.Label>
-                <Col sm="10">
-                    <Form.Check
-                        inline
-                        label="Un homme"
-                        type='checkbox'
-                        defaultChecked={props.orientationChecked.maleOrientation}
-                        onChange={props.onOrientationChange}
-                        name="maleOrientation"
-                        id='maleOrientation'
-                        className='gender-and-orientation'
-                    />
-                    <Form.Check
-                        inline
-                        label="Une femme"
-                        type='checkbox'
-                        defaultChecked={props.orientationChecked.femaleOrientation}
-                        onChange={props.onOrientationChange}
-                        name="femaleOrientation"
-                        id='femaleOrientation'
-                        className='gender-and-orientation'
-                    />
-                </Col>
-            </Form.Group> */}
             <Form.Group as={Row} className="mb-1 d-flex align-items-center">
                 <Form.Label column sm="2">
                     Je cherche

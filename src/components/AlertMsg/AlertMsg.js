@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Alert from 'react-bootstrap/Alert'
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { BsInfoCircleFill } from 'react-icons/bs';
-import { IoCloseCircle } from 'react-icons/io5';
+import { TiWarning } from 'react-icons/ti';
+
 
 
 
@@ -17,7 +18,7 @@ const AlertMsg = ({variant, information}) => {
             return <BsInfoCircleFill size='19' className='mr-2' />
         }
         else if (variant === 'error') {
-            return <IoCloseCircle size='23' className='mr-2' />
+            return <TiWarning size='21' className='mr-2' />
         }
         else
             return null

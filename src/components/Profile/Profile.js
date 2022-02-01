@@ -4,6 +4,7 @@ import UserInformationSection from './UserInformationSection'
 import GenderAndOrientation from './GenderAndOrientation'
 import TagsBadge from '../MemberProfile/TagsBadge';
 import PasswordChangeSection from './PasswordChangeSection'
+import Location from './Location'
 import AlertMsg from '../AlertMsg/AlertMsg';
 import ConfirmWindow from '../ConfirmWindow/ConfirmWindow';
 import Form from 'react-bootstrap/Form'
@@ -56,7 +57,7 @@ const Profile = () => {
 
     useEffect( () => {
         prevUsersPersonalInformationRef.current = usersPersonalInformation;
-    });
+    }, [usersPersonalInformation]);
     
     const prevUsersPersonalInformation = prevUsersPersonalInformationRef.current;
     
@@ -65,8 +66,7 @@ const Profile = () => {
     const handleSubmitUpdatedInformation = e => {
         e.preventDefault();
 
-        if ( prevUsersPersonalInformation !== usersPersonalInformation &&
-             prevUsersPersonalInformation !== undefined )
+        if ( prevUsersPersonalInformation && prevUsersPersonalInformation !== usersPersonalInformation )
         {
             if ( usersPersonalInformation.lastname !== '' && usersPersonalInformation.firstname !== '' &&
                 usersPersonalInformation.username !== '' && usersPersonalInformation.email !== '' )
@@ -82,11 +82,13 @@ const Profile = () => {
                     }
                     else
                     {
+                        updateErrorAlert();
                         setInfoDataError(true);
                     }
                 }
                 else
                 {
+                    updateErrorAlert();
                     setInfoDataError(true);
                 }
             }
@@ -126,7 +128,7 @@ const Profile = () => {
     useEffect( () => {
         prevGenderCheckedRef.current = genderChecked;
         prevOrientationCheckedRef.current = orientationChecked;
-    });
+    }, [genderChecked, orientationChecked]);
     
     const prevGenderChecked = prevGenderCheckedRef.current;
     const prevOrientationChecked = prevOrientationCheckedRef.current;
@@ -135,16 +137,27 @@ const Profile = () => {
     const handleSubmitUpdatedGenderAndOrientation = e => {
         e.preventDefault();
 
-        if ( (prevGenderChecked !== genderChecked && prevGenderChecked !== undefined) ||
-             (prevOrientationChecked !== orientationChecked && prevOrientationChecked !== undefined) )
+        if ( (prevGenderChecked && prevGenderChecked !== genderChecked) ||
+             (prevOrientationChecked && prevOrientationChecked !== orientationChecked) )
         {
-            // console.log("SUCCESS!")
-            console.log(prevGenderChecked !== genderChecked && prevGenderChecked !== undefined)
-            // console.log(prevGenderChecked);
-            // console.log(genderChecked);
-            console.log(prevOrientationChecked !== orientationChecked && prevOrientationChecked !== undefined)
-            // console.log(prevOrientationChecked);
-            // console.log(orientationChecked);
+            if ( (typeof(genderChecked.maleGender) === 'boolean') && (typeof(genderChecked.femaleGender) === 'boolean') &&
+                 (typeof(orientationChecked.maleOrientation) === 'boolean') && (typeof(orientationChecked.femaleOrientation) === 'boolean') )
+            {
+                if ( (genderChecked.maleGender !== genderChecked.femaleGender) &&
+                     (orientationChecked.maleOrientation === true || orientationChecked.femaleOrientation === true) )
+                {
+                    console.log(genderChecked.maleGender)
+                    updateSuccessAlert();
+                }
+                else
+                {
+                    updateErrorAlert();
+                }
+            }
+            else
+            {
+                updateErrorAlert();
+            }
         }
     }
 
@@ -179,7 +192,7 @@ const Profile = () => {
 
     useEffect( () => {
         prevDescriptionRef.current = description;
-    });
+    }, [description]);
     
     const prevDescription = prevDescriptionRef.current;
     
@@ -188,7 +201,7 @@ const Profile = () => {
     const handleSubmitUpdatedDescription = e => {
         e.preventDefault();
 
-        if ( prevDescription !== description && prevDescription !== undefined )
+        if ( prevDescription && prevDescription !== description )
         {
             if ( description !== '' )
             {
@@ -199,6 +212,7 @@ const Profile = () => {
                 }
                 else
                 {
+                    updateErrorAlert();
                     setDescriptionDataError(true);
                 }
             }
@@ -206,7 +220,7 @@ const Profile = () => {
     }
 
 
-    // _-_-_-_-_-_-_-_-_- TAGS SECTION -_-_-_-_-_-_-_-_-_
+// _-_-_-_-_-_-_-_-_- TAGS SECTION -_-_-_-_-_-_-_-_-_
     
     
     // USER TAGS ↓↓↓
@@ -247,7 +261,7 @@ const Profile = () => {
 
     useEffect( () => {
         prevUserTagsRef.current = userTags;
-    });
+    }, [userTags]);
     
     const prevUserTags = prevUserTagsRef.current;
     
@@ -256,7 +270,7 @@ const Profile = () => {
     const handleSubmitUpdatedUserTags = e => {
         e.preventDefault();
 
-        if ( prevUserTags !== userTags && prevUserTags !== undefined )
+        if ( prevUserTags && prevUserTags !== userTags )
         {
             if ( userTags.length === 5 )
             {
@@ -265,6 +279,7 @@ const Profile = () => {
             }
             else
             {
+                updateErrorAlert();
                 setUserTagsDataError(true);
             }
         }
@@ -318,16 +333,19 @@ const Profile = () => {
                     }
                     else
                     {
+                        updateErrorAlert();
                         setPasswordDataError(true)
                     }
                 }
                 else
                 {
+                    updateErrorAlert();
                     setPasswordDataError(true)
                 }
             }
             else
             {
+                updateErrorAlert();
                 setPasswordDataError(true)
             }
         }
@@ -361,6 +379,7 @@ const Profile = () => {
         }
         else
         {
+            updateErrorAlert();
             setPasswordAccountDeletionDataError(true);
         }
     }
@@ -476,6 +495,12 @@ const Profile = () => {
         handleNewAlert({id: uuidv4(),
                         variant: "success",
                         information: "Les données ont été mises à jour."})
+    }
+
+    const updateErrorAlert = () => {
+        handleNewAlert({id: uuidv4(),
+                        variant: "error",
+                        information: "Oups ! Erreur..."})
     }
 
 
@@ -623,6 +648,24 @@ const Profile = () => {
                         <Form.Text className='error-update-profile' style={{right: '6%'}}>
                             <RiErrorWarningLine/>
                             Veuillez sélectionner 5 tags de la liste
+                        </Form.Text>
+                        }
+                    </Form>
+                </div>
+            <hr className='hr-profile'/>
+            <h2 className='personal-information'>Votre localisation</h2>
+                <div className='info-container mb-5'>
+                    <Form onSubmit={null}>
+                        <h3 className='user-city-location'>Paris, Ile-de-France (France)</h3>
+                        <Location/>
+                        <button type='submit' className='buttons-form-profile'>
+                            Enregistrer
+                        </button>
+                        {
+                        passwordDataError &&
+                        <Form.Text className='error-update-profile'>
+                            <RiErrorWarningLine/>
+                            Vos entrées ne sont pas valide
                         </Form.Text>
                         }
                     </Form>

@@ -620,13 +620,13 @@ color: #ced6e0;
 }
 
 .orientation-check--active {
-    border-color: #10ac84;
-    background: #10ac84;
+    border-color: #079992;
+    background: #079992;
 }
 
 .gender-check--active {
-    border-color: #0a3d62;
-    background: #0a3d62;
+    border-color: #007bff;
+    background: #007bff;
 }
 
 .profile-description-textarea {
@@ -753,6 +753,11 @@ color: #ced6e0;
 
 .personal-information.account-deletion {
     color: #84202A;
+}
+
+.user-city-location {
+    margin-bottom: 1rem;
+    font-size: 15px;
 }
 
 .form-control-profile-account-deletion {

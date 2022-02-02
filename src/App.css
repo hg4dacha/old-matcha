@@ -755,9 +755,41 @@ color: #ced6e0;
     color: #84202A;
 }
 
-.user-city-location {
+.user-city-location-container {
     margin-bottom: 1rem;
+    width: 64%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-city-location {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    position: relative;
     font-size: 15px;
+}
+
+.reset-city-button {
+    padding: 0 3px 3px 3px !important;
+}
+
+.reset-city-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.activate-geolocation {
+    font-size: 13px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.leaflet-popup {
+    bottom: 38px !important;
+    left: -52px !important;
 }
 
 .form-control-profile-account-deletion {
@@ -822,7 +854,7 @@ color: #ced6e0;
 
 .hr-profile {
     width: 49%;
-    border-top: 1px solid #a4b0be;
+    border-top: 1px solid #dbdbdb;
 }
 
 .hr-profile.account-deletion {

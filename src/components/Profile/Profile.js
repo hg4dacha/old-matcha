@@ -8,6 +8,7 @@ import Location from './Location'
 import AlertMsg from '../AlertMsg/AlertMsg';
 import ConfirmWindow from '../ConfirmWindow/ConfirmWindow';
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { v4 as uuidv4 } from 'uuid';
@@ -15,6 +16,9 @@ import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { CgCloseO } from 'react-icons/cg';
 import { BsShieldLockFill } from 'react-icons/bs';
+import { TiLocation } from 'react-icons/ti';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import { IoPinSharp } from 'react-icons/io5';
 
 
 
@@ -654,9 +658,15 @@ const Profile = () => {
                 </div>
             <hr className='hr-profile'/>
             <h2 className='personal-information'>Votre localisation</h2>
-                <div className='info-container mb-5'>
+                <div className='info-container'>
                     <Form onSubmit={null}>
-                        <h3 className='user-city-location'>Paris, Ile-de-France (France)</h3>
+                        <div className='user-city-location-container'>
+                            <h3 className='user-city-location'><IoPinSharp/>Paris, Ile-de-France (France)</h3>
+                            {/* <Button variant="danger" className='reset-city-button'>
+                                <RiDeleteBin6Line className='reset-city-icon' />
+                            </Button> */}
+                            <Button variant="info" disabled={false} className='activate-geolocation'><TiLocation/>Activer la géolocalisation</Button>
+                        </div>
                         <Location/>
                         <button type='submit' className='buttons-form-profile'>
                             Enregistrer

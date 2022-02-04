@@ -17,7 +17,6 @@ import { RiErrorWarningLine } from 'react-icons/ri';
 import { CgCloseO } from 'react-icons/cg';
 import { BsShieldLockFill } from 'react-icons/bs';
 import { TiLocation } from 'react-icons/ti';
-import { RiDeleteBin6Line } from 'react-icons/ri';
 import { IoPinSharp } from 'react-icons/io5';
 
 

@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -24,6 +24,43 @@ const Location = (props) => {
         width: '64%',
         zIndex: '50'
     }
+
+
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
+
+
+    useEffect(() => {
+
+        fetch("https://nominatim.openstreetmap.org/reverse?lat=48.862725&lon=2.287592&format=json&accept-language=fr-FR")
+        .then(res => res.json())
+        .then(
+        (result) => {
+            setIsLoaded(true);
+            setItems(result);
+        },
+        (error) => {
+            setIsLoaded(true);
+            setError(error);
+        })
+        getCity();
+
+    }, [])
+
+    const getCity = () => {
+        if (error) {
+            console.log(error.message);
+        }
+        else if (!isLoaded) {
+            console.log('Chargement...');
+        }
+        else {
+            console.log(items);
+        }
+    }
+
+
 
 
     return (

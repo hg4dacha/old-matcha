@@ -25,7 +25,7 @@ function App() {
         <Route path='/SignIn' component={SignIn} />
         <Route path='/ForgotPassword' component={ForgotPassword} />
         <Route path='/NewPassword' component={NewPassword} />
-        {/* <Route path='/CompleteProfile' component={CompleteProfile} /> */}
+        <Route path='/CompleteProfile' component={CompleteProfile} />
         <Route path='/Main' component={Main} />
         <Route path='/Profile' component={Profile} />
         <Route path='/MemberProfile' component={MemberProfile} />

@@ -19,11 +19,21 @@ const GenderAndOrientation = (props) => {
                             type="checkbox"
                             className='old-gender-check'
                             onChange={() => {
-                                props.genderChecked.maleGender === false &&
-                                props.setGenderChecked({
-                                    maleGender: !props.genderChecked.maleGender,
-                                    femaleGender: !props.genderChecked.femaleGender
-                                })
+                                if (props.genderChecked.maleGender === false &&
+                                    props.genderChecked.femaleGender === false)
+                                {
+                                    props.setGenderChecked({
+                                        maleGender: true,
+                                        femaleGender: false
+                                    })
+                                }
+                                else if (props.genderChecked.maleGender === false)
+                                {                                    
+                                    props.setGenderChecked({
+                                        maleGender: !props.genderChecked.maleGender,
+                                        femaleGender: !props.genderChecked.femaleGender
+                                    })
+                                }
                             }}
                         />
                         <svg
@@ -47,11 +57,21 @@ const GenderAndOrientation = (props) => {
                             type="checkbox"
                             className='old-gender-check'
                             onChange={() => {
-                                props.genderChecked.femaleGender === false &&
-                                props.setGenderChecked({
-                                    maleGender: !props.genderChecked.maleGender,
-                                    femaleGender: !props.genderChecked.femaleGender
-                                })
+                                if (props.genderChecked.maleGender === false &&
+                                    props.genderChecked.femaleGender === false)
+                                {
+                                    props.setGenderChecked({
+                                        maleGender: false,
+                                        femaleGender: true
+                                    })
+                                }
+                                else if (props.genderChecked.femaleGender === false)
+                                {                                    
+                                    props.setGenderChecked({
+                                        maleGender: !props.genderChecked.maleGender,
+                                        femaleGender: !props.genderChecked.femaleGender
+                                    })
+                                }
                             }}
                         />
                         <svg

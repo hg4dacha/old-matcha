@@ -170,6 +170,10 @@ const CompleteProfile = () => {
         console.log(genderOrientationDataError);
         console.log(descriptionDataError);
         console.log(userTagsDataError);
+        if (!genderOrientationDataError && !descriptionDataError && !userTagsDataError)
+        {
+            console.log('SUCCESS')
+        }
     }
 
 
@@ -297,7 +301,7 @@ const CompleteProfile = () => {
                     }
                     <RiUserSmileLine className='complete-profile-icons' color='#0F5132' />
                 </div>
-                <hr className='hr-profile'/>
+                <hr className='hr-profile vf-hr'/>
                 <Form className='complete-profile-form' onSubmit={handleSubmitComplementaryInformation}>
                     <h2 className='personal-information'>Genre et orientation</h2>
                     <div className='info-container'>

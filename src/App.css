@@ -582,6 +582,39 @@ color: #ced6e0;
     color: #8395a7;
 }
 
+.age-user-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 14%;
+    width: 48%;
+}
+
+.age-user-label {
+    font-size: 14px;
+}
+
+.age-user {
+    color: rgb(1, 1, 3);
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.hr-age-user {
+    width: 20%;
+    border-top: 1px solid #dbdbdb;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.calendar-age-user-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
 .gender-and-orientation {
     color: rgb(1, 1, 3) !important;
     font-size: 15px !important;
@@ -717,7 +750,7 @@ color: #ced6e0;
 
 .tag-hide {
     margin-left: -8px;
-    color: #EA2027;
+    color: brown;
     cursor: pointer;
 }
 
@@ -853,6 +886,59 @@ color: #ced6e0;
     border-top: 1px solid #84202A;
 }
 
+.react-datepicker-wrapper {
+    width: 15rem;
+}
+
+.react-datepicker__input-container {
+    width: 15rem !important;
+}
+
+.react-datepicker__input-container>input {
+    width: 13rem !important;
+    border: 1px solid #dbdbdb !important;
+    color: #2f3542 !important;
+    border-radius: 2px !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    text-align: center !important;
+}
+
+.react-datepicker__input-container>input::placeholder {
+    font-size: 12px !important;
+    font-weight: normal !important;
+    color: #8395a7 !important;
+}
+
+.react-datepicker__close-icon::after {
+    background-color: brown !important;
+}
+
+.react-datepicker__header {
+    background-color: #4385F5 !important;
+}
+
+.react-datepicker__current-month {
+    color: whitesmoke;
+}
+
+.react-datepicker__day-name {
+    color: whitesmoke;
+}
+
+.react-datepicker__day--selected, .react-datepicker__day--keyboard-selected {
+    background-color: #4584F6;
+    border-radius: 50px;
+    box-shadow: 0px 3px 5px 0px #ced6e0;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--keyboard-selected:hover {
+    background-color: #4584F6;
+    box-shadow: 0px 3px 5px 0px #ced6e0;
+}
+
+
 
 /*****************************   ALERT   *****************************/
 
@@ -912,6 +998,11 @@ color: #ced6e0;
     font-weight: 500;
 }
 
+.vf-hr {
+    border-top: 1px solid #0F5132;
+    margin-bottom: 5rem;
+}
+
 .complete-profile-indication {
     font-size: 12px;
     color: #576574;
@@ -921,8 +1012,8 @@ color: #ced6e0;
 }
 
 .complete-profile-icons {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     position: absolute;
     right: 13%;
     top: 50%;

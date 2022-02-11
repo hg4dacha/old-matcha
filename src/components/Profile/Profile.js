@@ -9,16 +9,20 @@ import AlertMsg from '../AlertMsg/AlertMsg';
 import ConfirmWindow from '../ConfirmWindow/ConfirmWindow';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import fr from "date-fns/locale/fr";
+import differenceInYears from 'date-fns/differenceInYears';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { v4 as uuidv4 } from 'uuid';
 import { NAMES_REGEX, USERNAME_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '../../other/Regex';
 import { RiErrorWarningLine } from 'react-icons/ri';
-import { CgCloseO } from 'react-icons/cg';
+import { IoIosCloseCircle } from 'react-icons/io';
 import { BsShieldLockFill } from 'react-icons/bs';
 import { TiLocation } from 'react-icons/ti';
 import { IoPinSharp } from 'react-icons/io5';
-
+import { BiCalendarAlt } from 'react-icons/bi';
 
 
 
@@ -100,6 +104,64 @@ const Profile = () => {
 
 
 
+
+
+// _-_-_-_-_-_-_-_-_- USER AGE SECTION -_-_-_-_-_-_-_-_-_
+
+
+    // USER AGE ↓↓↓
+    const _dateSelected = new Date('1992-06-01T08:59:24.000Z');
+    const [dateSelected, setDateSelected] = useState(_dateSelected)
+
+    const _userAge = '30';
+    const [userAge, setUserAge] = useState(_userAge)
+
+    const handleDateSelectedChange = (e) => {
+
+        setDateSelected(e);
+        (e !== null) &&
+        setUserAge(differenceInYears(new Date(), e));
+    }
+
+
+    // PREVIOUS VALUE ↓↓↓
+    const prevDateSelectedRef = useRef();
+
+    useEffect( () => {
+        prevDateSelectedRef.current = dateSelected;
+    }, [dateSelected]);
+    
+    const prevDateSelected = prevDateSelectedRef.current;
+
+
+    // INCORRECT DATA ↓↓↓
+    const [dateDataError, setDateDataError] = useState(false)
+
+
+    // ON SUBMIT NEW AGE ↓↓↓
+    const handleSubmitUpdatedUserAge = (e) => {
+        e.preventDefault();
+
+        if ( prevDateSelected && prevDateSelected !== dateSelected &&
+             dateSelected!== null )
+        {
+            if ( (dateSelected instanceof Date) &&
+                 (Object.prototype.toString.call(dateSelected)) &&
+                 !(isNaN(dateSelected)) )
+            {
+                if ( (differenceInYears(new Date(), dateSelected)) > 18 )
+                {
+                    updateSuccessAlert();
+                    setDateDataError(false);
+                }
+                else
+                {
+                    updateErrorAlert();
+                    setDateDataError(true);
+                }
+            }
+        }
+    }
 
 
 // _-_-_-_-_-_-_-_-_- GENDER AND ORIENTATION SECTION -_-_-_-_-_-_-_-_-_
@@ -577,6 +639,40 @@ const Profile = () => {
                     </Form>
                 </div>
             <hr className='hr-profile'/>
+                <h2 className='personal-information'>Date de naissance</h2>
+                <div className='info-container'>
+                    <Form className='d-flex align-items-center' onSubmit={handleSubmitUpdatedUserAge}>
+                        <div className='age-user-label'>Âge</div>
+                        <div className='age-user-div'>
+                            <div className='age-user'>{`${userAge} ans`}</div>
+                            <hr className='hr-age-user'/>
+                            <div className='d-flex align-items-center'>
+                                <BiCalendarAlt className='calendar-age-user-icon'/>
+                                <DatePicker
+                                    selected={dateSelected}
+                                    onChange={handleDateSelectedChange}
+                                    locale={fr}
+                                    dateFormat="dd/MM/yyyy"
+                                    closeOnScroll={true}
+                                    isClearable={true}
+                                    fixedHeight
+                                    placeholderText="Entrez une date • jj/mm/aaaa"
+                                />
+                            </div>
+                        </div>
+                        <button type='submit' className='buttons-form-profile'>
+                            Enregistrer
+                        </button>
+                        {
+                        dateDataError &&
+                        <Form.Text className='error-update-profile'>
+                            <RiErrorWarningLine/>
+                            Matcha est réservé aux majeurs
+                        </Form.Text>
+                        }
+                    </Form>
+                </div>
+            <hr className='hr-profile'/>
                 <h2 className='personal-information'>Genre et orientation</h2>
                 <div className='info-container'>
                     <Form onSubmit={handleSubmitUpdatedGenderAndOrientation}>
@@ -637,7 +733,7 @@ const Profile = () => {
                                 return (
                                     <div key={uuidv4()} id={data} onClick={handleRemoveTag} className='user-tags-div'>
                                         <TagsBadge tag={data} />
-                                        <CgCloseO className='tag-hide' />
+                                        <IoIosCloseCircle className='tag-hide' />
                                     </div>
                                 )
                             })

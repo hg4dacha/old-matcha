@@ -1,21 +1,25 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import Alert from 'react-bootstrap/Alert';
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import LogoBis from '../Logo/LogoBis';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import fr from "date-fns/locale/fr";
+import differenceInYears from 'date-fns/differenceInYears';
 import ValidatedInfo from './ValidatedInfo'
 import GenderAndOrientation from '../Profile/GenderAndOrientation'
 import TagsBadge from '../MemberProfile/TagsBadge';
 import Location from '../Profile/Location'
 import AlertMsg from '../AlertMsg/AlertMsg';
-import ConfirmWindow from '../ConfirmWindow/ConfirmWindow';
 import { v4 as uuidv4 } from 'uuid';
-import { AiFillWarning } from 'react-icons/ai';
-import { RiErrorWarningLine, RiUserSmileLine, RiSaveFill } from 'react-icons/ri';
+import { RiErrorWarningLine, RiSaveFill } from 'react-icons/ri';
 import { CgCloseO, CgCardHearts } from 'react-icons/cg';
-import { TiLocation } from 'react-icons/ti';
-import { IoPinSharp, IoMaleFemaleSharp } from 'react-icons/io5';
+import { TiLocation, TiInfo } from 'react-icons/ti';
+import { IoPinSharp, IoMaleFemaleSharp, IoCalendarOutline } from 'react-icons/io5';
 import { FaSearchLocation, FaSlackHash } from "react-icons/fa";
-import { BsInfoCircle } from "react-icons/bs";
+import { BsInfoCircle, BsPersonCheck } from "react-icons/bs";
+import { BiCalendarAlt } from "react-icons/bi";
 
 
 
@@ -26,6 +30,61 @@ const CompleteProfile = () => {
     useEffect( () => {
         document.title = 'Compléter profil - Matcha'
     }, [])
+
+
+
+
+
+// _-_-_-_-_-_-_-_-_- USER AGE SECTION -_-_-_-_-_-_-_-_-_
+
+
+    // USER AGE ↓↓↓
+    const [dateSelected, setDateSelected] = useState(null)
+
+    const _userAge = '...';
+    const [userAge, setUserAge] = useState(_userAge)
+
+    const handleDateSelectedChange = (e) => {
+
+        setDateSelected(e);
+        (e !== null) &&
+        setUserAge(differenceInYears(new Date(), e));
+    }
+
+    
+    // INCORRECT DATA ↓↓↓
+    const [dateDataError, setDateDataError] = useState(false)
+    // ON SUBMIT NEW AGE ↓↓↓
+    const userAgeChecking = () => {
+
+        if (dateSelected)
+        {
+            if ( (dateSelected instanceof Date) &&
+                    (Object.prototype.toString.call(dateSelected)) &&
+                    !(isNaN(dateSelected)) )
+            {
+                if ( (differenceInYears(new Date(), dateSelected)) > 18 &&
+                    (differenceInYears(new Date(), dateSelected)) <= 130 )
+                {
+                    setDateDataError(false);
+                    return(false);
+                }
+                else
+                {
+                    setDateDataError(true);
+                    return(true);
+                }
+            }
+        }
+        else
+        {
+            setDateDataError(true);
+            return(true);
+        }
+    }
+
+
+
 
 
 
@@ -63,15 +122,18 @@ const CompleteProfile = () => {
                     (orientationChecked.maleOrientation === true || orientationChecked.femaleOrientation === true) )
             {
                 setGenderOrientationDataError(false);
+                return (false);
             }
             else
             {
                 setGenderOrientationDataError(true);
+                return(true);
             }
         }
         else
         {
             setGenderOrientationDataError(true);
+            return(true);
         }
     }
 
@@ -99,13 +161,16 @@ const CompleteProfile = () => {
             if ( description.length <= 650 )
             {
                 setDescriptionDataError(false);
+                return (false);
             }
             else
             {
                 setDescriptionDataError(true);
+                return (true);
             }
         }
         setDescriptionDataError(true);
+        return (true);
     }
 
 
@@ -146,10 +211,12 @@ const CompleteProfile = () => {
         if ( userTags.length === 5 )
         {
             setUserTagsDataError(false);
+            return (false);
         }
         else
         {
             setUserTagsDataError(true);
+            return (true);
         }
     }
 
@@ -163,18 +230,22 @@ const CompleteProfile = () => {
     const handleSubmitComplementaryInformation = e => {
         e.preventDefault();
 
-        genderAndOrientationChecking();
-        descriptionChecking();
-        userTagsChecking();
+        const userAgeInvalid = userAgeChecking();
+        const genderAndOrientationInvalid = genderAndOrientationChecking();
+        const descriptionInvalid = descriptionChecking();
+        const userTagsInvalid = userTagsChecking();
 
-        console.log(genderOrientationDataError);
-        console.log(descriptionDataError);
-        console.log(userTagsDataError);
-        if (!genderOrientationDataError && !descriptionDataError && !userTagsDataError)
+        if (userAgeInvalid === false && genderAndOrientationInvalid === false &&
+            descriptionInvalid === false && userTagsInvalid === false)
         {
-            console.log('SUCCESS')
+                console.log('SUCCESS')
+        }
+        else
+        {
+            updateErrorAlert();
         }
     }
+
 
 
 
@@ -230,11 +301,6 @@ const CompleteProfile = () => {
         setAlertMessages(prevState => [...prevState, newAlert]);
     }
 
-    const updateSuccessAlert = () => {
-        handleNewAlert({id: uuidv4(),
-                        variant: "success",
-                        information: "Les données ont été mises à jour."})
-    }
 
     const updateErrorAlert = () => {
         handleNewAlert({id: uuidv4(),
@@ -244,17 +310,6 @@ const CompleteProfile = () => {
 
 
 
-// _-_-_-_-_-_-_-_-_- CONFIRM WINDOW -_-_-_-_-_-_-_-_-_
-
-    // CONFIRMATION WINDOW ↓↓↓
-    const [confirmWindow, setConfirmWindow] = useState(false)
-
-    const displayConfirmWindow = (act) => {
-        setMsgConfirmWindow(act)
-        setConfirmWindow(true)
-    }
-
-    const [msgConfirmWindow, setMsgConfirmWindow] = useState(null)
 
 
  
@@ -271,18 +326,10 @@ const CompleteProfile = () => {
                     )
                 })
             }
-            {
-                confirmWindow &&
-                <ConfirmWindow
-                    act={msgConfirmWindow.act}
-                    quest={msgConfirmWindow.quest}
-                    onCancel={setConfirmWindow}
-                    onConfirm={msgConfirmWindow.onConfirm}
-                />
-            }
             <header>
                 <Alert variant='warning' className='complete-profile-alert'>
-                    <AiFillWarning className='mr-2' />
+                    <div className='complete-profile-logo'><LogoBis width='150' /></div>
+                    <TiInfo className='mr-2' />
                     Veuillez compléter votre profil afin d'accéder aux autres services
                 </Alert>
             </header>
@@ -299,10 +346,43 @@ const CompleteProfile = () => {
                             )
                         })
                     }
-                    <RiUserSmileLine className='complete-profile-icons' color='#0F5132' />
+                    <BsPersonCheck className='complete-profile-icons' color='#65746E' />
                 </div>
                 <hr className='hr-profile vf-hr'/>
                 <Form className='complete-profile-form' onSubmit={handleSubmitComplementaryInformation}>
+                    <h2 className='personal-information'>Date de naissance</h2>
+                    <div className='info-container'>
+                        <h4 className='complete-profile-indication'><BsInfoCircle className='mr-1' />Définissez votre date de naissance</h4>
+                        <div className='d-flex align-items-center'>
+                            <div className='age-user-label'>Âge</div>
+                            <div className='age-user-div'>
+                                <div className='age-user'>{`${userAge} ans`}</div>
+                                <hr className='hr-age-user'/>
+                                <div className='d-flex align-items-center'>
+                                    <BiCalendarAlt className='calendar-age-user-icon'/>
+                                    <DatePicker
+                                        selected={dateSelected}
+                                        onChange={handleDateSelectedChange}
+                                        locale={fr}
+                                        dateFormat="dd/MM/yyyy"
+                                        closeOnScroll={true}
+                                        isClearable={true}
+                                        fixedHeight
+                                        placeholderText="Entrez une date • jj/mm/aaaa"
+                                    />
+                                </div>
+                            </div>
+                            <IoCalendarOutline className='complete-profile-icons'/>
+                            {
+                            dateDataError &&
+                            <Form.Text className='error-update-profile for-cp'>
+                                <RiErrorWarningLine/>
+                                Matcha est réservé aux majeurs
+                            </Form.Text>
+                            }
+                        </div>
+                    </div>
+                    <hr className='hr-profile'/>
                     <h2 className='personal-information'>Genre et orientation</h2>
                     <div className='info-container'>
                         <h4 className='complete-profile-indication'><BsInfoCircle className='mr-1' />Définissez votre genre et orientation</h4>

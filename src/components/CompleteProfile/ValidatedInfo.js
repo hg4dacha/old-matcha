@@ -1,5 +1,4 @@
 import React from 'react';
-import { IoArrowForwardCircle } from 'react-icons/io5';
 import { HiOutlineBadgeCheck } from 'react-icons/hi';
 
 

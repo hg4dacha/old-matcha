@@ -143,13 +143,14 @@ const Profile = () => {
         e.preventDefault();
 
         if ( prevDateSelected && prevDateSelected !== dateSelected &&
-             dateSelected!== null )
+             dateSelected )
         {
             if ( (dateSelected instanceof Date) &&
                  (Object.prototype.toString.call(dateSelected)) &&
                  !(isNaN(dateSelected)) )
             {
-                if ( (differenceInYears(new Date(), dateSelected)) > 18 )
+                if ( (differenceInYears(new Date(), dateSelected)) > 18 &&
+                     (differenceInYears(new Date(), dateSelected)) <= 130 )
                 {
                     updateSuccessAlert();
                     setDateDataError(false);
@@ -349,6 +350,52 @@ const Profile = () => {
             }
         }
     }
+
+
+
+
+
+// _-_-_-_-_-_-_-_-_- USER LOCATION SECTION -_-_-_-_-_-_-_-_-_
+
+
+    // USER LOCATION ↓↓↓
+    const _userLocation = { lat: 48.862725, lng: 2.287592 }
+    const [userLocation, setUserLocation] = useState(_userLocation)
+
+
+    // ACTIVATION OF GEOLOCATION ↓↓↓
+    const [geolocationActivated, setGeolocationActivated] = useState(false)
+
+    const enableGeolocation = () => {
+        setGeolocationActivated(true);
+    }
+
+
+    // INCORRECT DATA ↓↓↓
+    const [userLocationDataError, setUserLocationDataError] = useState({ error: false, msg: '' })
+
+
+    // PREVIOUS VALUE ↓↓↓
+    const prevUserLocationRef = useRef();
+
+    useEffect( () => {
+        prevUserLocationRef.current = userLocation;
+    }, [userLocation]);
+    
+    const prevUserLocation = prevUserLocationRef.current;
+
+
+    // ON SUBMIT NEW LOCATION ↓↓↓
+    const handleSubmitUpdatedUserLocation = e => {
+        e.preventDefault();
+
+        if ( prevUserLocation && prevUserLocation !== userLocation )
+        {
+            console.log('OK')
+        }
+    }
+
+
 
 
 // _-_-_-_-_-_-_-_-_- PASSWORD MODIFICATION SECTION -_-_-_-_-_-_-_-_-_
@@ -754,23 +801,36 @@ const Profile = () => {
             <hr className='hr-profile'/>
             <h2 className='personal-information'>Votre localisation</h2>
                 <div className='info-container'>
-                    <Form onSubmit={null}>
+                    <Form onSubmit={handleSubmitUpdatedUserLocation}>
                         <div className='user-city-location-container'>
                             <h3 className='user-city-location'><IoPinSharp/>Paris, Ile-de-France (France)</h3>
                             {/* <Button variant="danger" className='reset-city-button'>
                                 <RiDeleteBin6Line className='reset-city-icon' />
                             </Button> */}
-                            <Button variant="info" disabled={false} className='activate-geolocation'><TiLocation/>Activer la géolocalisation</Button>
+                            <Button
+                                variant="info"
+                                disabled={geolocationActivated ? true : false}
+                                className='activate-geolocation'
+                                onClick={enableGeolocation}
+                            >
+                                <TiLocation/>Activer la géolocalisation
+                            </Button>
                         </div>
-                        <Location/>
+                        <Location
+                            userLocation={userLocation}
+                            setUserLocation={setUserLocation}
+                            geolocationActivated={geolocationActivated}
+                            setGeolocationActivated={setGeolocationActivated}
+                            setUserLocationDataError={setUserLocationDataError}
+                        />
                         <button type='submit' className='buttons-form-profile'>
                             Enregistrer
                         </button>
                         {
-                        passwordDataError &&
+                        userLocationDataError.error &&
                         <Form.Text className='error-update-profile'>
                             <RiErrorWarningLine/>
-                            Vos entrées ne sont pas valide
+                            {userLocationDataError.msg}
                         </Form.Text>
                         }
                     </Form>

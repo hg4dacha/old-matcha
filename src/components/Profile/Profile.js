@@ -173,18 +173,18 @@ const Profile = () => {
         maleGender: true,
         femaleGender: false
     }
-
     const [genderChecked, setGenderChecked] = useState(_genderChecked)
-
-
 
     // ORIENTATION (CHECKBOX) ↓↓↓
     const _orientationChecked = {
         maleOrientation: false,
         femaleOrientation: true
     }
-
     const [orientationChecked, setOrientationChecked] = useState(_orientationChecked)
+
+
+    // INCORRECT DATA ↓↓↓
+    const [genderAndOrientationDataError, setGenderAndOrientationDataError] = useState(false)
 
 
     // PREVIOUS VALUE ↓↓↓
@@ -214,15 +214,18 @@ const Profile = () => {
                 {
                     console.log(genderChecked.maleGender)
                     updateSuccessAlert();
+                    setGenderAndOrientationDataError(false);
                 }
                 else
                 {
                     updateErrorAlert();
+                    setGenderAndOrientationDataError(true);
                 }
             }
             else
             {
                 updateErrorAlert();
+                setGenderAndOrientationDataError(true);
             }
         }
     }
@@ -678,10 +681,12 @@ const Profile = () => {
                         </button>
                         {
                         infoDataError &&
-                        <Form.Text className='error-update-profile'>
-                            <RiErrorWarningLine/>
-                            Vos entrées ne sont pas valide
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                Vos entrées ne sont pas valide
+                            </Form.Text>
+                        </div>
                         }
                     </Form>
                 </div>
@@ -712,10 +717,12 @@ const Profile = () => {
                         </button>
                         {
                         dateDataError &&
-                        <Form.Text className='error-update-profile'>
-                            <RiErrorWarningLine/>
-                            Matcha est réservé aux majeurs
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                Matcha est réservé aux majeurs
+                            </Form.Text>
+                        </div>
                         }
                     </Form>
                 </div>
@@ -732,6 +739,15 @@ const Profile = () => {
                         <button type='submit' className='buttons-form-profile'>
                             Enregistrer
                         </button>
+                        {
+                        genderAndOrientationDataError &&
+                        <div className='error-update-profile-div'>
+                        <Form.Text className='error-update-profile'>
+                            <RiErrorWarningLine/>
+                            Vos entrées ne sont pas valide
+                        </Form.Text>
+                        </div>
+                        }
                     </Form>
                 </div>
             <hr className='hr-profile'/>
@@ -754,10 +770,12 @@ const Profile = () => {
                         </button>
                         {
                         descriptionDataError &&
-                        <Form.Text className='error-update-profile'>
-                            <RiErrorWarningLine/>
-                            Vos entrées ne sont pas valide
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                Vos entrées ne sont pas valide
+                            </Form.Text>
+                        </div>
                         }
                     </Form>
                 </div>
@@ -791,10 +809,12 @@ const Profile = () => {
                         </button>
                         {
                         userTagsDataError &&
-                        <Form.Text className='error-update-profile' style={{right: '6%'}}>
-                            <RiErrorWarningLine/>
-                            Veuillez sélectionner 5 tags de la liste
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                Veuillez sélectionner 5 tags de la liste
+                            </Form.Text>
+                        </div>
                         }
                     </Form>
                 </div>
@@ -804,9 +824,6 @@ const Profile = () => {
                     <Form onSubmit={handleSubmitUpdatedUserLocation}>
                         <div className='user-city-location-container'>
                             <h3 className='user-city-location'><IoPinSharp/>Paris, Ile-de-France (France)</h3>
-                            {/* <Button variant="danger" className='reset-city-button'>
-                                <RiDeleteBin6Line className='reset-city-icon' />
-                            </Button> */}
                             <Button
                                 variant="info"
                                 disabled={geolocationActivated ? true : false}
@@ -822,16 +839,19 @@ const Profile = () => {
                             geolocationActivated={geolocationActivated}
                             setGeolocationActivated={setGeolocationActivated}
                             setUserLocationDataError={setUserLocationDataError}
+                            updateErrorAlert={updateErrorAlert}
                         />
                         <button type='submit' className='buttons-form-profile'>
                             Enregistrer
                         </button>
                         {
                         userLocationDataError.error &&
-                        <Form.Text className='error-update-profile'>
-                            <RiErrorWarningLine/>
-                            {userLocationDataError.msg}
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                {userLocationDataError.msg}
+                            </Form.Text>
+                        </div>
                         }
                     </Form>
                 </div>
@@ -858,10 +878,12 @@ const Profile = () => {
                         </button>
                         {
                         passwordDataError &&
-                        <Form.Text className='error-update-profile'>
-                            <RiErrorWarningLine/>
-                            Vos entrées ne sont pas valide
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                Vos entrées ne sont pas valide
+                            </Form.Text>
+                        </div>
                         }
                     </Form>
                 </div>
@@ -890,10 +912,12 @@ const Profile = () => {
                         </button>
                         {
                         passwordAccountDeletionDataError &&
-                        <Form.Text className='error-update-profile account-deletion'>
-                            <RiErrorWarningLine/>
-                            Votre entrée n'est pas valide
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                Votre entrée n'est pas valide
+                            </Form.Text>
+                        </div>
                         }
                     </Form>
                 </div>

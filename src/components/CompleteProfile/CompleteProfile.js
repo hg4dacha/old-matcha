@@ -375,10 +375,12 @@ const CompleteProfile = () => {
                             <IoCalendarOutline className='complete-profile-icons'/>
                             {
                             dateDataError &&
-                            <Form.Text className='error-update-profile for-cp'>
-                                <RiErrorWarningLine/>
-                                Matcha est réservé aux majeurs
-                            </Form.Text>
+                            <div className='error-update-profile-div'>
+                                <Form.Text className='error-update-profile'>
+                                    <RiErrorWarningLine/>
+                                    Matcha est réservé aux majeurs
+                                </Form.Text>
+                            </div>
                             }
                         </div>
                     </div>
@@ -395,10 +397,12 @@ const CompleteProfile = () => {
                         <IoMaleFemaleSharp className='complete-profile-icons'/>
                         {
                         genderOrientationDataError &&
-                        <Form.Text className='error-update-profile for-cp'>
-                            <RiErrorWarningLine />
-                            Complétez les informations
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine />
+                                Complétez les informations
+                            </Form.Text>
+                        </div>
                         }
                     </div>
                     <hr className='hr-profile'/>
@@ -419,10 +423,12 @@ const CompleteProfile = () => {
                         <CgCardHearts className='complete-profile-icons'/>
                         {
                         descriptionDataError &&
-                        <Form.Text className='error-update-profile for-cp'>
-                            <RiErrorWarningLine/>
-                            Vos entrées ne sont pas valide
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                Vos entrées ne sont pas valide
+                            </Form.Text>
+                        </div>
                         }
                     </div>
                     <hr className='hr-profile'/>
@@ -453,10 +459,12 @@ const CompleteProfile = () => {
                         <FaSlackHash className='complete-profile-icons'/>
                         {
                         userTagsDataError &&
-                        <Form.Text className='error-update-profile for-cp1'>
-                            <RiErrorWarningLine/>
-                            Veuillez sélectionner 5 tags de la liste
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                Veuillez sélectionner 5 tags de la liste
+                            </Form.Text>
+                        </div>
                         }
                     </div>
                     <hr className='hr-profile'/>
@@ -471,10 +479,12 @@ const CompleteProfile = () => {
                         <FaSearchLocation className='complete-profile-icons'/>
                         {
                         userTagsDataError &&
-                        <Form.Text className='error-update-profile for-cp'>
-                            <RiErrorWarningLine />
-                            Vos entrées ne sont pas valide
-                        </Form.Text>
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine />
+                                Vos entrées ne sont pas valide
+                            </Form.Text>
+                        </div>
                         }
                     </div>
                     <hr className='hr-profile'/>

@@ -863,11 +863,16 @@ color: #ced6e0;
     color: #0a3d62;
 }
 
+.error-update-profile-div {
+    position: absolute;
+    right: 0;
+    bottom: 1%;
+    width: 36%;
+}
+
 .error-update-profile {
     color: #EA2027;
-    position: absolute;
-    right: 8%;
-    bottom: 1%;
+    width: fit-content;
     font-style: italic;
     display: flex;
     align-items: center;
@@ -875,6 +880,9 @@ color: #ced6e0;
     -moz-transition: 0.2s ease-in;
     -o-transition: 0.2s ease-in;
     transition: 0.2s ease-in;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .hr-profile {
@@ -1042,14 +1050,6 @@ color: #ced6e0;
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-.for-cp {
-    right: 6% !important;
-}
-
-.for-cp1 {
-    right: 4% !important;
 }
 
 /*****************************   CHAT   *****************************/

@@ -1,9 +1,9 @@
-import { React, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import _markerIcon from '../../images/marker.png';
-// import Geolocation from './Geolocation';
+// import getCityFromCoordinates from './getCityFromCoordinates';
 
 
 
@@ -20,21 +20,19 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
         iconAnchor: [17, 46],
     });
 
-    const mapRef = useRef();
+    const [map, setMap] = useState(null);
 
-// _-_-_-_-_-_-_-_-_- GEOLOCATION -_-_-_-_-_-_-_-_-_
+    // _-_-_-_-_-_-_-_-_- GEOLOCATION -_-_-_-_-_-_-_-_-_
 
     // ON SUCCESS ↓↓↓
     const onSuccess = theResult => {
         setUserLocation({ lat: theResult.coords.latitude, lng: theResult.coords.longitude });
         setGeolocationActivated(false);
         setUserLocationDataError({ error: false, msg: "" });
-        mapRef.current.flyTo(
-            [theResult.coords.latitude, theResult.coords.longitude],
-            9,
-            {animate: true}
-        )
+        map && map.flyTo([theResult.coords.latitude, theResult.coords.longitude], 9);
+        setGetCity(true);
     }
+
     // ON ERROR ↓↓↓
     const onError = theError => {
         theError.message === 'User denied Geolocation' ?
@@ -43,6 +41,7 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
         setGeolocationActivated(false);
         updateErrorAlert();
     }
+
     // ENABLE GEOLOCATION ↓↓↓
     useEffect( () => {
 
@@ -59,43 +58,61 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
 
     }, [geolocationActivated])
 
-// _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
 
-    // const [error, setError] = useState(null);
-    // const [isLoaded, setIsLoaded] = useState(false);
-    // const [items, setItems] = useState([]);
+    // _-_-_-_-_-_-_-_-_- GET CITY -_-_-_-_-_-_-_-_-_
+
+    const [items, setItems] = useState(null);
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [getCity, setGetCity] = useState(false);
 
 
-    // useEffect(() => {
+    // AJAX CALL ↓↓↓
+    useEffect(() => {
 
-    //     fetch("https://nominatim.openstreetmap.org/reverse?lat=48.862725&lon=2.287592&format=json&accept-language=fr-FR")
-    //     .then(res => res.json())
-    //     .then(
-    //     (result) => {
-    //         setIsLoaded(true);
-    //         setItems(result);
-    //     },
-    //     (error) => {
-    //         setIsLoaded(true);
-    //         setError(error);
-    //     })
-    //     getCity();
+        if (getCity)
+        {
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=48.862725&lon=2.287592&format=json&accept-language=fr-FR`)
+            // fetch(`https://nominatim.openstreetmap.org/reverse?lat=${userLocation.lat}&lon=${userLocation.lng}&format=json&accept-language=fr-FR`)
+            .then(res => res.json())
+            .then(
+            (result) => {
+                setItems(result);
+                setIsLoaded(true);
+            },
+            (error) => {
+                setError(error);
+                setIsLoaded(true);
+            })
+            setGetCity(false);
+        }
 
-    // }, [])
+    }, [getCity])
 
-    // const getCity = () => {
-    //     if (error) {
-    //         console.log(error.message);
-    //     }
-    //     else if (!isLoaded) {
-    //         console.log('Chargement...');
-    //     }
-    //     else {
-    //         console.log(items);
-    //     }
-    // }
+    // RESULT AJAX CALL ↓↓↓
+    useEffect(() => {
 
+        if (isLoaded)
+        {
+            if (error)
+            {
+                console.log(error);
+                console.log('error');
+            }
+            else if (items)
+            {
+                console.log({
+                    city: items.address.city,
+                    state: items.address.state,
+                    country: items.address.country
+                });
+            }
+        }
+
+    }, [isLoaded])
+
+    // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
 
 
@@ -104,6 +121,7 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
             center={userLocation}
             zoom={9}
             className='container-map-style'
+            whenCreated={setMap}
         >
             <TileLayer
                 url='https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=WzbI7kOa26WXiwQXx4jQ'

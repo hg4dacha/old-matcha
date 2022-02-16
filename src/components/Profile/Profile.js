@@ -9,6 +9,7 @@ import AlertMsg from '../AlertMsg/AlertMsg';
 import ConfirmWindow from '../ConfirmWindow/ConfirmWindow';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import fr from "date-fns/locale/fr";
@@ -362,7 +363,13 @@ const Profile = () => {
 
 
     // USER LOCATION ↓↓↓
-    const _userLocation = { lat: 48.862725, lng: 2.287592 }
+    const _userLocation = {
+        lat: 48.862725,
+        lng: 2.287592,
+        city: 'Paris',
+        state: 'Ile-de-France',
+        country: 'France'
+    }
     const [userLocation, setUserLocation] = useState(_userLocation)
 
 
@@ -823,14 +830,25 @@ const Profile = () => {
                 <div className='info-container'>
                     <Form onSubmit={handleSubmitUpdatedUserLocation}>
                         <div className='user-city-location-container'>
-                            <h3 className='user-city-location'><IoPinSharp/>Paris, Ile-de-France (France)</h3>
+                            <h3 className='user-city-location'>
+                                <IoPinSharp/>
+                                {`${userLocation.city}, ${userLocation.state} (${userLocation.country})`}
+                            </h3>
                             <Button
                                 variant="info"
                                 disabled={geolocationActivated ? true : false}
                                 className='activate-geolocation'
                                 onClick={enableGeolocation}
                             >
-                                <TiLocation/>Activer la géolocalisation
+                            {
+                            geolocationActivated ?
+                            <Spinner as="span" animation="border"
+                                        size="sm" role="status"
+                                        aria-hidden="true"/> :
+                            <TiLocation/>
+                            }
+                                
+                                Activer la géolocalisation
                             </Button>
                         </div>
                         <Location
@@ -840,8 +858,9 @@ const Profile = () => {
                             setGeolocationActivated={setGeolocationActivated}
                             setUserLocationDataError={setUserLocationDataError}
                             updateErrorAlert={updateErrorAlert}
+                            zoom={9}
                         />
-                        <button type='submit' className='buttons-form-profile'>
+                        <button type='submit' disabled={geolocationActivated ? true : false} className='buttons-form-profile'>
                             Enregistrer
                         </button>
                         {

@@ -11,7 +11,7 @@ import _markerIcon from '../../images/marker.png';
 
 
 const Location = ({ userLocation, setUserLocation, geolocationActivated,
-setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
+setGeolocationActivated, setUserLocationDataError, updateErrorAlert, zoom }) => {
 
 
     const markerIcon = new L.Icon({
@@ -26,10 +26,11 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
 
     // ON SUCCESS ↓↓↓
     const onSuccess = theResult => {
-        setUserLocation({ lat: theResult.coords.latitude, lng: theResult.coords.longitude });
-        setGeolocationActivated(false);
-        setUserLocationDataError({ error: false, msg: "" });
-        map && map.flyTo([theResult.coords.latitude, theResult.coords.longitude], 9);
+        setTemporaryCoordinates({ lat: theResult.coords.latitude, lng: theResult.coords.longitude });
+        // setUserLocation({ lat: theResult.coords.latitude, lng: theResult.coords.longitude });
+        // setGeolocationActivated(false);
+        // setUserLocationDataError({ error: false, msg: "" });
+        // map && map.flyTo([theResult.coords.latitude, theResult.coords.longitude], 9);
         setGetCity(true);
     }
 
@@ -63,9 +64,10 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
     // _-_-_-_-_-_-_-_-_- GET CITY -_-_-_-_-_-_-_-_-_
 
     const [items, setItems] = useState(null);
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [temporaryCoordinates, setTemporaryCoordinates] = useState({ lat: '0', lng: '0' });
     const [getCity, setGetCity] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [error, setError] = useState(null);
 
 
     // AJAX CALL ↓↓↓
@@ -73,7 +75,7 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
 
         if (getCity)
         {
-            fetch(`https://nominatim.openstreetmap.org/reverse?lat=48.862725&lon=2.287592&format=json&accept-language=fr-FR`)
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${temporaryCoordinates.lat}&lon=${temporaryCoordinates.lng}&format=json&accept-language=fr-FR`)
             // fetch(`https://nominatim.openstreetmap.org/reverse?lat=${userLocation.lat}&lon=${userLocation.lng}&format=json&accept-language=fr-FR`)
             .then(res => res.json())
             .then(
@@ -98,15 +100,27 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
             if (error)
             {
                 console.log(error);
-                console.log('error');
+                setError(null);
+                setItems(null);
+                setIsLoaded(false);
             }
             else if (items)
             {
-                console.log({
+                // TOTAL SUCCESS ↓↓↓
+                setUserLocation({
+                    lat: temporaryCoordinates.lat,
+                    lng: temporaryCoordinates.lng,
                     city: items.address.city,
                     state: items.address.state,
                     country: items.address.country
                 });
+                map && map.flyTo([temporaryCoordinates.lat, temporaryCoordinates.lng], 9);
+
+                setGeolocationActivated(false);
+                setUserLocationDataError({ error: false, msg: "" });
+                setIsLoaded(false);
+                setItems(null);
+                setError(null);
             }
         }
 
@@ -118,8 +132,8 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
 
     return (
         <MapContainer
-            center={userLocation}
-            zoom={9}
+            center={[ userLocation.lat, userLocation.lng ]}
+            zoom={zoom}
             className='container-map-style'
             whenCreated={setMap}
         >
@@ -127,7 +141,7 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert }) => {
                 url='https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=WzbI7kOa26WXiwQXx4jQ'
             />
             <Marker
-                position={userLocation}
+                position={[ userLocation.lat, userLocation.lng ]}
                 icon={markerIcon}
             >
                 <Popup>Votre position</Popup>

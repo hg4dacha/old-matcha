@@ -22,23 +22,22 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert, zoom }) => 
 
     const [map, setMap] = useState(null);
 
+
+
+
     // _-_-_-_-_-_-_-_-_- GEOLOCATION -_-_-_-_-_-_-_-_-_
 
     // ON SUCCESS ↓↓↓
     const onSuccess = theResult => {
         setTemporaryCoordinates({ lat: theResult.coords.latitude, lng: theResult.coords.longitude });
-        // setUserLocation({ lat: theResult.coords.latitude, lng: theResult.coords.longitude });
-        // setGeolocationActivated(false);
-        // setUserLocationDataError({ error: false, msg: "" });
-        // map && map.flyTo([theResult.coords.latitude, theResult.coords.longitude], 9);
         setGetCity(true);
-    }
+    } 
 
     // ON ERROR ↓↓↓
     const onError = theError => {
         theError.message === 'User denied Geolocation' ?
         setUserLocationDataError({ error: true, msg: "Vous devez autoriser l'accès à votre position" }) :
-        setUserLocationDataError({ error: true, msg: "Une erreur est survenue" }) ;
+        setUserLocationDataError({ error: true, msg: "Une erreur est survenue, réessayez ultérieurement" }) ;
         setGeolocationActivated(false);
         updateErrorAlert();
     }
@@ -57,7 +56,8 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert, zoom }) => 
             navigator.geolocation.getCurrentPosition(onSuccess, onError);
         }
 
-    }, [geolocationActivated])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [geolocationActivated, setUserLocationDataError, setGeolocationActivated])
 
 
 
@@ -76,7 +76,6 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert, zoom }) => 
         if (getCity)
         {
             fetch(`https://nominatim.openstreetmap.org/reverse?lat=${temporaryCoordinates.lat}&lon=${temporaryCoordinates.lng}&format=json&accept-language=fr-FR`)
-            // fetch(`https://nominatim.openstreetmap.org/reverse?lat=${userLocation.lat}&lon=${userLocation.lng}&format=json&accept-language=fr-FR`)
             .then(res => res.json())
             .then(
             (result) => {
@@ -90,6 +89,7 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert, zoom }) => 
             setGetCity(false);
         }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getCity])
 
     // RESULT AJAX CALL ↓↓↓
@@ -99,32 +99,45 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert, zoom }) => 
         {
             if (error)
             {
-                console.log(error);
-                setError(null);
-                setItems(null);
+                // FAILED ↓↓↓
+                onError({ message: '' });
                 setIsLoaded(false);
+                setItems(null);
+                setError(null);
             }
             else if (items)
             {
-                // TOTAL SUCCESS ↓↓↓
-                setUserLocation({
-                    lat: temporaryCoordinates.lat,
-                    lng: temporaryCoordinates.lng,
-                    city: items.address.city,
-                    state: items.address.state,
-                    country: items.address.country
-                });
-                map && map.flyTo([temporaryCoordinates.lat, temporaryCoordinates.lng], 9);
+                if (items.address.city && items.address.state && items.address.country)
+                {
+                    // TOTAL SUCCESS ↓↓↓
+                    setUserLocation({
+                        lat: temporaryCoordinates.lat,
+                        lng: temporaryCoordinates.lng,
+                        city: items.address.city,
+                        state: items.address.state,
+                        country: items.address.country
+                    });
+                    map && map.flyTo([temporaryCoordinates.lat, temporaryCoordinates.lng], 9);
 
-                setGeolocationActivated(false);
-                setUserLocationDataError({ error: false, msg: "" });
-                setIsLoaded(false);
-                setItems(null);
-                setError(null);
+                    setGeolocationActivated(false);
+                    setUserLocationDataError({ error: false, msg: "" });
+                    setIsLoaded(false);
+                    setItems(null);
+                    setError(null);
+                }
+                else
+                {
+                    // FAILED ↓↓↓
+                    onError({ message: '' });
+                    setIsLoaded(false);
+                    setItems(null);
+                    setError(null);
+                }
             }
         }
 
-    }, [isLoaded])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoaded, setUserLocation, setGeolocationActivated, setUserLocationDataError])
 
     // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
@@ -140,12 +153,15 @@ setGeolocationActivated, setUserLocationDataError, updateErrorAlert, zoom }) => 
             <TileLayer
                 url='https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=WzbI7kOa26WXiwQXx4jQ'
             />
+            {
+            userLocation.city !== '' &&
             <Marker
                 position={[ userLocation.lat, userLocation.lng ]}
                 icon={markerIcon}
             >
                 <Popup>Votre position</Popup>
             </Marker>
+            }
         </MapContainer>
     )
 

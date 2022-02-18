@@ -10,12 +10,7 @@ html, body {
     overflow-x: hidden;
 }
 
-html {
-    /* background-image: url(./images/background2.png); */
-}
-
 body {
-    /* background-color: rgba(39, 174, 96, 0.8); */
     background-color: whitesmoke;
 }
 
@@ -582,6 +577,69 @@ color: #ced6e0;
     color: #8395a7;
 }
 
+.user-photo-from {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 64%;
+}
+
+.user-photo-img-div {
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+}
+
+.user-photo-img {
+    max-width: 100px;
+}
+
+.user-photo-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #dbdbdb;
+    background-color: rgb(245, 245, 245, 0.7);
+    display: inline-block;
+    padding: 2px 7px 5px 7px;
+    cursor: pointer;
+    margin: 0;
+    border-radius: 0px;
+}
+
+.user-photo-number-and-delete-div {
+    margin-top: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user-photo-delete {
+    border: 1px solid #dbdbdb;
+    background-color: white;
+    color: #7f8c8d;
+    border: 0;
+    padding: 2px 7px 5px 7px;
+    width: 70%;
+}
+
+.user-photo-number {
+    font-size: 13px;
+    font-weight: 600;
+    background: white;
+    width: fit-content;
+    padding: 1px 5px;
+    border-right: 1px solid #dbdbdb;
+    border-radius: 1px;
+    color: #2d3436;
+    width: 30%;
+}
+
+.user-photo-input {
+    display: none;
+}
+
 .age-user-div {
     display: flex;
     flex-direction: column;
@@ -750,7 +808,7 @@ color: #ced6e0;
 
 .tag-hide {
     margin-left: -8px;
-    color: brown;
+    color: #7f8c8d;
     cursor: pointer;
 }
 
@@ -919,7 +977,7 @@ color: #ced6e0;
 }
 
 .react-datepicker__close-icon::after {
-    background-color: brown !important;
+    background-color: #7f8c8d !important;
 }
 
 .react-datepicker__header {
@@ -1022,7 +1080,6 @@ color: #ced6e0;
 }
 
 .vf-hr {
-    border-top: 1px dashed rgb(101, 116, 110);
     margin-bottom: 5rem;
 }
 
@@ -1897,19 +1954,19 @@ color: #ced6e0;
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 200;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
 .confirm-window-frame {
+    position: relative;
+    top: 30%;
     background-color: transparent;
     width: 30%;
     height: 20%;
-    border-radius: 10px;
-    position: relative;
+    border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 0 6px 1px #222f3e;;
 }

@@ -1,15 +1,16 @@
 import React, { useState, useEffect, Fragment, useRef } from 'react';
 import Navbar from '../NavBar/NavBar';
-import UserInformationSection from './UserInformationSection'
-import GenderAndOrientation from './GenderAndOrientation'
+import UserPhotosSection from './UserPhotosSection';
+import UserInformationSection from './UserInformationSection';
+import GenderAndOrientation from './GenderAndOrientation';
 import TagsBadge from '../MemberProfile/TagsBadge';
-import PasswordChangeSection from './PasswordChangeSection'
-import Location from './Location'
+import PasswordChangeSection from './PasswordChangeSection';
+import Location from './Location';
 import AlertMsg from '../AlertMsg/AlertMsg';
 import ConfirmWindow from '../ConfirmWindow/ConfirmWindow';
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import Spinner from 'react-bootstrap/Spinner'
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import fr from "date-fns/locale/fr";
@@ -26,6 +27,12 @@ import { IoPinSharp } from 'react-icons/io5';
 import { BiCalendarAlt } from 'react-icons/bi';
 
 
+import selfie22 from '../../images/selfie22.jpg'
+import selfie from '../../images/selfie.jpg'
+import jeanma1 from '../../images/jeanma1.jpg'
+import jeanma2 from '../../images/jeanma2.jpg'
+
+
 
 
 const Profile = () => {
@@ -35,6 +42,23 @@ const Profile = () => {
     }, [])
 
 
+
+
+
+// _-_-_-_-_-_-_-_-_- USER PICTURES SECTION -_-_-_-_-_-_-_-_-_
+
+
+    // USER PICTURES ↓↓↓
+    const _userPictures = {
+        secondPicture: selfie22,
+        thirdPicture: selfie,
+        fourthPicture: jeanma1,
+        fifthPicture: jeanma2
+    }
+    
+    const [userPictures, setUserPictures] = useState(_userPictures)
+    
+    
 
 
 
@@ -401,7 +425,19 @@ const Profile = () => {
 
         if ( prevUserLocation && prevUserLocation !== userLocation )
         {
-            console.log('OK')
+            if ( !isNaN(userLocation.lat) && !isNaN(userLocation.lng) )
+            {
+                if (userLocation.country === 'France')
+                {
+                    updateSuccessAlert();
+                    setUserLocationDataError({ error: false, msg: '' });
+                }
+                else
+                {
+                    updateErrorAlert();
+                    setUserLocationDataError({ error: true, msg: 'Matcha est réservé aux utilisateurs résidant en France' });
+                }
+            }
         }
     }
 
@@ -666,6 +702,26 @@ const Profile = () => {
             }
             <Navbar />
             <div className='big-info-container centerElementsInPage'>
+            <h2 className='personal-information'>Vos photos</h2>
+                <div className='info-container'>
+                    <Form className='user-photo-from' onSubmit={null}>
+                        <UserPhotosSection
+                        
+                        />
+                        <button type='submit' className='buttons-form-profile'>
+                            Enregistrer
+                        </button>
+                        {
+                        infoDataError &&
+                        <div className='error-update-profile-div'>
+                            <Form.Text className='error-update-profile'>
+                                <RiErrorWarningLine/>
+                                Vos entrées ne sont pas valide
+                            </Form.Text>
+                        </div>
+                        }
+                    </Form>
+                </div>
                 <h2 className='personal-information'>Vos informations personelles</h2>
                 <div className='info-container'>
                     <Form onSubmit={handleSubmitUpdatedInformation}>

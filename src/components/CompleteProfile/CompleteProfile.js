@@ -3,6 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 import LogoBis from '../Logo/LogoBis';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import fr from "date-fns/locale/fr";
@@ -224,6 +225,60 @@ const CompleteProfile = () => {
 
 
 
+// _-_-_-_-_-_-_-_-_- USER LOCATION SECTION -_-_-_-_-_-_-_-_-_
+
+
+    // USER LOCATION ↓↓↓
+    const _userLocation = {
+        lat: 47.0814396,
+        lng: 2.3986275,
+        city: '',
+        state: '',
+        country: ''
+    }
+    const [userLocation, setUserLocation] = useState(_userLocation)
+
+
+    // ACTIVATION OF GEOLOCATION ↓↓↓
+    const [geolocationActivated, setGeolocationActivated] = useState(false)
+
+    const enableGeolocation = () => {
+        setGeolocationActivated(true);
+    }
+
+
+    // INCORRECT DATA ↓↓↓
+    const [userLocationDataError, setUserLocationDataError] = useState({ error: false, msg: '' })
+
+
+
+    // ON SUBMIT NEW LOCATION ↓↓↓
+    const userLocationChecking = () => {
+
+        if ( !isNaN(userLocation.lat) && !isNaN(userLocation.lng) )
+        {
+            if (userLocation.country === 'France')
+            {
+                setUserLocationDataError({ error: false, msg: '' });
+                return (false);
+            }
+            else
+            {
+                setUserLocationDataError({ error: true, msg: 'Matcha est réservé aux utilisateurs résidant en France' });
+                return (true);
+            }
+        }
+        else
+        {
+            setUserLocationDataError({ error: true, msg: 'Une erreur est survenue' });
+            return (true);
+        }
+    }
+
+
+
+
+
 // _-_-_-_-_-_-_-_-_- SUBMIT COMPLEMENTARY INFORMATION -_-_-_-_-_-_-_-_-_
 
 
@@ -234,9 +289,11 @@ const CompleteProfile = () => {
         const genderAndOrientationInvalid = genderAndOrientationChecking();
         const descriptionInvalid = descriptionChecking();
         const userTagsInvalid = userTagsChecking();
+        const userLocationInvalid = userLocationChecking();
 
-        if (userAgeInvalid === false && genderAndOrientationInvalid === false &&
-            descriptionInvalid === false && userTagsInvalid === false)
+        if ( userAgeInvalid === false && genderAndOrientationInvalid === false &&
+             descriptionInvalid === false && userTagsInvalid === false &&
+             userLocationInvalid === false )
         {
                 console.log('SUCCESS')
         }
@@ -328,7 +385,7 @@ const CompleteProfile = () => {
             }
             <header>
                 <Alert variant='warning' className='complete-profile-alert'>
-                    <div className='complete-profile-logo'><LogoBis width='150' /></div>
+                    <div className='complete-profile-logo'><LogoBis width='100' /></div>
                     <TiInfo className='mr-2' />
                     Veuillez compléter votre profil afin d'accéder aux autres services
                 </Alert>
@@ -472,17 +529,47 @@ const CompleteProfile = () => {
                     <div className='info-container'>
                         <h4 className='complete-profile-indication'><BsInfoCircle className='mr-1' />Localisez vous</h4>
                         <div className='user-city-location-container'>
-                            <h3 className='user-city-location'><IoPinSharp/>...</h3>
-                            <Button variant="info" disabled={false} className='activate-geolocation'><TiLocation/>Activer la géolocalisation</Button>
+                            <h3 className='user-city-location'>
+                                <IoPinSharp/>
+                                {
+                                userLocation.city === '' ?
+                                '...' :
+                                `${userLocation.city}, ${userLocation.state} (${userLocation.country})`
+                                }
+                            </h3>
+                            <Button
+                                variant="info"
+                                disabled={geolocationActivated ? true : false}
+                                className='activate-geolocation'
+                                onClick={enableGeolocation}
+                            >
+                            {
+                            geolocationActivated ?
+                            <Spinner as="span" animation="border"
+                                        size="sm" role="status"
+                                        aria-hidden="true"/> :
+                            <TiLocation/>
+                            }
+                                
+                                Activer la géolocalisation
+                            </Button>
                         </div>
-                        <Location/>
+                        <Location
+                            userLocation={userLocation}
+                            setUserLocation={setUserLocation}
+                            geolocationActivated={geolocationActivated}
+                            setGeolocationActivated={setGeolocationActivated}
+                            setUserLocationDataError={setUserLocationDataError}
+                            updateErrorAlert={updateErrorAlert}
+                            zoom={5}
+                        />
                         <FaSearchLocation className='complete-profile-icons'/>
                         {
-                        userTagsDataError &&
+                        userLocationDataError.error &&
                         <div className='error-update-profile-div'>
                             <Form.Text className='error-update-profile'>
-                                <RiErrorWarningLine />
-                                Vos entrées ne sont pas valide
+                                <RiErrorWarningLine/>
+                                {userLocationDataError.msg}
                             </Form.Text>
                         </div>
                         }
